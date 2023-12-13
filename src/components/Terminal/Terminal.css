@@ -1,0 +1,20 @@
+.terminal-wrapper {
+    /* border: #519975 2px solid;
+    height: 100vh;
+    border-radius: 5px; */
+}
+
+#command-field{
+    padding: 0 !important ;
+    border: 0 !important ;
+    caret-color: transparent;
+    color: #519975;
+    background: #211D1B;
+    font-family: cursor, monospace;
+    font-size: 20px;  
+}
+
+#command-field:focus-visible {
+    outline: none;
+}
+

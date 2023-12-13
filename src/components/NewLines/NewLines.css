@@ -1,0 +1,6 @@
+.NewLines {}
+
+.banner{
+    white-space: pre-wrap;
+    text-wrap: nowrap;
+}
