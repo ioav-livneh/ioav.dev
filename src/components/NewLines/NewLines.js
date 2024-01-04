@@ -9,7 +9,7 @@ function NewLines({ lines, type }) {
   return (
     <div className={"NewLines"}>
       {lines.map((line) => (
-        <p className={type} key={line}>
+        <p className={type} key={`${line}-${crypto.randomUUID()}`}>
           {line}
         </p>
       ))}

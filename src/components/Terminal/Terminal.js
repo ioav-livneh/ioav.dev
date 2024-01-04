@@ -6,6 +6,8 @@ import NewLines from "../NewLines/NewLines";
 function Terminal() {
   const [tentativeCommand, setTentativeCommand] = React.useState("");
   const [lines, setLines] = React.useState([""]);
+  const [commandHistory, setCommandHistory] = React.useState([]);
+  const [historyIndex, setHistoryIndex] = React.useState(0);
 
   const inputRef = React.useRef();
   React.useEffect(() => {
@@ -13,10 +15,11 @@ function Terminal() {
   });
   const cursorRef = React.useRef();
   React.useEffect(() => {
-    cursorRef.current.style.left = "0px";
+    // cursorRef.current.style.left = "0px";
   });
 
   function handleSubmit() {
+    setCommandHistory([...commandHistory, tentativeCommand]);
     switch (tentativeCommand) {
       case "about":
         setLines([...lines, about]);
@@ -30,31 +33,44 @@ function Terminal() {
       default:
         setLines([...lines, `${tentativeCommand} ${error}`]);
     }
-
     setTentativeCommand("");
+    cursorRef.current.style.left = "0px";
   }
 
   function moveCaret(keyCode) {
-    if (keyCode === "ArrowUp") {
-      console.log("go back history");
+    if (keyCode === "ArrowUp" && commandHistory.length > historyIndex) {
+      const nextIndex = historyIndex + 1;
+      setHistoryIndex(nextIndex);
+      setTentativeCommand(commandHistory[commandHistory.length - nextIndex]);
+      cursorRef.current.style.left = "0px";
     }
-    if (keyCode === "ArrowDown") {
-      console.log("go forward history");
+    if (keyCode === "ArrowDown" && historyIndex > 0) {
+      const nextIndex = historyIndex - 1;
+      setHistoryIndex(nextIndex);
+      setTentativeCommand(commandHistory[commandHistory.length - nextIndex]);
+      if (nextIndex === 0) {
+        setTentativeCommand("");
+        cursorRef.current.style.left = "0px";
+      }
     }
     if (
       keyCode === "ArrowLeft" &&
-      parseInt(cursorRef.current.style.left) >=
-        0 - (tentativeCommand.length - 1) * 10
+      parseFloat(cursorRef.current.style.left) >=
+        0 - (tentativeCommand.length - 1) * 10.4
     ) {
       cursorRef.current.style.left =
-        parseInt(cursorRef.current.style.left) - 10 + "px";
+        parseFloat(cursorRef.current.style.left) - 10.4 + "px";
     }
     if (
       keyCode === "ArrowRight" &&
-      parseInt(cursorRef.current.style.left) + 10 <= 0
+      parseFloat(cursorRef.current.style.left) + 10.4 <= 0
     ) {
       cursorRef.current.style.left =
-        parseInt(cursorRef.current.style.left) + 10 + "px";
+        parseFloat(cursorRef.current.style.left) + 10.4 + "px";
+    }
+    if (keyCode === "Meta" || keyCode === "Control" || keyCode === "Alt") {
+      setTentativeCommand("Control, Alt, and Meta"); //not working?
+      handleSubmit();
     }
   }
 
@@ -93,10 +109,17 @@ function Terminal() {
           onclick = inputRef.current.focus();
         }}
       >
-        <span>visitor@ioav.dev: ~ $ {tentativeCommand} </span>
-        <b className="cursor" id="cursor" ref={cursorRef}>
-          █
-        </b>
+        <p>
+          visitor@ioav.dev: ~ $ <span>{tentativeCommand}</span>
+          <b
+            className="cursor"
+            id="cursor"
+            ref={cursorRef}
+            style={{ left: "0px" }}
+          >
+            █
+          </b>
+        </p>
       </div>
     </div>
   );

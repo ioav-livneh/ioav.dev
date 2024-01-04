@@ -14,7 +14,6 @@ body {
   background: #211D1B;
   font-family: cursor, monospace;
   overflow-x: hidden;
-  font-size: 20px;
 }
 p {
   display: block;
@@ -25,7 +24,7 @@ p {
   margin: 0;
   letter-spacing: 0.05em;
   animation: typing 0.5s steps(30, end);
-  text-wrap: nowrap;
+  text-wrap: wrap;
 } 
 /* 
 ::selection {
