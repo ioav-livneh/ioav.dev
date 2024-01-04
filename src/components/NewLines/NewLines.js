@@ -9,15 +9,10 @@ function NewLines({ lines, type }) {
   return (
     <div className={"NewLines"}>
       {lines.map((line) => (
-        <p className={type} key={`${line}-${crypto.randomUUID()}`}>
+        <p className={`${type} color2`} key={`${line}-${crypto.randomUUID()}`}>
           {line}
         </p>
       ))}
-      {type === "timeline" && (
-        <b className="cursor" id="cursor" style={{ left: "0px" }}>
-          █
-        </b>
-      )}
     </div>
   );
 }

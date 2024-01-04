@@ -1,6 +1,6 @@
 import React from "react";
 import "./Terminal.css";
-import { about, help, social, banner, error, timeline } from "../../commands";
+import { about, help, social, banner, timeline } from "../../commands";
 import NewLines from "../NewLines/NewLines";
 
 function Terminal() {
@@ -18,6 +18,8 @@ function Terminal() {
 
   function handleSubmit() {
     setCommandHistory([...commandHistory, tentativeCommand]);
+    // setLines([...lines, ["tentativeCommand"]]);
+
     switch (tentativeCommand) {
       case "help":
         setLines([...lines, ...help]);
@@ -25,8 +27,26 @@ function Terminal() {
       case "clear":
         setLines([]);
         break;
+      case "history":
+        setLines([...lines, ...commandHistory]);
+        break;
+      case "banner":
+        setLines([...lines, ...banner]);
+        break;
       case "about":
         setLines([...lines, about]);
+        break;
+      case "theme":
+        setLines([
+          ...lines,
+          "You must specify a theme (ex. theme dark, theme light)",
+        ]);
+        break;
+      case "theme dark":
+        setLines([...lines, "Changed to dark theme"]);
+        break;
+      case "theme light":
+        setLines([...lines, "Changed to light theme"]);
         break;
       case "social":
         setLines([...lines, ...social]);
@@ -36,7 +56,10 @@ function Terminal() {
         linerRef.current.style.display = "none";
         break;
       default:
-        setLines([...lines, `${tentativeCommand} ${error}`]);
+        setLines([
+          ...lines,
+          `Command not found: ${tentativeCommand}. For a list of commands, type <span class="command">'help'</span>.`,
+        ]);
     }
     setTentativeCommand("");
     cursorRef.current.style.left = "0px";
@@ -84,7 +107,10 @@ function Terminal() {
       {/* TODO: create separate component for tracking history */}
 
       <NewLines lines={banner} type={"banner"} />
-      <p>Instructions on how to use terminal and type in "help" for more</p>
+      <p className="color2">
+        Instructions on how to use terminal and type in{" "}
+        <span className="command">'help'</span> for more
+      </p>
       <NewLines lines={lines} />
 
       {/* TODO:  create separate component just for command line*/}
