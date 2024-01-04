@@ -13,6 +13,11 @@ function NewLines({ lines, type }) {
           {line}
         </p>
       ))}
+      {type === "timeline" && (
+        <b className="cursor" id="cursor" style={{ left: "0px" }}>
+          █
+        </b>
+      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "./Terminal.css";
-import { about, help, social, banner, error } from "../../commands";
+import { about, help, social, banner, error, timeline } from "../../commands";
 import NewLines from "../NewLines/NewLines";
 
 function Terminal() {
@@ -14,21 +14,26 @@ function Terminal() {
     inputRef.current.focus();
   });
   const cursorRef = React.useRef();
-  React.useEffect(() => {
-    // cursorRef.current.style.left = "0px";
-  });
+  const linerRef = React.useRef();
 
   function handleSubmit() {
     setCommandHistory([...commandHistory, tentativeCommand]);
     switch (tentativeCommand) {
-      case "about":
-        setLines([...lines, about]);
-        break;
       case "help":
         setLines([...lines, ...help]);
         break;
+      case "clear":
+        setLines([]);
+        break;
+      case "about":
+        setLines([...lines, about]);
+        break;
       case "social":
         setLines([...lines, ...social]);
+        break;
+      case "timeline":
+        setLines([...lines, ...timeline]);
+        linerRef.current.style.display = "none";
         break;
       default:
         setLines([...lines, `${tentativeCommand} ${error}`]);
@@ -104,6 +109,7 @@ function Terminal() {
         />
       </form>
       <div
+        ref={linerRef}
         id="command-line"
         onClick={() => {
           onclick = inputRef.current.focus();
