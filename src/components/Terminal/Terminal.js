@@ -1,11 +1,11 @@
 import React from "react";
 import "./Terminal.css";
-import { about, help, social, banner, timeline } from "../../commands";
+import { about, help, skills, social, banner, timeline } from "../../commands";
 import NewLines from "../NewLines/NewLines";
 
 function Terminal() {
   const [tentativeCommand, setTentativeCommand] = React.useState("");
-  const [lines, setLines] = React.useState([""]);
+  const [lines, setLines] = React.useState([]);
   const [commandHistory, setCommandHistory] = React.useState([]);
   const [historyIndex, setHistoryIndex] = React.useState(0);
 
@@ -20,45 +20,53 @@ function Terminal() {
     setCommandHistory([...commandHistory, tentativeCommand]);
     // setLines([...lines, ["tentativeCommand"]]);
 
+    let command = `<br><p>visitor@ioav.dev: ~ $ <span>${tentativeCommand}</span></p><br>`;
+    let history = `<br><p className='color2'>${commandHistory}</p><br>`;
+
     switch (tentativeCommand) {
       case "help":
-        setLines([...lines, ...help]);
+        setLines([...lines, command, ...help]);
         break;
       case "clear":
         setLines([]);
         break;
       case "history":
-        setLines([...lines, ...commandHistory]);
+        setLines([...lines, command, ...commandHistory]);
         break;
       case "banner":
-        setLines([...lines, ...banner]);
+        setLines([...lines, command, ...banner]);
         break;
       case "about":
-        setLines([...lines, about]);
+        setLines([...lines, command, ...about]);
+        break;
+      case "skills":
+        setLines([...lines, command, ...skills]);
         break;
       case "theme":
         setLines([
           ...lines,
+          command,
           "You must specify a theme (ex. theme dark, theme light)",
         ]);
         break;
       case "theme dark":
-        setLines([...lines, "Changed to dark theme"]);
+        setLines([...lines, command, "Changed to dark theme"]);
         break;
       case "theme light":
-        setLines([...lines, "Changed to light theme"]);
+        setLines([...lines, command, "Changed to light theme"]);
         break;
       case "social":
-        setLines([...lines, ...social]);
+        setLines([...lines, command, ...social]);
         break;
       case "timeline":
-        setLines([...lines, ...timeline]);
+        setLines([...lines, command, ...timeline]);
         linerRef.current.style.display = "none";
         break;
       default:
         setLines([
           ...lines,
-          `Command not found: ${tentativeCommand}. For a list of commands, type <span class="command">'help'</span>.`,
+          command,
+          `<p className='color2'>Command not found: ${tentativeCommand}. For a list of commands, type <span class="command">'help'</span>.</p>`,
         ]);
     }
     setTentativeCommand("");
@@ -96,7 +104,12 @@ function Terminal() {
       cursorRef.current.style.left =
         parseFloat(cursorRef.current.style.left) + 10.4 + "px";
     }
-    if (keyCode === "Meta" || keyCode === "Control" || keyCode === "Alt") {
+    if (
+      keyCode === "Meta" ||
+      keyCode === "Control" ||
+      keyCode === "Alt" ||
+      keyCode === "<"
+    ) {
       setTentativeCommand("Control, Alt, and Meta"); //not working?
       handleSubmit();
     }
@@ -111,6 +124,7 @@ function Terminal() {
         Instructions on how to use terminal and type in{" "}
         <span className="command">'help'</span> for more
       </p>
+
       <NewLines lines={lines} />
 
       {/* TODO:  create separate component just for command line*/}
@@ -127,7 +141,7 @@ function Terminal() {
           value={tentativeCommand}
           autoComplete="off"
           onChange={(event) => {
-            setTentativeCommand(event.target.value);
+            setTentativeCommand(event.target.value); //TODO: Keep a separate component for this state or cache this data so that component doesnt rerender on every key stroke.
           }}
           onKeyDown={(event) => {
             moveCaret(event.key);
@@ -141,6 +155,7 @@ function Terminal() {
           onclick = inputRef.current.focus();
         }}
       >
+        <br />
         <p>
           visitor@ioav.dev: ~ $ <span>{tentativeCommand}</span>
           <b
