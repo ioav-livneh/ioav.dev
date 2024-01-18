@@ -1,6 +1,18 @@
 import React from "react";
 import "./Terminal.css";
-import { about, help, skills, social, banner, timeline } from "../../commands";
+import {
+  about,
+  help,
+  skills,
+  social,
+  banner,
+  timeline,
+  // timeline2,
+  // timeline3,
+  // timeline4,
+  // timeline5,
+  theme,
+} from "../../commands";
 import NewLines from "../NewLines/NewLines";
 
 function Terminal() {
@@ -12,64 +24,72 @@ function Terminal() {
   const inputRef = React.useRef();
   React.useEffect(() => {
     inputRef.current.focus();
-  });
+    // inputRef.current.setSelectionRange(
+    //   tentativeCommand.length,
+    //   tentativeCommand.length
+    // );
+  }, []);
   const cursorRef = React.useRef();
   const linerRef = React.useRef();
 
-  function handleSubmit() {
+  function handleSubmit(command = tentativeCommand) {
     setCommandHistory([...commandHistory, tentativeCommand]);
     // setLines([...lines, ["tentativeCommand"]]);
 
-    let command = `<br><p>visitor@ioav.dev: ~ $ <span>${tentativeCommand}</span></p><br>`;
-    let history = `<br><p className='color2'>${commandHistory}</p><br>`;
+    let commandLiner = `<br><p>visitor@ioav.dev: ~ $ <span>${command}</span></p><br>`;
+    let history = `<p className='color2'>
+    ${commandHistory.map((commandHist) => {
+      return commandHist;
+    }).join(`<br>
+    `)}</p>`;
 
-    switch (tentativeCommand) {
+    switch (command) {
       case "help":
-        setLines([...lines, command, ...help]);
+        setLines([...lines, commandLiner, ...help]);
         break;
       case "clear":
         setLines([]);
         break;
       case "history":
-        setLines([...lines, command, ...commandHistory]);
+        setLines([...lines, commandLiner, history]);
         break;
       case "banner":
-        setLines([...lines, command, ...banner]);
+        setLines([...lines, commandLiner, ...banner]);
         break;
       case "about":
-        setLines([...lines, command, ...about]);
+        setLines([...lines, commandLiner, ...about]);
         break;
       case "skills":
-        setLines([...lines, command, ...skills]);
+        setLines([...lines, commandLiner, ...skills]);
         break;
       case "theme":
-        setLines([
-          ...lines,
-          command,
-          "You must specify a theme (ex. theme dark, theme light)",
-        ]);
+        setLines([...lines, commandLiner, ...theme]);
         break;
       case "theme dark":
-        setLines([...lines, command, "Changed to dark theme"]);
+        setLines([...lines, commandLiner, "Changed to dark theme"]);
         break;
       case "theme light":
-        setLines([...lines, command, "Changed to light theme"]);
+        setLines([...lines, commandLiner, "Changed to light theme"]);
         break;
+      // case command.startsWith("theme "):
+      //   console.log("works");
+      //   setLines([...lines, commandLiner, ...theme]);
+      //   break;
       case "social":
-        setLines([...lines, command, ...social]);
+        setLines([...lines, commandLiner, ...social]);
         break;
       case "timeline":
-        setLines([...lines, command, ...timeline]);
-        linerRef.current.style.display = "none";
+        setLines([...lines, commandLiner, ...timeline]);
+        // linerRef.current.style.display = "none";
         break;
       default:
         setLines([
           ...lines,
-          command,
-          `<p className='color2'>Command not found: ${tentativeCommand}. For a list of commands, type <span class="command">'help'</span>.</p>`,
+          commandLiner,
+          `<p className='color2'>Command not found: ${command}. For a list of commands, type <span class="command">'help'</span>.</p>`,
         ]);
     }
-    setTentativeCommand("");
+    setTentativeCommand(""); //not working
     cursorRef.current.style.left = "0px";
   }
 
@@ -110,7 +130,18 @@ function Terminal() {
       keyCode === "Alt" ||
       keyCode === "<"
     ) {
-      setTentativeCommand("Control, Alt, and Meta"); //not working?
+      handleSubmit("Control, Alt, and Meta");
+    }
+    if (
+      keyCode === "y" &&
+      commandHistory[commandHistory.length - 1] === "timeline"
+    ) {
+      handleSubmit("timeline2");
+    }
+    if (
+      keyCode === "n" &&
+      commandHistory[commandHistory.length - 1] === "timeline"
+    ) {
       handleSubmit();
     }
   }

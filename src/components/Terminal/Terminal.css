@@ -11,10 +11,12 @@ form{
 
 .cursor{
     font-size: 12px;
-    color: #73ABAD;
-    background-color: #73ABAD;
+    color: #eeffff ;
+    /* color: #73ABAD; */
+    background-color: #eeffff;
+    /* background-color: #73ABAD; */
     position: relative;
-    opacity: 1;
+    opacity: 0.4;
     height: 1.5em;
     width: 10px;
     max-width: 10px;
@@ -35,9 +37,12 @@ form{
 #command-field{
     padding: 0 !important ;
     border: 0 !important ;
-    caret: #519975 block !important;
-    color: #519975;
-    background: #211D1B;
+    caret: #717CB480 block !important;
+    /* caret: #519975 block !important; */
+    color: #717CB480;
+    /* color: #519975; */
+    background: #717CB480;
+    /* background: #211D1B; */
     font-family: cursor, monospace;
     font-size: 20px;  
 }

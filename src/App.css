@@ -10,8 +10,10 @@ body {
   min-height: 99%;
   width: 100%;
   min-width: 550px;
-  color: #519975;
-  background: #211D1B;
+  color: #eeffff;
+  /* color: #519975; */
+  background: #0F111A; 
+  /* background:#211D1B */
   font-family: cursor, monospace;
   overflow-x: hidden;
 }
@@ -30,11 +32,14 @@ p {
   color: #DCDCCC;
 }
 .color2 {
-  color: #B89076;
+  color: #c3e88d;
+  /* color: #B89076; */
 }
 .command {
-  color: #73ABAD;
-  text-shadow: 0 0 5px #73ABAD; 
+  color: #84ffff;
+  /* color: #73ABAD; */
+  text-shadow: 0 0 5px #89ddff; 
+  /* text-shadow: 0 0 5px #73ABAD;  */
 }
 .error {
   color: #B89076;
@@ -44,14 +49,17 @@ p {
 }
 .inherit,
 a {
-  color: #9C8394;
+  color: #82aaff;
+  /* color: #9C8394; */
 }
 a {
   text-decoration: inherit;
 }
 a:hover {
-  background: #73ABAD;
-  color: #211830;
+  background: #717CB480;
+  /* background: #73ABAD; */
+  color: #FFFFFF;
+  /* color: #0F111A; */
 }
 a:focus {
   outline: 0;

@@ -13,20 +13,17 @@ function NewLines({ lines, type = "" }) {
         if (line.startsWith("<")) {
           var t = "";
           for (let i = 0; i < line.length; i++) {
-            if (line.charAt(i) == " " && line.charAt(i + 1) == " ") {
+            if (line.charAt(i) === " " && line.charAt(i + 1) === " ") {
               t += "&nbsp;&nbsp;";
               i++;
             } else {
               t += line.charAt(i);
             }
           }
-          return parse(t);
+          return parse(t); //add to the <p> key={`${line}-${crypto.randomUUID()}`}
         } else {
           return (
-            <p
-              className={`${type} color2`}
-              key={`${line}-${crypto.randomUUID()}`}
-            >
+            <p className={`${type} color2`} key={crypto.randomUUID()}>
               {line}
             </p>
           );
