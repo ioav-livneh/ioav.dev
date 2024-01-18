@@ -11,7 +11,7 @@ import {
   // timeline3,
   // timeline4,
   // timeline5,
-  theme,
+  // theme,
 } from "../../commands";
 import NewLines from "../NewLines/NewLines";
 
@@ -53,24 +53,24 @@ function Terminal() {
       case "history":
         setLines([...lines, commandLiner, history]);
         break;
-      case "banner":
-        setLines([...lines, commandLiner, ...banner]);
-        break;
+      // case "banner":
+      //   setLines([...lines, commandLiner, ...banner]);
+      //   break;
       case "about":
         setLines([...lines, commandLiner, ...about]);
         break;
       case "skills":
         setLines([...lines, commandLiner, ...skills]);
         break;
-      case "theme":
-        setLines([...lines, commandLiner, ...theme]);
-        break;
-      case "theme dark":
-        setLines([...lines, commandLiner, "Changed to dark theme"]);
-        break;
-      case "theme light":
-        setLines([...lines, commandLiner, "Changed to light theme"]);
-        break;
+      // case "theme":
+      //   setLines([...lines, commandLiner, ...theme]);
+      //   break;
+      // case "theme dark":
+      //   setLines([...lines, commandLiner, "Changed to dark theme"]);
+      //   break;
+      // case "theme light":
+      //   setLines([...lines, commandLiner, "Changed to light theme"]);
+      //   break;
       // case command.startsWith("theme "):
       //   console.log("works");
       //   setLines([...lines, commandLiner, ...theme]);

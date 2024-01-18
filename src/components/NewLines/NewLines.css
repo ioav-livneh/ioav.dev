@@ -2,5 +2,5 @@
 
 .banner{
     white-space: pre-wrap;
-    text-wrap: nowrap;
+    text-wrap: nowrap !important;
 }
