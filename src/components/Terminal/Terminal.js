@@ -6,11 +6,12 @@ import {
   skills,
   social,
   banner,
-  timeline,
-  // timeline2,
-  // timeline3,
-  // timeline4,
-  // timeline5,
+  timeline1,
+  timeline2,
+  timeline3,
+  timeline4,
+  timeline5,
+  egg,
   // theme,
 } from "../../commands";
 import NewLines from "../NewLines/NewLines";
@@ -33,8 +34,11 @@ function Terminal() {
   const linerRef = React.useRef();
 
   function handleSubmit(command = tentativeCommand) {
-    setCommandHistory([...commandHistory, tentativeCommand]);
-    // setLines([...lines, ["tentativeCommand"]]);
+    if (tentativeCommand === "timeline") {
+      setCommandHistory([...commandHistory, "timeline1"]);
+    } else {
+      setCommandHistory([...commandHistory, tentativeCommand]);
+    } // setLines([...lines, ["tentativeCommand"]]);
 
     let commandLiner = `<br><p>visitor@ioav.dev: ~ $ <span>${command}</span></p><br>`;
     let history = `<p className='color2'>
@@ -79,7 +83,7 @@ function Terminal() {
         setLines([...lines, commandLiner, ...social]);
         break;
       case "timeline":
-        setLines([...lines, commandLiner, ...timeline]);
+        setLines([...lines, commandLiner, ...timeline1]);
         // linerRef.current.style.display = "none";
         break;
       default:
@@ -132,17 +136,51 @@ function Terminal() {
     ) {
       handleSubmit("Control, Alt, and Meta");
     }
-    if (
-      keyCode === "y" &&
-      commandHistory[commandHistory.length - 1] === "timeline"
-    ) {
-      handleSubmit("timeline2");
-    }
-    if (
-      keyCode === "n" &&
-      commandHistory[commandHistory.length - 1] === "timeline"
-    ) {
-      handleSubmit();
+  }
+
+  function checkTimeline(nextCommand) {
+    let lastCommand = commandHistory[commandHistory.length - 1];
+    if (lastCommand.includes("timeline")) {
+      if (nextCommand === "n") {
+        let commandLiner = `<br><p>visitor@ioav.dev: ~ $ <span>n</span></p><br>`;
+        setCommandHistory([...commandHistory, "cancel"]);
+        let response = `<p className='color2'>  You're no fun :( </p>`;
+        setLines([...lines, commandLiner, response]);
+        setTentativeCommand("");
+      }
+
+      if (nextCommand === "y") {
+        let commandLiner = `<br><p>visitor@ioav.dev: ~ $ <span>y</span></p><br>`;
+        setTentativeCommand("");
+        switch (lastCommand) {
+          case "timeline1":
+            setLines([...lines, commandLiner, ...timeline2]);
+            setCommandHistory([...commandHistory, "timeline2"]);
+            break;
+          case "timeline2":
+            setLines([...lines, commandLiner, ...timeline3]);
+            setCommandHistory([...commandHistory, "timeline3"]);
+            break;
+          case "timeline3":
+            setLines([...lines, commandLiner, ...timeline4]);
+            setCommandHistory([...commandHistory, "timeline4"]);
+            break;
+          case "timeline4":
+            setLines([...lines, commandLiner, ...timeline5]);
+            setCommandHistory([...commandHistory, "timeline5"]);
+            break;
+          case "timeline5":
+            let response = `<p className='color2'>  There was an egg...</p>`;
+            setLines([...lines, commandLiner, response]);
+            setCommandHistory([...commandHistory, "the egg"]);
+            setTimeout(function () {
+              window.open(egg, "_blank");
+            }, 1000);
+            break;
+          default:
+            break;
+        }
+      }
     }
   }
 
@@ -164,6 +202,7 @@ function Terminal() {
         onSubmit={(event) => {
           event.preventDefault();
           handleSubmit();
+          // handleSubmit(tentativeCommand);
         }}
       >
         <input
@@ -171,11 +210,15 @@ function Terminal() {
           id="command-field"
           value={tentativeCommand}
           autoComplete="off"
-          onChange={(event) => {
-            setTentativeCommand(event.target.value.toLowerCase()); //TODO: Keep a separate component for this state or cache this data so that component doesnt rerender on every key stroke.
-          }}
           onKeyDown={(event) => {
             moveCaret(event.key);
+          }}
+          onChange={(event) => {
+            let nextCommand = event.target.value.toLowerCase();
+            setTentativeCommand(nextCommand); //TODO: Keep a separate component for this state or cache this data so that component doesnt rerender on every key stroke.
+            if (commandHistory[commandHistory.length - 1] !== undefined) {
+              checkTimeline(nextCommand);
+            }
           }}
         />
       </form>

@@ -1,4 +1,4 @@
-// var egg = "https://youtu.be/h6fcK_fRYaI";
+export const egg = "https://youtu.be/h6fcK_fRYaI";
 var github = "https://github.com/ioav-livneh";
 var linkedin = "https://www.linkedin.com/in/ioav/";
 var email = "mailto:ioavlivneh@gmail.com";
@@ -56,7 +56,7 @@ export const help = [
   //   "secret:      I hid a secret link somewhere on this page. Can you find it?",
 ];
 
-export const timeline = [
+export const timeline1 = [
   `<p className='color2' key={${crypto.randomUUID()}}>
   2022: Worked as Web Developer at ITLIZE (Vitacost)<br>
   2021: Graduated NYIT with Bachelor's in Computer Science<br>
@@ -68,46 +68,47 @@ export const timeline = [
 ];
 
 export const timeline2 = [
-  "2017: Graduated AIS High School in Costa Rica",
-  "2015: C++ bootcamp",
-  "2013: Java bootcamp",
-  "2003: Moved to Costa Rica",
-  "1999: Born in Israel",
-  "Do you want to continue? (y/n)",
+  `<p className='color2' key={${crypto.randomUUID()}}>
+  2017: Graduated AIS High School in Costa Rica<br>
+  2015: C++ bootcamp<br>
+  2013: Java bootcamp<br>
+  2003: Moved to Costa Rica<br>
+  1999: Born in Israel<br>
+  Do you want to continue? (y/n)
+  </p>`,
 ];
 
 export const timeline3 = [
-  "1995: Brendan Eich invents JavaScript",
-  "1983: Internet is born",
-  "1945: Von Neumann designs computer architecture",
-  "1936: Alan Turing invents the turing machine (aka computer)",
-  "1843: Ada Lovelace invents the first algorithm (computer program)",
-  "Do you want to continue? (y/n)",
+  `<p className='color2' key={${crypto.randomUUID()}}>
+  1995: Brendan Eich invents JavaScript<br>
+  1983: Internet is born<br>
+  1945: Von Neumann designs computer architecture<br>
+  1936: Alan Turing invents the turing machine (aka computer)<br>
+  1843: Ada Lovelace invents the first algorithm (computer program)<br>
+  Do you want to continue? (y/n)<br>
+  </p>`,
 ];
 
 export const timeline4 = [
-  "1760 AD - 1840 AD: Industrial Revolution",
-  // "1685 AD - 1815 AD: Enlightenment",
-  "1543 AD - 1687 AD: Scientific Revolution",
-  "2000 BC - 620 AD: Major world religions are founded",
-  "12,000 years ago: Agricultural Revolution ",
-  "70,000 years ago: Cognitive Revolution ",
-  "Do you want to continue? (y/n)",
+  `<p className='color2' key={${crypto.randomUUID()}}>
+  1760 AD - 1840 AD: Industrial Revolution<br>
+  1543 AD - 1687 AD: Scientific Revolution<br>
+  2000 BC - 620 AD: Major world religions are founded<br>
+  12,000 years ago: Agricultural Revolution <br>
+  70,000 years ago: Cognitive Revolution <br>
+  Do you want to continue? (y/n)<br>
+  </p>`,
 ];
 
 export const timeline5 = [
-  "9.3 - 6.5 million years ago : Humans diverged from chimps, our closest living biological ancestor",
-  "85 million years ago: Primates diverged from mammals",
-  "325 million years ago: Mammals diverged from reptiles",
-  "1.5 billion years ago: Animals diverged from plants and fungi",
-  "3.9 billion years ago: The Last Universal Common Ancestor (LUCA), the species from which everything alive today is descended, may have lived at this time according to genetic evidence.",
-  "Do you want to know what came before that? (y/n)",
-  // There was an egg...
-  // function newTab(link) {
-  //   setTimeout(function () {
-  //     window.open(link, "_blank");
-  //   }, 500);
-  // }
+  `<p className='color2' key={${crypto.randomUUID()}}>
+  9.3 - 6.5 million years ago : Humans diverged from chimps, our closest living biological ancestor<br>
+  85 million years ago: Primates diverged from mammals<br>
+  325 million years ago: Mammals diverged from reptiles<br>
+  1.5 billion years ago: Animals diverged from plants and fungi<br>
+  3.9 billion years ago: The Last Universal Common Ancestor (LUCA), the species from which everything alive today is descended, may have lived at this time according to genetic evidence.<br>
+  Do you want to know what came before that? (y/n)<br>
+  </p>`,
 ];
 
 export const theme = [
