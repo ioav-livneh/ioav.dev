@@ -190,8 +190,8 @@ function Terminal() {
 
       <NewLines lines={banner} type={"banner"} />
       <p className="color2">
-        Instructions on how to use terminal and type in{" "}
-        <span className="command">'help'</span> for more
+        For instructions on how to use terminal, type in{" "}
+        <span className="command">'help'</span>.
       </p>
 
       <NewLines lines={lines} />
