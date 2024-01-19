@@ -5,6 +5,7 @@
 
 /* Everything below this line is copy-pasted from fkcodes.com */
 body {
+  display: flex;
   margin: 0;
   padding: 15px 20px;
   min-height: 99%;
@@ -15,7 +16,7 @@ body {
   background: #0F111A; 
   /* background:#211D1B */
   font-family: cursor, monospace;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 p {
   line-height: 1.3em;
