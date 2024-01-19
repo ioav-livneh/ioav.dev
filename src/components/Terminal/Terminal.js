@@ -172,7 +172,7 @@ function Terminal() {
           value={tentativeCommand}
           autoComplete="off"
           onChange={(event) => {
-            setTentativeCommand(event.target.value); //TODO: Keep a separate component for this state or cache this data so that component doesnt rerender on every key stroke.
+            setTentativeCommand(event.target.value.toLowerCase()); //TODO: Keep a separate component for this state or cache this data so that component doesnt rerender on every key stroke.
           }}
           onKeyDown={(event) => {
             moveCaret(event.key);
