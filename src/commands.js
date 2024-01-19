@@ -83,8 +83,8 @@ export const timeline3 = [
   1995: Brendan Eich invents JavaScript<br>
   1983: Internet is born<br>
   1945: Von Neumann designs computer architecture<br>
-  1936: Alan Turing invents the turing machine (aka computer)<br>
-  1843: Ada Lovelace invents the first algorithm (computer program)<br>
+  1936: Alan Turing invents the turing machine<br>
+  1843: Ada Lovelace invents the first algorithm<br>
   Do you want to continue? (y/n)
   </p>`,
 ];
@@ -93,7 +93,7 @@ export const timeline4 = [
   `<p className='color2' key={${crypto.randomUUID()}}>
   1760 AD - 1840 AD:  Industrial Revolution<br>
   1543 AD - 1687 AD:  Scientific Revolution<br>
-  2000 BC - 620 AD:   Major world religions are founded<br>
+  2000 BC - 620 AD:   Major world religions founded<br>
   12,000 years ago:   Agricultural Revolution <br>
   70,000 years ago:   Cognitive Revolution <br>
   Do you want to continue? (y/n)
@@ -102,11 +102,11 @@ export const timeline4 = [
 
 export const timeline5 = [
   `<p className='color2' key={${crypto.randomUUID()}}>
-  9.3 - 6.5 million years ago:  Humans diverged from chimps, our closest living biological ancestor<br>
-  85 million years ago:         Primates diverged from mammals<br>
-  325 million years ago:        Mammals diverged from reptiles<br>
-  1.5 billion years ago:        Animals diverged from plants and fungi<br>
-  3.9 billion years ago:        The species from which everything alive today is descended may have lived at this time<br>
+  7 million years ago:    Humans diverged from chimps, our closest living biological ancestor<br>
+  85 million years ago:   Primates diverged from mammals<br>
+  325 million years ago:  Mammals diverged from reptiles<br>
+  1.5 billion years ago:  Animals diverged from plants and fungi<br>
+  3.9 billion years ago:  The species from which everything alive today is descended may have lived at this time<br>
   Do you want to know what came before that? (y/n)
   </p>`,
 ];
