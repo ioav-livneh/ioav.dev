@@ -62,16 +62,3 @@ form{
     display: block;
     padding-bottom: 20px;
 }
-
-@media only screen and (max-width: 600px) {
-    .cursor{
-        font-size: 6px;
-        /* height: 1.5em;
-        width: 10px;
-        max-width: 10px; */
-    }
-
-    #command-field{
-        font-size: 10px;  
-    }
-  }
