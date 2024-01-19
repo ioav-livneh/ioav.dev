@@ -85,7 +85,7 @@ export const timeline3 = [
   1945: Von Neumann designs computer architecture<br>
   1936: Alan Turing invents the turing machine (aka computer)<br>
   1843: Ada Lovelace invents the first algorithm (computer program)<br>
-  Do you want to continue? (y/n)<br>
+  Do you want to continue? (y/n)
   </p>`,
 ];
 
@@ -96,7 +96,7 @@ export const timeline4 = [
   2000 BC - 620 AD: Major world religions are founded<br>
   12,000 years ago: Agricultural Revolution <br>
   70,000 years ago: Cognitive Revolution <br>
-  Do you want to continue? (y/n)<br>
+  Do you want to continue? (y/n)
   </p>`,
 ];
 
@@ -107,7 +107,7 @@ export const timeline5 = [
   325 million years ago: Mammals diverged from reptiles<br>
   1.5 billion years ago: Animals diverged from plants and fungi<br>
   3.9 billion years ago: The Last Universal Common Ancestor (LUCA), the species from which everything alive today is descended, may have lived at this time according to genetic evidence.<br>
-  Do you want to know what came before that? (y/n)<br>
+  Do you want to know what came before that? (y/n)
   </p>`,
 ];
 
