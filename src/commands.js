@@ -2,20 +2,49 @@ export const egg = "https://youtu.be/h6fcK_fRYaI";
 var github = "https://github.com/ioav-livneh";
 var linkedin = "https://www.linkedin.com/in/ioav/";
 var email = "mailto:ioavlivneh@gmail.com";
-
-const birthday = new Date("1999-08-26");
-let ageDifMs = Date.now() - birthday.getTime();
-let ageDate = new Date(ageDifMs); // miliseconds from epoch
-let age = Math.abs(ageDate.getUTCFullYear() - 1970);
+var game = "https://www.1010.ioav.dev";
+var blog = "https://www.ioav.blog";
+var button = "https://www.button.ioav.dev";
 
 export const about = [
   `<p className='color2' key={${crypto.randomUUID()}}>
-  Hey, I'm Ioav! 👋 <br>
-  I'm a ${age} year old software developer. This is my terminal portfolio! <br>
-  When I'm not coding, I love to read and am interested in all subjects <br>
-  related to AI, history, psychology, philosophy, and music.
+  Hi, my name Ioav Livneh! 👋 <br><br>
+  I'm a full-stack developer based in Barcelona, Spain.<br>
+  I am currently working as a Solutions Architect at MongoDB.<br>
+  INFP, Virgo, 9w8, Hufflepuff... if you're into that sort of thing.<br>
   </p>`,
 ];
+
+export const projects = [
+  `<p className='color2' key={${crypto.randomUUID()}}> 
+  Do you even code bro? Yes, I do. <br>
+  Here are some of my projects you shouldn't miss <br><br>
+  <a href=${blog} target="_blank">1. Book Notes </a><br>
+    My digital commonplace journal where I keep the <br>
+    best quotes and takeaways from my favorite books.<br><br>
+  <a href=${game} target="_blank">2. 1010! </a><br>
+    A recreation of the Tetris-like mobile game, <br>
+    now available in web format. <br><br>
+  <a href=${button} target="_blank">3. Press the Button </a><br>
+    An infuriatingly entertaining game, inspired by <br>
+    the classic flash game 'Dont Press the Button'.<br><br>
+  These are all still works in progress, so you <br>
+  can check back on them occassionally for updates.
+  </p>`,
+];
+{
+  /* <a href=${blog} target="_blank">1. Commonplace Garden </a><br>
+A hybrid of commonplace book and digital garden <br>
+for quotes, continuously edited and refined.<br><br>
+<a href=${game} target="_blank">2. 1010! </a><br>
+A faithful online recreation of the Tetris-like <br>
+mobile game, now available in web format. <br><br>
+<a href=${button} target="_blank">3. Press the Button </a><br>
+An infuriatingly entertaining game, inspired by <br>
+the classic flash game 'Dont Press the Button'.<br><br>
+These are all still works in progress, so you <br>
+can check back on them occassionally for updates. */
+}
 
 export const skills = [
   `<p className='color2'>
@@ -39,14 +68,17 @@ export const skills = [
 
 export const help = [
   `<p className='color2'>
-  <span className='command'>about</span>       Who is Ioav? <br>
-  <span className='command'>timeline</span>    Work experience, education and other fun facts <br>
-  <span className='command'>skills</span>      Technologies and frameworks <br>
-  <span className='command'>social</span>      Check out my github, linkedin, or email <br>
-  <span className='command'>history</span>     View command history <br>
-  <span className='command'>clear</span>       Clear terminal <br></p>`,
+  <span className='command'>about</span>       - about Ioav Livneh<br>
+  <span className='command'>projects</span>    - view projects that I've coded <br>
+  <span className='command'>timeline</span>    - work experience, education and other fun facts <br>
+  <span className='command'>skills</span>      - technologies and frameworks <br>
+  <span className='command'>social</span>      - check out my github, linkedin, or email <br>
+  <span className='command'>theme</span>       - check available themes <br>
+  <span className='command'>history</span>     - view command history <br>
+  <span className='command'>clear</span>       - clear terminal <br><br>
+  Tab         => autocompletes the command<br>
+  Up Arrow    => go back to previous command<br></p>`,
 
-  // <span className='command'>theme</span>       Change style background color. <br>
   // <span className='command'>inspire</span>     Inspirobot API <br>
   // <span className='command'>banner</span>      Display banner <br>
 
@@ -58,11 +90,11 @@ export const help = [
 
 export const timeline1 = [
   `<p className='color2' key={${crypto.randomUUID()}}>
-  2022: Worked as Web Developer at ITLIZE (Vitacost)<br>
+  2022: Worked as Web Developer at Vitacost (Kroger)<br>
   2021: Graduated NYIT with Bachelor's in Computer Science<br>
   2019: Completed Ironhack Web Development Bootcamp<br>
   2018: Worked as a student tutor at NYIT<br>
-  2017: Began studying at New York Institute of Technology<br>
+  2017: Began studying at New York Institute of Technology<br><br>
   Do you want to continue? (y/n)
   </p>`,
 ];
@@ -73,7 +105,7 @@ export const timeline2 = [
   2015: C++ bootcamp<br>
   2013: Java bootcamp<br>
   2003: Moved to Costa Rica<br>
-  1999: Born in Israel<br>
+  1999: Born in Israel<br><br>
   Do you want to continue? (y/n)
   </p>`,
 ];
@@ -84,7 +116,7 @@ export const timeline3 = [
   1983: Internet is born<br>
   1945: Von Neumann designs computer architecture<br>
   1936: Alan Turing invents the turing machine<br>
-  1843: Ada Lovelace invents the first algorithm<br>
+  1843: Ada Lovelace invents the first algorithm<br><br>
   Do you want to continue? (y/n)
   </p>`,
 ];
@@ -95,7 +127,7 @@ export const timeline4 = [
   1543 AD - 1687 AD:  Scientific Revolution<br>
   2000 BC - 620 AD:   Major world religions founded<br>
   12,000 years ago:   Agricultural Revolution <br>
-  70,000 years ago:   Cognitive Revolution <br>
+  70,000 years ago:   Cognitive Revolution <br><br>
   Do you want to continue? (y/n)
   </p>`,
 ];
@@ -106,15 +138,17 @@ export const timeline5 = [
   85 million years ago:   Primates diverged from mammals<br>
   325 million years ago:  Mammals diverged from reptiles<br>
   1.5 billion years ago:  Animals diverged from plants and fungi<br>
-  3.9 billion years ago:  The species from which everything alive today is descended may have lived at this time<br>
+  3.9 billion years ago:  The species from which everything alive today is descended may have lived at this time<br><br>
   Do you want to know what came before that? (y/n)
   </p>`,
 ];
 
 export const theme = [
   `<p className='color2'>
-  Pick from any of the following themes by using the syntax 'theme [name-here]'<br>
-  ['Dark','Light','Ocean','Sunset']
+  'dark'  'light'  'ocean'  'espresso' <br><br>
+
+  Apply any theme by using the syntax 'theme [theme-name]'<br>
+  ie: theme espresso
   </p>`,
 ];
 

@@ -3,6 +3,7 @@ import "./Terminal.css";
 import {
   about,
   help,
+  projects,
   skills,
   social,
   banner,
@@ -12,7 +13,7 @@ import {
   timeline4,
   timeline5,
   egg,
-  // theme,
+  theme,
 } from "../../commands";
 import NewLines from "../NewLines/NewLines";
 
@@ -63,18 +64,27 @@ function Terminal() {
       case "about":
         setLines([...lines, commandLiner, ...about]);
         break;
+      case "projects":
+        setLines([...lines, commandLiner, ...projects]);
+        break;
       case "skills":
         setLines([...lines, commandLiner, ...skills]);
         break;
-      // case "theme":
-      //   setLines([...lines, commandLiner, ...theme]);
-      //   break;
-      // case "theme dark":
-      //   setLines([...lines, commandLiner, "Changed to dark theme"]);
-      //   break;
-      // case "theme light":
-      //   setLines([...lines, commandLiner, "Changed to light theme"]);
-      //   break;
+      case "theme":
+        setLines([...lines, commandLiner, ...theme]);
+        break;
+      case "theme dark":
+        setLines([...lines, commandLiner, "Changed to dark theme"]);
+        break;
+      case "theme light":
+        setLines([...lines, commandLiner, "Changed to light theme"]);
+        break;
+      case "theme ocean":
+        setLines([...lines, commandLiner, "Changed to ocean theme"]);
+        break;
+      case "theme espresso":
+        setLines([...lines, commandLiner, "Changed to espresso theme"]);
+        break;
       // case command.startsWith("theme "):
       //   console.log("works");
       //   setLines([...lines, commandLiner, ...theme]);
@@ -189,8 +199,11 @@ function Terminal() {
       {/* TODO: create separate component for tracking history */}
 
       <NewLines lines={banner} type={"banner"} />
+      <br />
+      <p className="color2">Welcome my terminal portfolio!</p>
+      <br />
       <p className="color2">
-        For instructions on how to use terminal, type in{" "}
+        For a list of available commands, type{" "}
         <span className="command">'help'</span>.
       </p>
 
