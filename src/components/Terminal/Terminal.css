@@ -62,13 +62,15 @@ form{
 }
 
 .desc{
-    @media (max-width: 550px) {
+    display: flex;
+    @media screen and (max-width: 550px) {
         display: block;
       }
 }
 
 .key-container{
-    @media (max-width: 550px) {
+    display: flex;
+    @media screen and (max-width: 550px) {
         display: none;
         }
 }

@@ -4,7 +4,7 @@
     white-space: pre-wrap;
     text-wrap: nowrap !important;
 
-    @media (max-width: 550px) {
+    @media screen and (max-width: 550px) {
         display: none;
       }
 }
@@ -12,7 +12,7 @@
     white-space: pre-wrap;
     text-wrap: nowrap !important;
 
-    @media (min-width: 550px) {
+    @media screen and (min-width: 550px) {
         display: none;
       }
 }
