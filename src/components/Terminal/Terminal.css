@@ -63,14 +63,14 @@ form{
 
 .desc{
     display: flex;
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 780px) {
         display: block;
       }
 }
 
 .key-container{
     display: flex;
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 780px) {
         display: none;
         }
 }
@@ -79,7 +79,7 @@ form{
     white-space: pre-wrap;
     text-wrap: nowrap !important;
 
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 780px) {
         display: none;
       }
 }
@@ -87,7 +87,7 @@ form{
     white-space: pre-wrap;
     text-wrap: nowrap !important;
 
-    @media screen and (min-width: 550px) {
+    @media screen and (min-width: 780px) {
         display: none;
       }
 }
