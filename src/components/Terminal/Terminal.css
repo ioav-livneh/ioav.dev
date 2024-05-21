@@ -76,21 +76,21 @@ form{
 }
 
 .banner{
+    display: none;
+
+    @media screen and (min-width: 551px) {
+        display: inline !important;
+        white-space: pre-wrap;
+        text-wrap: nowrap !important;
+      }
+}
+
+.mobile-bannr{
     display: inline !important;
     white-space: pre-wrap;
     text-wrap: nowrap !important;
 
     @media screen and (max-width: 550px) {
-        display: none;
-      }
-}
-
-.mobile-banner{
-    display: inline !important;
-    white-space: pre-wrap;
-    text-wrap: nowrap !important;
-
-    @media screen and (min-width: 551px) {
         display: none;
       }
 }
