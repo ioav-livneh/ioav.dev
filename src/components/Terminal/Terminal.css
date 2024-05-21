@@ -76,7 +76,7 @@ form{
 }
 
 .banner{
-    display: inline;
+    display: inline !important;
     white-space: pre-wrap;
     text-wrap: nowrap !important;
 
@@ -84,8 +84,9 @@ form{
         display: none;
       }
 }
-.banner-mobile{
-    display: inline;
+
+.mobile-banner{
+    display: inline !important;
     white-space: pre-wrap;
     text-wrap: nowrap !important;
 
