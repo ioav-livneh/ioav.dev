@@ -8,7 +8,7 @@ function NewLines({ lines, type = "" }) {
   });
 
   return (
-    <div className={"NewLines"}>
+    <div className={`${type} NewLines`}>
       {lines.map((line) => {
         if (line.startsWith("<")) {
           var t = "";
@@ -23,7 +23,7 @@ function NewLines({ lines, type = "" }) {
           return parse(t); //add to the <p> key={`${line}-${crypto.randomUUID()}`}
         } else {
           return (
-            <p className={`${type} color2`} key={crypto.randomUUID()}>
+            <p className={"color2"} key={crypto.randomUUID()}>
               {line}
             </p>
           );
