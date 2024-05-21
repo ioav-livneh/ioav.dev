@@ -63,31 +63,33 @@ form{
 
 .desc{
     display: inline;
-    @media all and (max-width: 550px) {
+    @media screen and (max-width: 550px) {
         display: block;
       }
 }
 
 .key-container{
     display: flex;
-    @media all and (max-width: 550px) {
+    @media screen and (max-width: 550px) {
         display: none;
         }
 }
 
 .banner{
+    display: inline;
     white-space: pre-wrap;
     text-wrap: nowrap !important;
 
-    @media all and (max-width: 550px) {
+    @media screen and (max-width: 550px) {
         display: none;
       }
 }
 .banner-mobile{
+    display: inline;
     white-space: pre-wrap;
     text-wrap: nowrap !important;
 
-    @media all and (min-width: 551px) {
+    @media screen and (min-width: 551px) {
         display: none;
       }
 }
