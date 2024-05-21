@@ -78,7 +78,7 @@ form{
 .banner{
     display: none;
 
-    @media screen and (min-width: 551px) {
+    @media screen and (min-width: 550px) {
         display: inline !important;
         white-space: pre-wrap;
         text-wrap: nowrap !important;
