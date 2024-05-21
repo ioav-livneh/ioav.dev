@@ -19,11 +19,9 @@ body {
 p {
   line-height: 1.3em;
   margin: 0;
-  overflow: hidden;
+  text-wrap: wrap !important;
   white-space: nowrap;
-  margin: 0;
   letter-spacing: 0.05em;
-  text-wrap: wrap;
 } 
 
 .index {

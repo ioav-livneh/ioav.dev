@@ -88,7 +88,7 @@ form{
 .mobile-banner{
     display: inline;
     white-space: pre-wrap;
-    text-wrap: nowrap;
+    text-wrap: nowrap !important;
 
     @media screen and (min-width: 550px) {
         display: none !important;
