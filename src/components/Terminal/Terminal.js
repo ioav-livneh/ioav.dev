@@ -201,7 +201,7 @@ function Terminal() {
 
       <NewLines lines={banner} type={"banner"} />
       <div className="bannerWrapper">
-        <NewLines lines={bannerMobile} type={"mobile-bannr"} />
+        <NewLines lines={bannerMobile} type={"mobile-banner"} />
       </div>
 
       <br />
