@@ -165,10 +165,10 @@ export const theme = [
 
 export const social = [
   `<p className='color2'> 
-  You can find me on any of the following links: <br>
-  <a href=${github} target="_blank">gitHub();</a>
-  <a href=${linkedin} target="_blank">linkedIn();</a>
-  <a href=${email} target="_blank">emailMe();</a>
+  Here are my social links<br><br>
+  <a href=${github} target="_blank">1. GitHub</a>       - github.com/ioav-livneh<br>
+  <a href=${linkedin} target="_blank">2. LinkedIn</a>     - linkedin.com/in/ioav<br>
+  <a href=${email} target="_blank">3. Email</a>        - ioavlivneh@gmail.com
   </p>`,
 ];
 

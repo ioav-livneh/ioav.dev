@@ -50,6 +50,9 @@ a {
 }
 a {
   text-decoration: inherit;
+  display: inline-block;
+  width: min-content;
+  white-space: nowrap;
 }
 a:hover {
   background: #717CB480;

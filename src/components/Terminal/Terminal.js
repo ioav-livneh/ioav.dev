@@ -181,7 +181,7 @@ function Terminal() {
             setCommandHistory([...commandHistory, "timeline5"]);
             break;
           case "timeline5":
-            let response = `<p className='color2'>  There was an egg...</p>`;
+            let response = `<a href='${egg}'>  There was an egg...</a>`;
             setLines([...lines, commandLiner, response]);
             setCommandHistory([...commandHistory, "the egg"]);
             setTimeout(function () {
