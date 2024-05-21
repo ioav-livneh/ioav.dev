@@ -7,6 +7,7 @@ import {
   skills,
   social,
   banner,
+  bannerMobile,
   timeline1,
   timeline2,
   timeline3,
@@ -199,6 +200,10 @@ function Terminal() {
       {/* TODO: create separate component for tracking history */}
 
       <NewLines lines={banner} type={"banner"} />
+      <div className="bannerWrapper">
+        <NewLines lines={bannerMobile} type={"banner-mobile"} />
+      </div>
+
       <br />
       <p className="color2">Welcome my terminal portfolio!</p>
       <br />

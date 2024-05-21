@@ -3,4 +3,16 @@
 .banner{
     white-space: pre-wrap;
     text-wrap: nowrap !important;
+
+    @media (max-width: 550px) {
+        display: none;
+      }
+}
+.banner-mobile{
+    white-space: pre-wrap;
+    text-wrap: nowrap !important;
+
+    @media (min-width: 550px) {
+        display: none;
+      }
 }

@@ -68,14 +68,16 @@ export const skills = [
 
 export const help = [
   `<p className='color2'>
-  <span className='command'>about</span>       - about Ioav Livneh<br>
-  <span className='command'>timeline</span>    - work experience, education and other fun facts <br>
-  <span className='command'>skills</span>      - technologies and frameworks <br>
-  <span className='command'>social</span>      - check out my github, linkedin, or email <br>
-  <span className='command'>history</span>     - view command history <br>
-  <span className='command'>clear</span>       - clear terminal <br><br>
-  Tab         => autocompletes the command<br>
-  Up Arrow    => go back to previous command<br></p>`,
+  <span className='command'>about</span>       <span className='desc'>  - about Ioav Livneh</span><br>
+  <span className='command'>timeline</span>    <span className='desc'>  - work history, education, and fun facts </span><br>
+  <span className='command'>skills</span>      <span className='desc'>  - technologies and frameworks </span><br>
+  <span className='command'>social</span>      <span className='desc'>  - check out my github, linkedin, or email </span><br>
+  <span className='command'>history</span>     <span className='desc'>  - view command history </span><br>
+  <span className='command'>clear</span>       <span className='desc'>  - clear terminal </span><br>
+<div className='key-container color2'><br>
+  Tab            => autocompletes the command<br>
+  Up Arrow       => go back to previous command
+</div></p>`,
   // `<p className='color2'>
   // <span className='command'>about</span>       - about Ioav Livneh<br>
   // <span className='command'>projects</span>    - view projects that I've coded <br>
@@ -194,4 +196,16 @@ export const banner = [
   "    /  /    \\/ /\\     \\    /  \\/\\/  \\/  \\  /\\/  \\/\\  /\\  /\\/ / /  \\/  \\",
   "   /  /      \\/  \\/\\   \\  /    \\ \\  /    \\/ /   /  \\/  \\/  \\  /    \\   \\",
   "__/__/_______/___/__\\___\\__________________________________________________",
+];
+
+export const bannerMobile = [
+  "    _                  ",
+  "   (_)___  ____ __   __",
+  "  / / __ \\/ __ `/ | / /",
+  " / / /_/ / /_/ /| |/ / ",
+  "/_/\\____/\\__,_/ |___/  ",
+  "    ____/ /__ _   __   ",
+  "   / __  / _ \\ | / /   ",
+  " _/ /_/ /  __/ |/ /    ",
+  "(_)__,_/\\___/|___/     ",
 ];

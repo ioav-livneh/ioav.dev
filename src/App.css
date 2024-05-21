@@ -8,8 +8,6 @@ body {
   display: flex;
   margin: 0;
   padding: 15px 20px;
-  min-height: 99%;
-  min-width: 550px;
   color: #eeffff;
   /* color: #519975; */
   background: #0F111A; 
@@ -64,11 +62,11 @@ a:focus {
   outline: 0;
 } 
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   p{
     font-size: 0.5em;
   }
-}
+} */
 
 /* 
 
