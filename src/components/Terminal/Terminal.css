@@ -74,3 +74,20 @@ form{
         display: none;
         }
 }
+
+.banner{
+    white-space: pre-wrap;
+    text-wrap: nowrap !important;
+
+    @media screen and (max-width: 550px) {
+        display: none;
+      }
+}
+.banner-mobile{
+    white-space: pre-wrap;
+    text-wrap: nowrap !important;
+
+    @media screen and (min-width: 550px) {
+        display: none;
+      }
+}
