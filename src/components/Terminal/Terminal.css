@@ -86,11 +86,11 @@ form{
 }
 
 .mobile-bannr{
-    display: inline !important;
+    display: inline;
     white-space: pre-wrap;
-    text-wrap: nowrap !important;
+    text-wrap: nowrap;
 
-    @media screen and (max-width: 550px) {
-        display: none;
+    @media screen and (min-width: 550px) {
+        display: none !important;
       }
 }

@@ -1,1 +1,4 @@
-.NewLines {}
+.NewLines {
+    display: flex;
+    flex-direction: column;
+}
