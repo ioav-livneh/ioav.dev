@@ -1,7 +1,10 @@
 .terminal-wrapper {
-    /* border: #519975 2px solid;
-    height: 100vh;
-    border-radius: 5px; */
+    border: #c3e88d 2px solid;
+    height: 100%;
+    min-height: calc(100vh - 34px);
+    border-radius: 5px;
+    min-width: calc(100vw - 44px); 
+    padding: 15px 20px;
 }
 
 form{
@@ -63,14 +66,14 @@ form{
 
 .desc{
     display: inline;
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 640px) {
         display: block;
       }
 }
 
 .key-container{
     display: flex;
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 640px) {
         display: none;
         }
 }
@@ -78,7 +81,7 @@ form{
 .banner{
     display: none;
 
-    @media screen and (min-width: 550px) {
+    @media screen and (min-width: 830px) {
         display: inline !important;
         white-space: pre-wrap;
         text-wrap: nowrap !important;
@@ -90,7 +93,7 @@ form{
     white-space: pre-wrap;
     text-wrap: nowrap !important;
 
-    @media screen and (min-width: 550px) {
+    @media screen and (min-width: 830px) {
         display: none !important;
       }
 }

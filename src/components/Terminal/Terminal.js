@@ -147,6 +147,17 @@ function Terminal() {
     ) {
       handleSubmit("Control, Alt, and Meta");
     }
+    //Add tab autocomplete functionality
+    // if (e.key === "Tab") {
+    //   e.preventDefault();
+    //   if (!inputVal) return;
+
+    //   let hintsCmds: string[] = [];
+    //   commands.forEach(({ cmd }) => {
+    //     if (_.startsWith(cmd, inputVal)) {
+    //       hintsCmds = [...hintsCmds, cmd];
+    //     }
+    //   });
   }
 
   function checkTimeline(nextCommand) {
@@ -199,8 +210,8 @@ function Terminal() {
     <div className="terminal-wrapper">
       {/* TODO: create separate component for tracking history */}
 
-      <NewLines lines={banner} type={"banner"} />
       <div className="bannerWrapper">
+        <NewLines lines={banner} type={"banner"} />
         <NewLines lines={bannerMobile} type={"mobile-banner"} />
       </div>
 
