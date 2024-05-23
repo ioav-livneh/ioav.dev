@@ -1,23 +1,35 @@
 # ioav.dev Terminal Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This website was built using React. I got the idea for this project from [Forrest Knight's website](https://fkcodes.com/). I also took inspiration from [Sat Naing's terminal portfolio](https://terminal.satnaing.dev/).
 
 ## Available Scripts
 
-In the terminal, you can run the following commands:
+#### In the terminal, you can run the following commands:
 
-### `help`
+#### `help`
 
-Displays all options
+list all available commands
 
-### `timeline`
+#### `about`
 
-Displays my history
+about Ioav Livneh
 
-Bonus secrets if you go far enough on my timeline
+#### `timeline`
 
-### `social`
+work history, education, and fun facts
 
-If you would like to find me, you can do so on [github](), [linkedin](), and [email](mailto:ioavlivneh@gmail.com)
+#### `skills`
 
-**ioav.dev**
+technologies and frameworks
+
+#### `social`
+
+check out my github, linkedin, or email
+
+#### `history`
+
+view history of commands
+
+#### `clear`
+
+clear terminal

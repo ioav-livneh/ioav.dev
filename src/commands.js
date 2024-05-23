@@ -42,8 +42,8 @@ export const projects = [
   can check back on them occassionally for updates.
   </p>`,
 ];
-{
-  /* <a href=${blog} target="_blank">1. Commonplace Garden </a><br>
+
+/* <a href=${blog} target="_blank">1. Commonplace Garden </a><br>
 A hybrid of commonplace book and digital garden <br>
 for quotes, continuously edited and refined.<br><br>
 <a href=${game} target="_blank">2. 1010! </a><br>
@@ -54,7 +54,6 @@ An infuriatingly entertaining game, inspired by <br>
 the classic flash game 'Dont Press the Button'.<br><br>
 These are all still works in progress, so you <br>
 can check back on them occassionally for updates. */
-}
 
 export const skills = [
   `<p className='color2'>
@@ -82,32 +81,33 @@ export const help = [
   <span className='command'>timeline</span>    <span className='desc'>  - work history, education, and fun facts </span><br>
   <span className='command'>skills</span>      <span className='desc'>  - technologies and frameworks </span><br>
   <span className='command'>social</span>      <span className='desc'>  - check out my github, linkedin, or email </span><br>
-  <span className='command'>history</span>     <span className='desc'>  - view command history </span><br>
+  <span className='command'>history</span>     <span className='desc'>  - view history of commands </span><br>
   <span className='command'>clear</span>       <span className='desc'>  - clear terminal </span><br>
 <div className='key-container color2'><br>
   Tab            => autocompletes the command<br>
   Up Arrow       => go back to previous command
 </div></p>`,
-  // `<p className='color2'>
-  // <span className='command'>about</span>       - about Ioav Livneh<br>
-  // <span className='command'>projects</span>    - view projects that I've coded <br>
-  // <span className='command'>timeline</span>    - work experience, education and other fun facts <br>
-  // <span className='command'>skills</span>      - technologies and frameworks <br>
-  // <span className='command'>social</span>      - check out my github, linkedin, or email <br>
-  // <span className='command'>theme</span>       - check available themes <br>
-  // <span className='command'>history</span>     - view command history <br>
-  // <span className='command'>clear</span>       - clear terminal <br><br>
-  // Tab         => autocompletes the command<br>
-  // Up Arrow    => go back to previous command<br></p>`,
-
-  // <span className='command'>inspire</span>     Inspirobot API <br>
-  // <span className='command'>banner</span>      Display banner <br>
-
-  //   "cv/linkedin: resume [pdg - 197kb]",
-  //   "matrix:      only for real hackers (make it rain ones and zeros)",
-  //   "projects:    other apps I've made",
-  //   "secret:      I hid a secret link somewhere on this page. Can you find it?",
 ];
+
+// `<p className='color2'>
+// <span className='command'>about</span>       - about Ioav Livneh<br>
+// <span className='command'>projects</span>    - view projects that I've coded <br>
+// <span className='command'>timeline</span>    - work experience, education and other fun facts <br>
+// <span className='command'>skills</span>      - technologies and frameworks <br>
+// <span className='command'>social</span>      - check out my github, linkedin, or email <br>
+// <span className='command'>theme</span>       - check available themes <br>
+// <span className='command'>history</span>     - view command history <br>
+// <span className='command'>clear</span>       - clear terminal <br><br>
+// Tab         => autocompletes the command<br>
+// Up Arrow    => go back to previous command<br></p>`,
+
+// <span className='command'>inspire</span>     Inspirobot API <br>
+// <span className='command'>banner</span>      Display banner <br>
+
+//   "cv/linkedin: resume [pdg - 197kb]",
+//   "matrix:      only for real hackers (make it rain ones and zeros)",
+//   "projects:    other apps I've made",
+//   "secret:      I hid a secret link somewhere on this page. Can you find it?",
 
 export const timeline1 = [
   `<p className='color2' key={${crypto.randomUUID()}}>
