@@ -15,6 +15,7 @@ import {
   timeline5,
   egg,
   theme,
+  cmds,
 } from "../../commands";
 import NewLines from "../NewLines/NewLines";
 
@@ -23,6 +24,7 @@ function Terminal() {
   const [lines, setLines] = React.useState([]);
   const [commandHistory, setCommandHistory] = React.useState([]);
   const [historyIndex, setHistoryIndex] = React.useState(0);
+  const [hints, setHints] = React.useState([]);
 
   const inputRef = React.useRef();
   React.useEffect(() => {
@@ -108,7 +110,8 @@ function Terminal() {
     cursorRef.current.style.left = "0px";
   }
 
-  function moveCaret(keyCode) {
+  function moveCaret(event) {
+    let keyCode = event.key;
     if (keyCode === "ArrowUp" && commandHistory.length > historyIndex) {
       const nextIndex = historyIndex + 1;
       setHistoryIndex(nextIndex);
@@ -147,17 +150,22 @@ function Terminal() {
     ) {
       handleSubmit("Control, Alt, and Meta");
     }
-    //Add tab autocomplete functionality
-    // if (e.key === "Tab") {
-    //   e.preventDefault();
-    //   if (!inputVal) return;
+    if (keyCode === "Tab") {
+      event.preventDefault();
 
-    //   let hintsCmds: string[] = [];
-    //   commands.forEach(({ cmd }) => {
-    //     if (_.startsWith(cmd, inputVal)) {
-    //       hintsCmds = [...hintsCmds, cmd];
-    //     }
-    //   });
+      let hintCmds = [];
+      cmds.forEach(function (cmd) {
+        if (cmd.startsWith(tentativeCommand)) {
+          hintCmds = [...hintCmds, cmd];
+        }
+      });
+      if (hintCmds.length > 1) {
+        setHints(hintCmds);
+      } else {
+        setTentativeCommand(hintCmds[0]);
+        setHints([]);
+      }
+    }
   }
 
   function checkTimeline(nextCommand) {
@@ -240,7 +248,7 @@ function Terminal() {
           value={tentativeCommand}
           autoComplete="off"
           onKeyDown={(event) => {
-            moveCaret(event.key);
+            moveCaret(event);
           }}
           onChange={(event) => {
             let nextCommand = event.target.value.toLowerCase();
@@ -270,6 +278,9 @@ function Terminal() {
             █
           </b>
         </p>
+        {hints.map((hint) => (
+          <span>{hint} </span>
+        ))}
       </div>
     </div>
   );

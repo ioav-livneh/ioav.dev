@@ -6,6 +6,16 @@ var game = "https://www.1010.ioav.dev";
 var blog = "https://www.ioav.blog";
 var button = "https://www.button.ioav.dev";
 
+export const cmds = [
+  "help",
+  "about",
+  "timeline",
+  "skills",
+  "social",
+  "history",
+  "clear",
+];
+
 export const about = [
   `<p className='color2' key={${crypto.randomUUID()}}>
   Hi, my name Ioav Livneh! 👋 <br><br>
