@@ -41,6 +41,10 @@ form{
     }
   }
 
+.hint{
+    padding-right: 1rem;
+}
+
 #command-field{
     padding: 0 !important ;
     border: 0 !important ;

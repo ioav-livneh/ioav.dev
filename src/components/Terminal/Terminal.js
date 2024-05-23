@@ -278,9 +278,11 @@ function Terminal() {
             █
           </b>
         </p>
-        {hints.map((hint) => (
-          <span>{hint} </span>
-        ))}
+        <p>
+          {hints.map((hint) => (
+            <>{hint} &nbsp;&nbsp;</>
+          ))}
+        </p>
       </div>
     </div>
   );
