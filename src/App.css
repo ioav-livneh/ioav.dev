@@ -1,3 +1,15 @@
+:root{
+  --main-text: #EEFFFF;
+  --main-bg: #0F111A;
+  --index-text: #DCDCCC;
+  --color2-text: #C3E88D;
+  --command-text: #84FFFF;
+  --command-shadow: #89DDFF; 
+  --link-text: #82AAFF;
+  --link-hover-bg: #717CB480;
+  --link-hover-text: #FFFFFF;
+}
+
 .App {
   display: flex;
   align-items: center;
@@ -9,28 +21,15 @@ body {
   display: flex;
   margin: 0;
   /* padding: 15px 20px; */
-  color: #eeffff;
-  background: #0F111A; 
+  color: var(--main-text);
+  background: var(--main-bg); 
   font-family: cursor, monospace;
 }
 
- /* ===== Custom Scroll Bar ===== */
-  /* width */
   ::-webkit-scrollbar {
     width: 0px;
   }
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #222222;
-  }
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #c3e88d;
-  }
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #e2f0cd;
-  }
+
 p {
   line-height: 1.3em;
   margin: 0;
@@ -40,24 +39,19 @@ p {
 } 
 
 .index {
-  color: #DCDCCC;
+  color: var(--index-text);
 }
 .color2 {
-  color: #c3e88d;
+  color: var(--color2-text);
 }
 .command {
-  color: #84ffff;
-  text-shadow: 0 0 5px #89ddff; 
+  color: var(--command-text);
+  text-shadow: 0 0 5px var(--command-shadow); 
 }
-/* .error {
-  color: #B89076;
-} */
-.white {
-  color: #fff;
-}
+
 .inherit,
 a {
-  color: #82aaff;
+  color: var(--link-text);
 }
 a {
   text-decoration: inherit;
@@ -66,8 +60,8 @@ a {
   white-space: nowrap;
 }
 a:hover {
-  background: #717CB480;
-  color: #FFFFFF;
+  background: var(--link-hover-bg);
+  color: var(--link-hover-text);
 }
 a:focus {
   outline: 0;

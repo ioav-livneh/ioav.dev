@@ -62,7 +62,7 @@ export const skills = [
 
   <span className='command'>Frameworks</span><br>
   React | Angular | Express | Node | Jupyter <br>
-  Spark | ASP.NET 
+  Spark | ASP.NET | Bootstrap | jQuery
   </p>`,
 ];
 
