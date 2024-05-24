@@ -21,7 +21,7 @@ export const about = [
   Hi, my name Ioav Livneh! 👋 <br><br>
   I'm a full-stack developer based in Barcelona, Spain.<br>
   I am currently working as a Solutions Architect at MongoDB.<br>
-  INFP, Virgo, 9w8, Hufflepuff... if you're into that sort of thing.<br>
+  INFP, Virgo, 9w8, Hufflepuff... if you're into that sort of thing.
   </p>`,
 ];
 
