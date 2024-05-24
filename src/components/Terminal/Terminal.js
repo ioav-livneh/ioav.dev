@@ -78,16 +78,19 @@ function Terminal() {
         setLines([...lines, commandLiner, ...theme]);
         break;
       case "theme dark":
-        setLines([...lines, commandLiner, "Changed to dark theme"]);
+        setLines([...lines, commandLiner, "Dark theme applied"]);
         break;
       case "theme light":
-        setLines([...lines, commandLiner, "Changed to light theme"]);
+        setLines([...lines, commandLiner, "Light theme applied"]);
         break;
-      case "theme ocean":
-        setLines([...lines, commandLiner, "Changed to ocean theme"]);
+      case "theme forest":
+        setLines([...lines, commandLiner, "Ocean theme applied"]);
         break;
-      case "theme espresso":
-        setLines([...lines, commandLiner, "Changed to espresso theme"]);
+      case "theme beach":
+        setLines([...lines, commandLiner, "Beach theme applied"]);
+        break;
+      case "theme space":
+        setLines([...lines, commandLiner, "Space theme applied"]);
         break;
       // case command.startsWith("theme "):
       //   console.log("works");
