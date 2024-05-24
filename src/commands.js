@@ -166,10 +166,10 @@ export const timeline5 = [
 
 export const theme = [
   `<p className='color2'>
-  'dark'  'light'  'ocean'  'espresso' <br><br>
+  'dark'   'light'   'forest'   'beach'   'space'<br><br>
 
   Apply any theme by using the syntax 'theme [theme-name]'<br>
-  ie: theme espresso
+  eg: theme forest
   </p>`,
 ];
 
