@@ -38,6 +38,7 @@ function Terminal() {
   const linerRef = React.useRef();
 
   function handleSubmit(command = tentativeCommand) {
+    setHints([]);
     if (tentativeCommand === "timeline") {
       setCommandHistory([...commandHistory, "timeline1"]);
     } else {
