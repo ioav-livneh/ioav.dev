@@ -166,8 +166,11 @@ function Terminal() {
       if (hintCmds.length > 1) {
         setHints(hintCmds);
       } else {
-        setTentativeCommand(hintCmds[0]);
-        setHints([]);
+        console.log(hintCmds);
+        if (hintCmds.length > 0) {
+          setTentativeCommand(hintCmds[0]);
+          setHints([]);
+        }
       }
     }
   }
