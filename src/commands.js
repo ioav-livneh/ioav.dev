@@ -29,31 +29,19 @@ export const projects = [
   `<p className='color2' key={${crypto.randomUUID()}}> 
   Do you even code bro? Yes, I do. <br>
   Here are some of my projects you shouldn't miss <br><br>
-  <a href=${blog} target="_blank">1. Book Notes </a><br>
-    My digital commonplace journal where I keep the <br>
+  <a href=${blog} target="_blank">1. Notecard System </a><br>
+    My digital notecard system where I keep the <br>
     best quotes and takeaways from my favorite books.<br><br>
   <a href=${game} target="_blank">2. 1010! </a><br>
     A recreation of the Tetris-like mobile game, <br>
     now available in web format. <br><br>
-  <a href=${button} target="_blank">3. Press the Button </a><br>
-    An infuriatingly entertaining game, inspired by <br>
-    the classic flash game 'Dont Press the Button'.<br><br>
   These are all still works in progress, so you <br>
   can check back on them occassionally for updates.
   </p>`,
+  // <a href=${button} target="_blank">3. Press the Button </a><br>
+  //   An infuriatingly entertaining game, inspired by <br>
+  //   the classic flash game 'Dont Press the Button'.<br><br></br>
 ];
-
-/* <a href=${blog} target="_blank">1. Commonplace Garden </a><br>
-A hybrid of commonplace book and digital garden <br>
-for quotes, continuously edited and refined.<br><br>
-<a href=${game} target="_blank">2. 1010! </a><br>
-A faithful online recreation of the Tetris-like <br>
-mobile game, now available in web format. <br><br>
-<a href=${button} target="_blank">3. Press the Button </a><br>
-An infuriatingly entertaining game, inspired by <br>
-the classic flash game 'Dont Press the Button'.<br><br>
-These are all still works in progress, so you <br>
-can check back on them occassionally for updates. */
 
 export const skills = [
   `<p className='color2'>
