@@ -231,7 +231,7 @@ function Terminal() {
       </div>
 
       <br />
-      <p className="color2">Welcome my terminal portfolio!</p>
+      <p className="color2">Welcome to my terminal portfolio!</p>
       <br />
       <p className="color2">
         For a list of available commands, type{" "}
