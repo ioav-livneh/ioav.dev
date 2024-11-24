@@ -35,7 +35,7 @@ p {
   margin: 0;
   text-wrap: wrap !important;
   white-space: nowrap;
-  letter-spacing: 0.05em;
+  font-size: max(1.11111111vw, 16px);
 } 
 
 .index {

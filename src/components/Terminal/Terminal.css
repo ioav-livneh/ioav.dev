@@ -72,6 +72,10 @@ form{
     text-align: center;
 }
 
+.bannerWrapper p{
+    max-width: 100% !important;
+}
+
 .desc{
     display: inline;
     @media screen and (max-width: 640px) {

@@ -18,25 +18,26 @@ export const cmds = [
 
 export const about = [
   `<p className='color2' key={${crypto.randomUUID()}}>
-  Hi, my name Ioav Livneh! 👋 <br><br>
-  I'm a full-stack developer based in Barcelona, Spain.<br>
-  I am currently working as a Solutions Architect at MongoDB.<br>
-  INFP, Virgo, 9w8, Hufflepuff... if you're into that sort of thing.
+  Hi, my name Ioav Livneh! 👋 <br>
+  Solutions Architect at MongoDB 🍃<br>
+  Based in Barcelona, Spain 📍<br><br>
+  Tech communicator, matcha lover, and journal scribbler. When I'm <br>
+  not coding or architecting solutions, you’ll find me on a hike, <br>
+  kickboxing, or fiddling on the piano. The good life is one filled <br>
+  with good books, quiet moments, and spending more time IRL. 
   </p>`,
 ];
+//and living life a bit more offline
 
 export const projects = [
   `<p className='color2' key={${crypto.randomUUID()}}> 
   Do you even code bro? Yes, I do. <br>
   Here are some of my projects you shouldn't miss <br><br>
   <a href=${blog} target="_blank">1. Notecard System </a><br>
-    My digital notecard system where I keep the <br>
-    best quotes and takeaways from my favorite books.<br><br>
+    My digital notecard system where I keep the best quotes and takeaways from my favorite books.<br><br>
   <a href=${game} target="_blank">2. 1010! </a><br>
-    A recreation of the Tetris-like mobile game, <br>
-    now available in web format. <br><br>
-  These are all still works in progress, so you <br>
-  can check back on them occassionally for updates.
+    A recreation of the Tetris-like mobile game, now available in web format. <br><br>
+  These are all still works in progress, so you can check back on them occassionally for updates.
   </p>`,
   // <a href=${button} target="_blank">3. Press the Button </a><br>
   //   An infuriatingly entertaining game, inspired by <br>
@@ -71,10 +72,10 @@ export const help = [
   <span className='command'>social</span>      <span className='desc'>  - check out my github, linkedin, or email </span><br>
   <span className='command'>history</span>     <span className='desc'>  - view history of commands </span><br>
   <span className='command'>clear</span>       <span className='desc'>  - clear terminal </span><br>
-<div className='key-container color2'><br>
+<span className='key-container color2'><br>
   Tab            => autocompletes the command<br>
   Up Arrow       => go back to previous command
-</div></p>`,
+</span></p>`,
 ];
 
 // `<p className='color2'>
