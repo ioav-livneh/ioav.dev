@@ -1,10 +1,8 @@
 :root{
   --main-text: #EEFFFF;
   --main-bg: #0F111A;
-  --index-text: #DCDCCC;
   --color2-text: #C3E88D;
-  --command-text: #84FFFF;
-  --command-shadow: #89DDFF; 
+  --command: #84FFFF;
   --link-text: #82AAFF;
   --link-hover-bg: #717CB480;
   --link-hover-text: #FFFFFF;
@@ -38,15 +36,12 @@ p {
   font-size: max(1.11111111vw, 16px);
 } 
 
-.index {
-  color: var(--index-text);
-}
 .color2 {
   color: var(--color2-text);
 }
 .command {
-  color: var(--command-text);
-  text-shadow: 0 0 5px var(--command-shadow); 
+  color: var(--command);
+  text-shadow: 0 0 1px var(--command); 
 }
 
 .inherit,

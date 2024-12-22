@@ -3,15 +3,17 @@ var github = "https://github.com/ioav-livneh";
 var linkedin = "https://www.linkedin.com/in/ioav/";
 var email = "mailto:ioavlivneh@gmail.com";
 var game = "https://www.1010.ioav.dev";
-var blog = "https://www.ioav.blog";
+var cards = "https://www.cards.ioav.dev";
 var button = "https://www.button.ioav.dev";
 
 export const cmds = [
   "help",
   "about",
+  "projects",
   "timeline",
   "skills",
   "social",
+  "theme",
   "history",
   "clear",
 ];
@@ -31,12 +33,12 @@ export const about = [
 
 export const projects = [
   `<p className='color2' key={${crypto.randomUUID()}}> 
-  Do you even code bro? Yes, I do. <br>
-  Here are some of my projects you shouldn't miss <br><br>
-  <a href=${blog} target="_blank">1. Notecard System </a><br>
+  <a href=${cards} target="_blank">1. Notecard System </a><br>
     My digital notecard system where I keep the best quotes and takeaways from my favorite books.<br><br>
   <a href=${game} target="_blank">2. 1010! </a><br>
     A recreation of the Tetris-like mobile game, now available in web format. <br><br>
+  <a href=${button} target="_blank">3. Press the Button (Coming Soon) </a><br>
+    An infuriatingly entertaining game, inspired by the classic flash game 'Dont Press the Button' <br><br>
   These are all still works in progress, so you can check back on them occassionally for updates.
   </p>`,
   // <a href=${button} target="_blank">3. Press the Button </a><br>
@@ -66,10 +68,12 @@ export const skills = [
 
 export const help = [
   `<p className='color2'>
-  <span className='command'>about</span>       <span className='desc'>  - about Ioav Livneh</span><br>
+  <span className='command'>about</span>       <span className='desc'>  - about Ioav Livneh </span><br>
+  <span className='command'>projects</span>    <span className='desc'>  - view projects that I've coded </span><br>
   <span className='command'>timeline</span>    <span className='desc'>  - work history, education, and fun facts </span><br>
   <span className='command'>skills</span>      <span className='desc'>  - technologies and frameworks </span><br>
   <span className='command'>social</span>      <span className='desc'>  - check out my github, linkedin, or email </span><br>
+  <span className='command'>theme</span>       <span className='desc'>  - check available themes </span><br>
   <span className='command'>history</span>     <span className='desc'>  - view history of commands </span><br>
   <span className='command'>clear</span>       <span className='desc'>  - clear terminal </span><br>
 <span className='key-container color2'><br>

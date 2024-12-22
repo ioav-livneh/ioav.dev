@@ -52,6 +52,8 @@ function Terminal() {
     }).join(`<br>
     `)}</p>`;
 
+    var r = document.querySelector(":root");
+
     switch (command) {
       case "help":
         setLines([...lines, commandLiner, ...help]);
@@ -79,18 +81,53 @@ function Terminal() {
         break;
       case "theme dark":
         setLines([...lines, commandLiner, "Dark theme applied"]);
+        r.style.setProperty("--main-bg", "#0F111A"); //background
+        r.style.setProperty("--link-hover-bg", "#717CB480"); //selection background
+        r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
+        r.style.setProperty("--command", "#84FFFF"); //accent color
+        r.style.setProperty("--main-text", "#EEFFFF"); //variables color
+        r.style.setProperty("--link-text", "#82AAFF"); //functions color
+        r.style.setProperty("--color2-text", "#C3E88D"); //strings color
         break;
       case "theme light":
         setLines([...lines, commandLiner, "Light theme applied"]);
+        r.style.setProperty("--main-bg", "#F0F0F0");
+        r.style.setProperty("--link-hover-bg", "#d3e8f8");
+        r.style.setProperty("--link-hover-text", "#403f53");
+        r.style.setProperty("--command", "#2AA298");
+        r.style.setProperty("--main-text", "#4876d6");
+        r.style.setProperty("--link-text", "#4876d6");
+        r.style.setProperty("--color2-text", "#c96765");
         break;
       case "theme forest":
-        setLines([...lines, commandLiner, "Ocean theme applied"]);
+        setLines([...lines, commandLiner, "Forest theme applied"]);
+        r.style.setProperty("--main-bg", "#002626"); //background
+        r.style.setProperty("--link-hover-bg", "#1E611E"); //selection background
+        r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
+        r.style.setProperty("--command", "#FFCC80"); //accent color
+        r.style.setProperty("--main-text", "#eeffff"); //variables color
+        r.style.setProperty("--link-text", "#82aaff"); //functions color
+        r.style.setProperty("--color2-text", "#c3e88d"); //strings color
         break;
       case "theme beach":
         setLines([...lines, commandLiner, "Beach theme applied"]);
+        r.style.setProperty("--main-bg", "#FFF8ED"); //background
+        r.style.setProperty("--link-hover-bg", "#e7c496"); //selection background
+        r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
+        r.style.setProperty("--command", "#53c7f0"); //accent color
+        r.style.setProperty("--main-text", "#272727"); //variables color
+        r.style.setProperty("--link-text", "#7C4DFF"); //functions color
+        r.style.setProperty("--color2-text", "#91B859"); //strings color
         break;
       case "theme space":
         setLines([...lines, commandLiner, "Space theme applied"]);
+        r.style.setProperty("--main-bg", "#1B2240"); //background
+        r.style.setProperty("--link-hover-bg", "#383f56"); //selection background
+        r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
+        r.style.setProperty("--command", "#ad9bf6"); //accent color
+        r.style.setProperty("--main-text", "#eeffff"); //variables color
+        r.style.setProperty("--link-text", "#82aaff"); //functions color
+        r.style.setProperty("--color2-text", "#c3e88d"); //strings color
         break;
       // case command.startsWith("theme "):
       //   console.log("works");
@@ -110,7 +147,7 @@ function Terminal() {
           `<p className='color2'>Command not found: ${command}. For a list of commands, type <span class="command">'help'</span>.</p>`,
         ]);
     }
-    setTentativeCommand(""); //not working
+    setTentativeCommand("");
     cursorRef.current.style.left = "0px";
   }
 
@@ -147,12 +184,13 @@ function Terminal() {
         parseFloat(cursorRef.current.style.left) + 10.4 + "px";
     }
     if (
+      keyCode === "<" ||
       keyCode === "Meta" ||
       keyCode === "Control" ||
-      keyCode === "Alt" ||
-      keyCode === "<"
+      keyCode === "Alt"
     ) {
-      handleSubmit("Control, Alt, and Meta");
+      handleSubmit("Invalid key");
+      setTentativeCommand("");
     }
     if (keyCode === "Tab") {
       event.preventDefault();
@@ -173,6 +211,10 @@ function Terminal() {
         }
       }
     }
+    const input = document.getElementById("command-field");
+    const length = input.value.length;
+    input.focus();
+    input.setSelectionRange(length, length);
   }
 
   function checkTimeline(nextCommand) {
