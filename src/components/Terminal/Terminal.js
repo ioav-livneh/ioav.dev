@@ -78,7 +78,7 @@ function Terminal() {
         setLines([...lines, commandLiner, "Dark theme applied"]);
         r.style.setProperty("--main-bg", "#0F111A"); //background
         r.style.setProperty("--main-bg-inverse", "#F0EEE550");
-        r.style.setProperty("--secondary-bg-inverse", "#F0EEE510");
+        r.style.setProperty("--secondary-bg-inverse", "#F0EEE515");
         r.style.setProperty("--link-hover-bg", "#717CB480"); //selection background
         r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
         r.style.setProperty("--command", "#84FFFF"); //accent color
@@ -90,7 +90,7 @@ function Terminal() {
         setLines([...lines, commandLiner, "Light theme applied"]);
         r.style.setProperty("--main-bg", "#F4F4F4"); //background
         r.style.setProperty("--main-bg-inverse", "#0b0b0b50");
-        r.style.setProperty("--secondary-bg-inverse", "#0b0b0b10");
+        r.style.setProperty("--secondary-bg-inverse", "#0b0b0b15");
         r.style.setProperty("--link-hover-bg", "#FFFFFF"); //selection background
         r.style.setProperty("--link-hover-text", "#232324"); //selection foreground
         r.style.setProperty("--command", "#2979ff"); //accent color
@@ -102,7 +102,7 @@ function Terminal() {
         setLines([...lines, commandLiner, "Forest theme applied"]);
         r.style.setProperty("--main-bg", "#002626"); //background
         r.style.setProperty("--main-bg-inverse", "#ffd9d950");
-        r.style.setProperty("--secondary-bg-inverse", "#ffd9d910");
+        r.style.setProperty("--secondary-bg-inverse", "#ffd9d915");
         r.style.setProperty("--link-hover-bg", "#1E611E"); //selection background
         r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
         r.style.setProperty("--command", "#FFCC80"); //accent color
@@ -114,7 +114,7 @@ function Terminal() {
         setLines([...lines, commandLiner, "Beach theme applied"]);
         r.style.setProperty("--main-bg", "#FFF8ED"); //background
         r.style.setProperty("--main-bg-inverse", "#00071250");
-        r.style.setProperty("--secondary-bg-inverse", "#00071210");
+        r.style.setProperty("--secondary-bg-inverse", "#00071215");
         r.style.setProperty("--link-hover-bg", "#e7c496"); //selection background
         r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
         r.style.setProperty("--command", "#53c7f0"); //accent color
@@ -126,7 +126,7 @@ function Terminal() {
         setLines([...lines, commandLiner, "Space theme applied"]);
         r.style.setProperty("--main-bg", "#1B2240"); //background
         r.style.setProperty("--main-bg-inverse", "#e4ddbf50");
-        r.style.setProperty("--secondary-bg-inverse", "#e4ddbf10");
+        r.style.setProperty("--secondary-bg-inverse", "#e4ddbf15");
         r.style.setProperty("--link-hover-bg", "#383f56"); //selection background
         r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
         r.style.setProperty("--command", "#ad9bf6"); //accent color
