@@ -16,6 +16,7 @@ import {
   egg,
   theme,
   cmds,
+  themeCmds,
 } from "../../commands";
 import NewLines from "../NewLines/NewLines";
 
@@ -29,10 +30,6 @@ function Terminal() {
   const inputRef = React.useRef();
   React.useEffect(() => {
     inputRef.current.focus();
-    // inputRef.current.setSelectionRange(
-    //   tentativeCommand.length,
-    //   tentativeCommand.length
-    // );
   }, []);
   const cursorRef = React.useRef();
   const linerRef = React.useRef();
@@ -43,8 +40,9 @@ function Terminal() {
       setCommandHistory([...commandHistory, "timeline1"]);
     } else {
       setCommandHistory([...commandHistory, tentativeCommand]);
-    } // setLines([...lines, ["tentativeCommand"]]);
+    }
 
+    let lastCommand = commandHistory[commandHistory.length - 1];
     let commandLiner = `<br><p>visitor@ioav.dev: ~ $ <span>${command}</span></p><br>`;
     let history = `<p className='color2'>
     ${commandHistory.map((commandHist) => {
@@ -64,9 +62,6 @@ function Terminal() {
       case "history":
         setLines([...lines, commandLiner, history]);
         break;
-      // case "banner":
-      //   setLines([...lines, commandLiner, ...banner]);
-      //   break;
       case "about":
         setLines([...lines, commandLiner, ...about]);
         break;
@@ -82,6 +77,7 @@ function Terminal() {
       case "theme dark":
         setLines([...lines, commandLiner, "Dark theme applied"]);
         r.style.setProperty("--main-bg", "#0F111A"); //background
+        r.style.setProperty("--main-bg-inverse", "#F0EEE5");
         r.style.setProperty("--link-hover-bg", "#717CB480"); //selection background
         r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
         r.style.setProperty("--command", "#84FFFF"); //accent color
@@ -91,13 +87,13 @@ function Terminal() {
         break;
       case "theme light":
         setLines([...lines, commandLiner, "Light theme applied"]);
-        r.style.setProperty("--main-bg", "#F0F0F0");
-        r.style.setProperty("--link-hover-bg", "#d3e8f8");
-        r.style.setProperty("--link-hover-text", "#403f53");
-        r.style.setProperty("--command", "#2AA298");
-        r.style.setProperty("--main-text", "#4876d6");
-        r.style.setProperty("--link-text", "#4876d6");
-        r.style.setProperty("--color2-text", "#c96765");
+        r.style.setProperty("--main-bg", "#F4F4F4"); //background
+        r.style.setProperty("--link-hover-bg", "#FFFFFF"); //selection background
+        r.style.setProperty("--link-hover-text", "#232324"); //selection foreground
+        r.style.setProperty("--command", "#2979ff"); //accent color
+        r.style.setProperty("--main-text", "#986801"); //variables color
+        r.style.setProperty("--link-text", "#4078F2"); //functions color
+        r.style.setProperty("--color2-text", "#50A14E"); //strings color
         break;
       case "theme forest":
         setLines([...lines, commandLiner, "Forest theme applied"]);
@@ -129,16 +125,59 @@ function Terminal() {
         r.style.setProperty("--link-text", "#82aaff"); //functions color
         r.style.setProperty("--color2-text", "#c3e88d"); //strings color
         break;
-      // case command.startsWith("theme "):
-      //   console.log("works");
-      //   setLines([...lines, commandLiner, ...theme]);
-      //   break;
       case "social":
         setLines([...lines, commandLiner, ...social]);
         break;
       case "timeline":
         setLines([...lines, commandLiner, ...timeline1]);
-        // linerRef.current.style.display = "none";
+        break;
+      case "n":
+        if (lastCommand.includes("timeline")) {
+          setCommandHistory([...commandHistory, "cancel"]);
+          let response = `<p className='color2'>  You're no fun :( </p>`;
+          setLines([...lines, commandLiner, response]);
+        } else {
+          setLines([
+            ...lines,
+            commandLiner,
+            `<p className='color2'>Command not found: ${command}. For a list of commands, type <span class="command">'help'</span>.</p>`,
+          ]);
+        }
+        break;
+      case "y":
+        switch (lastCommand) {
+          case "timeline1":
+            setLines([...lines, commandLiner, ...timeline2]);
+            setCommandHistory([...commandHistory, "timeline2"]);
+            break;
+          case "timeline2":
+            setLines([...lines, commandLiner, ...timeline3]);
+            setCommandHistory([...commandHistory, "timeline3"]);
+            break;
+          case "timeline3":
+            setLines([...lines, commandLiner, ...timeline4]);
+            setCommandHistory([...commandHistory, "timeline4"]);
+            break;
+          case "timeline4":
+            setLines([...lines, commandLiner, ...timeline5]);
+            setCommandHistory([...commandHistory, "timeline5"]);
+            break;
+          case "timeline5":
+            let response = `<a href='${egg}'>  There was an egg...</a>`;
+            setLines([...lines, commandLiner, response]);
+            setCommandHistory([...commandHistory, "the egg"]);
+            setTimeout(function () {
+              window.open(egg, "_blank");
+            }, 1000);
+            break;
+          default:
+            setLines([
+              ...lines,
+              commandLiner,
+              `<p className='color2'>Command not found: ${command}. For a list of commands, type <span class="command">'help'</span>.</p>`,
+            ]);
+            break;
+        }
         break;
       default:
         setLines([
@@ -189,22 +228,31 @@ function Terminal() {
       keyCode === "Control" ||
       keyCode === "Alt"
     ) {
-      handleSubmit("Invalid key");
-      setTentativeCommand("");
+      handleSubmit("Invalid key: '" + keyCode + "'");
+      setCommandHistory([...commandHistory, "invalid command"]);
     }
     if (keyCode === "Tab") {
       event.preventDefault();
 
       let hintCmds = [];
+
       cmds.forEach(function (cmd) {
         if (cmd.startsWith(tentativeCommand)) {
           hintCmds = [...hintCmds, cmd];
         }
       });
+
+      if (tentativeCommand.startsWith("theme")) {
+        themeCmds.forEach(function (cmds) {
+          if (cmds.startsWith(tentativeCommand)) {
+            hintCmds = [...hintCmds, cmds];
+          }
+        });
+      }
+
       if (hintCmds.length > 1) {
         setHints(hintCmds);
       } else {
-        console.log(hintCmds);
         if (hintCmds.length > 0) {
           setTentativeCommand(hintCmds[0]);
           setHints([]);
@@ -217,121 +265,77 @@ function Terminal() {
     input.setSelectionRange(length, length);
   }
 
-  function checkTimeline(nextCommand) {
-    let lastCommand = commandHistory[commandHistory.length - 1];
-    if (lastCommand.includes("timeline")) {
-      if (nextCommand === "n") {
-        let commandLiner = `<br><p>visitor@ioav.dev: ~ $ <span>n</span></p><br>`;
-        setCommandHistory([...commandHistory, "cancel"]);
-        let response = `<p className='color2'>  You're no fun :( </p>`;
-        setLines([...lines, commandLiner, response]);
-        setTentativeCommand("");
-      }
-
-      if (nextCommand === "y") {
-        let commandLiner = `<br><p>visitor@ioav.dev: ~ $ <span>y</span></p><br>`;
-        setTentativeCommand("");
-        switch (lastCommand) {
-          case "timeline1":
-            setLines([...lines, commandLiner, ...timeline2]);
-            setCommandHistory([...commandHistory, "timeline2"]);
-            break;
-          case "timeline2":
-            setLines([...lines, commandLiner, ...timeline3]);
-            setCommandHistory([...commandHistory, "timeline3"]);
-            break;
-          case "timeline3":
-            setLines([...lines, commandLiner, ...timeline4]);
-            setCommandHistory([...commandHistory, "timeline4"]);
-            break;
-          case "timeline4":
-            setLines([...lines, commandLiner, ...timeline5]);
-            setCommandHistory([...commandHistory, "timeline5"]);
-            break;
-          case "timeline5":
-            let response = `<a href='${egg}'>  There was an egg...</a>`;
-            setLines([...lines, commandLiner, response]);
-            setCommandHistory([...commandHistory, "the egg"]);
-            setTimeout(function () {
-              window.open(egg, "_blank");
-            }, 1000);
-            break;
-          default:
-            break;
-        }
-      }
-    }
-  }
-
   return (
     <div className="terminal-wrapper">
       {/* TODO: create separate component for tracking history */}
+      <div className="terminal-wrapper-content">
+        <div className="bannerWrapper">
+          <NewLines lines={banner} type={"banner"} />
+          <NewLines lines={bannerMobile} type={"mobile-banner"} />
+        </div>
 
-      <div className="bannerWrapper">
-        <NewLines lines={banner} type={"banner"} />
-        <NewLines lines={bannerMobile} type={"mobile-banner"} />
-      </div>
-
-      <br />
-      <p className="color2">Welcome to my terminal portfolio!</p>
-      <br />
-      <p className="color2">
-        For a list of available commands, type{" "}
-        <span className="command">'help'</span>.
-      </p>
-
-      <NewLines lines={lines} />
-
-      {/* TODO:  create separate component just for command line*/}
-
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          handleSubmit();
-          // handleSubmit(tentativeCommand);
-        }}
-      >
-        <input
-          ref={inputRef}
-          id="command-field"
-          value={tentativeCommand}
-          autoComplete="off"
-          onKeyDown={(event) => {
-            moveCaret(event);
-          }}
-          onChange={(event) => {
-            let nextCommand = event.target.value.toLowerCase();
-            setTentativeCommand(nextCommand); //TODO: Keep a separate component for this state or cache this data so that component doesnt rerender on every key stroke.
-            if (commandHistory[commandHistory.length - 1] !== undefined) {
-              checkTimeline(nextCommand);
-            }
-          }}
-        />
-      </form>
-      <div
-        ref={linerRef}
-        id="command-line"
-        onClick={() => {
-          onclick = inputRef.current.focus();
-        }}
-      >
         <br />
-        <p>
-          visitor@ioav.dev: ~ $ <span>{tentativeCommand}</span>
-          <b
-            className="cursor"
-            id="cursor"
-            ref={cursorRef}
-            style={{ left: "0px" }}
-          >
-            █
-          </b>
+        <p className="color2">Welcome to my terminal portfolio!</p>
+        <br />
+        <p className="color2">
+          For a list of available commands, type{" "}
+          <span className="command">'help'</span>.
         </p>
-        <p>
-          {hints.map((hint) => (
-            <>{hint} &nbsp;&nbsp;</>
-          ))}
-        </p>
+
+        <NewLines lines={lines} />
+
+        {/* TODO:  create separate component just for command line*/}
+
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            handleSubmit();
+          }}
+        >
+          <input
+            ref={inputRef}
+            id="command-field"
+            value={tentativeCommand}
+            autoComplete="off"
+            onKeyDown={(event) => {
+              moveCaret(event);
+            }}
+            onChange={(event) => {
+              let nextCommand = event.target.value.toLowerCase();
+              if (nextCommand === "<") {
+                nextCommand = "";
+              }
+              setTentativeCommand(
+                nextCommand
+              ); /*TODO: Keep a separate component for this state or cache this data so that component doesnt rerender on every key stroke.*/
+            }}
+          />
+        </form>
+        <div
+          ref={linerRef}
+          id="command-line"
+          onClick={() => {
+            onclick = inputRef.current.focus();
+          }}
+        >
+          <br />
+          <p>
+            visitor@ioav.dev: ~ $ <span>{tentativeCommand}</span>
+            <b
+              className="cursor"
+              id="cursor"
+              ref={cursorRef}
+              style={{ left: "0px" }}
+            >
+              █
+            </b>
+          </p>
+          <p>
+            {hints.map((hint) => (
+              <>{hint} &nbsp;&nbsp;</>
+            ))}
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -1,11 +1,12 @@
 :root{
-  --main-text: #EEFFFF;
   --main-bg: #0F111A;
-  --color2-text: #C3E88D;
-  --command: #84FFFF;
-  --link-text: #82AAFF;
+  --main-bg-inverse: #F0EEE550;
   --link-hover-bg: #717CB480;
   --link-hover-text: #FFFFFF;
+  --command: #84FFFF;
+  --main-text: #EEFFFF;
+  --link-text: #82AAFF;
+  --color2-text: #C3E88D;
 }
 
 .App {
@@ -18,7 +19,6 @@
 body {
   display: flex;
   margin: 0;
-  /* padding: 15px 20px; */
   color: var(--main-text);
   background: var(--main-bg); 
   font-family: cursor, monospace;

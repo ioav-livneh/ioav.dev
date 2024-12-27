@@ -1,15 +1,26 @@
 .terminal-wrapper {
-    border: var(--color2-text) 2px solid;
+    border: var(--color2-text) 3px solid;
     height: 100%;
-    min-height: calc(100vh - 34px);
-    border-radius: 5px;
-    min-width: calc(100vw - 44px); 
-    padding: 15px 20px;
+    min-height: calc(100vh - 36px);
+    border-radius: 1rem;
+    min-width: calc(100vw - 46px); 
+    padding: 15px 15px;
 
     @media screen and (max-width: 830px) {
         min-height: calc(80vh);
       }
 }
+
+.terminal-wrapper-content {
+    border: 1px solid var(--main-bg-inverse);
+    border-radius: 0.6rem;
+    padding: 15px 20px;
+    min-height: calc(100vh - 68px);
+    
+    @media screen and (max-width: 830px) {
+        min-height: calc(80vh - 32px);
+      }
+  }
 
 form{
     left: -1000px;

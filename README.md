@@ -14,6 +14,10 @@ list all available commands
 
 about Ioav Livneh
 
+#### `projects`
+
+view projects that I've coded
+
 #### `timeline`
 
 work history, education, and fun facts
@@ -25,6 +29,10 @@ technologies and frameworks
 #### `social`
 
 check out my github, linkedin, or email
+
+#### `theme`
+
+check available themes
 
 #### `history`
 

@@ -18,18 +18,22 @@ export const cmds = [
   "clear",
 ];
 
+export const themeCmds = [
+  "theme dark",
+  "theme light",
+  "theme forest",
+  "theme beach",
+  "theme space",
+];
+
 export const about = [
   `<p className='color2' key={${crypto.randomUUID()}}>
-  Hi, my name Ioav Livneh! 👋 <br>
+  Hi, I'm Ioav Livneh! 👋 <br>
   Solutions Architect at MongoDB 🍃<br>
   Based in Barcelona, Spain 📍<br><br>
-  Tech communicator, matcha lover, and journal scribbler. When I'm <br>
-  not coding or architecting solutions, you’ll find me on a hike, <br>
-  kickboxing, or fiddling on the piano. The good life is one filled <br>
-  with good books, quiet moments, and spending more time IRL. 
+  Tech communicator, guitar strummer, and journal scribbler.
   </p>`,
 ];
-//and living life a bit more offline
 
 export const projects = [
   `<p className='color2' key={${crypto.randomUUID()}}> 
@@ -41,9 +45,6 @@ export const projects = [
     An infuriatingly entertaining game, inspired by the classic flash game 'Dont Press the Button' <br><br>
   These are all still works in progress, so you can check back on them occassionally for updates.
   </p>`,
-  // <a href=${button} target="_blank">3. Press the Button </a><br>
-  //   An infuriatingly entertaining game, inspired by <br>
-  //   the classic flash game 'Dont Press the Button'.<br><br></br>
 ];
 
 export const skills = [
@@ -75,32 +76,12 @@ export const help = [
   <span className='command'>social</span>      <span className='desc'>  - check out my github, linkedin, or email </span><br>
   <span className='command'>theme</span>       <span className='desc'>  - check available themes </span><br>
   <span className='command'>history</span>     <span className='desc'>  - view history of commands </span><br>
-  <span className='command'>clear</span>       <span className='desc'>  - clear terminal </span><br>
+  <span className='command'>clear</span>       <span className='desc'>  - clear terminal </span>
 <span className='key-container color2'><br>
   Tab            => autocompletes the command<br>
   Up Arrow       => go back to previous command
 </span></p>`,
 ];
-
-// `<p className='color2'>
-// <span className='command'>about</span>       - about Ioav Livneh<br>
-// <span className='command'>projects</span>    - view projects that I've coded <br>
-// <span className='command'>timeline</span>    - work experience, education and other fun facts <br>
-// <span className='command'>skills</span>      - technologies and frameworks <br>
-// <span className='command'>social</span>      - check out my github, linkedin, or email <br>
-// <span className='command'>theme</span>       - check available themes <br>
-// <span className='command'>history</span>     - view command history <br>
-// <span className='command'>clear</span>       - clear terminal <br><br>
-// Tab         => autocompletes the command<br>
-// Up Arrow    => go back to previous command<br></p>`,
-
-// <span className='command'>inspire</span>     Inspirobot API <br>
-// <span className='command'>banner</span>      Display banner <br>
-
-//   "cv/linkedin: resume [pdg - 197kb]",
-//   "matrix:      only for real hackers (make it rain ones and zeros)",
-//   "projects:    other apps I've made",
-//   "secret:      I hid a secret link somewhere on this page. Can you find it?",
 
 export const timeline1 = [
   `<p className='color2' key={${crypto.randomUUID()}}>
@@ -109,7 +90,7 @@ export const timeline1 = [
   2019: Completed Ironhack Web Development Bootcamp<br>
   2018: Worked as a student tutor at NYIT<br>
   2017: Began studying at New York Institute of Technology<br><br>
-  Do you want to continue? (y/n)
+  Do you want to continue? [Y/n]
   </p>`,
 ];
 
@@ -120,7 +101,7 @@ export const timeline2 = [
   2013: Java bootcamp<br>
   2003: Moved to Costa Rica<br>
   1999: Born in Israel<br><br>
-  Do you want to continue? (y/n)
+  Do you want to continue? [Y/n]
   </p>`,
 ];
 
@@ -131,7 +112,7 @@ export const timeline3 = [
   1945: Von Neumann designs computer architecture<br>
   1936: Alan Turing invents the turing machine<br>
   1843: Ada Lovelace invents the first algorithm<br><br>
-  Do you want to continue? (y/n)
+  Do you want to continue? [Y/n]
   </p>`,
 ];
 
@@ -142,7 +123,7 @@ export const timeline4 = [
   2000 BC - 620 AD:   Major world religions founded<br>
   12,000 years ago:   Agricultural Revolution <br>
   70,000 years ago:   Cognitive Revolution <br><br>
-  Do you want to continue? (y/n)
+  Do you want to continue? [Y/n]
   </p>`,
 ];
 
@@ -153,7 +134,7 @@ export const timeline5 = [
   325 million years ago:  Mammals diverged from reptiles<br>
   1.5 billion years ago:  Animals diverged from plants and fungi<br>
   3.9 billion years ago:  The species from which everything alive today is descended may have lived at this time<br><br>
-  Do you want to know what came before that? (y/n)
+  Do you want to know what came before that? [Y/n]
   </p>`,
 ];
 
@@ -171,8 +152,7 @@ export const social = [
   Here are my social links<br><br>
   <a href=${github} target="_blank">1. GitHub</a>       <span className='desc'>  - github.com/ioav-livneh</span><br>
   <a href=${linkedin} target="_blank">2. LinkedIn</a>     <span className='desc'>  - linkedin.com/in/ioav</span><br>
-  <a href=${email} target="_blank">3. Email</a>        <span className='desc'>  - ioavlivneh@gmail.com</span>
-  </p>`,
+  <a href=${email} target="_blank">3. Email</a>        <span className='desc'>  - ioavlivneh@gmail.com</span> </p>`,
 ];
 
 export const banner2 = [
