@@ -1,6 +1,7 @@
 :root{
   --main-bg: #0F111A;
   --main-bg-inverse: #F0EEE550;
+  --secondary-bg-inverse: #F0EEE510;
   --link-hover-bg: #717CB480;
   --link-hover-text: #FFFFFF;
   --command: #84FFFF;

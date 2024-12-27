@@ -3,8 +3,11 @@
     height: 100%;
     min-height: calc(100vh - 36px);
     border-radius: 1rem;
-    min-width: calc(100vw - 46px); 
+    min-width: calc(100vw - 36px); 
     padding: 15px 15px;
+    overflow: hidden;
+    position: relative;
+    /* background-color: var(--secondary-bg-inverse); */
 
     @media screen and (max-width: 830px) {
         min-height: calc(80vh);
@@ -20,6 +23,33 @@
     @media screen and (max-width: 830px) {
         min-height: calc(80vh - 32px);
       }
+  }
+
+  @keyframes pan-overlay {
+    from {
+      background-position: 0% 0%;
+    }
+    
+    to {
+      background-position: 0% -100%;
+    }
+  }
+
+  .screen-overlay {    
+    background: linear-gradient(
+        var(--secondary-bg-inverse),
+        var(--secondary-bg-inverse) 3px,
+      transparent 3px,
+      transparent 9px
+    );
+    background-size: 100% 9px;
+    min-height: 100%;
+    width: 100%;
+    animation: pan-overlay 22s infinite linear;
+    position: absolute;
+    z-index: -1;
+    left: 0px;
+    top: 0px;
   }
 
 form{
