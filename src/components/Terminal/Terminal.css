@@ -27,11 +27,11 @@
 
   @keyframes pan-overlay {
     from {
-      background-position: 0% 0%;
+      background-position: 0 0;
     }
     
     to {
-      background-position: 0% -100%;
+      background-position: 0px -9px;
     }
   }
 
@@ -45,7 +45,7 @@
     background-size: 100% 9px;
     min-height: 100%;
     width: 100%;
-    animation: pan-overlay 22s infinite linear;
+    animation: pan-overlay 0.3s infinite linear;
     position: absolute;
     z-index: -1;
     left: 0px;
