@@ -47,6 +47,13 @@ export const projects = [
   </p>`,
 ];
 
+// Technical Skills
+// Languages: Java | Kotlin | C/C++ | C# | Python | JavaScript | TypeScript | PHP | HTML5 | CSS3 | SASS
+// Frameworks & Libraries: React | Angular | Node.js | Express | ASP.NET | jQuery | Bootstrap | Jupyter | Spark
+// Databases: SQL Server | MySQL | PostgreSQL | MongoDB | Firebase | NoSQL | PhpMyAdmin
+// Cloud & DevOps: AWS | GCP | Azure | MongoDB Atlas | Jenkins | Firebase | GitHub | Postman
+// Tools & Platforms: Android Studio | Visual Studio | SSMS | JIRA
+
 export const skills = [
   `<p className='color2'>
   <span className='command'>Programming languages</span><br>
@@ -78,7 +85,7 @@ export const help = [
   <span className='command'>history</span>     <span className='desc'>  - view history of commands </span><br>
   <span className='command'>clear</span>       <span className='desc'>  - clear terminal </span>
 <span className='key-container color2'><br>
-  Tab            => autocompletes the command<br>
+  TAB            => autocompletes the command<br>
   Up Arrow       => go back to previous command
 </span></p>`,
 ];
