@@ -17,6 +17,7 @@ import {
   theme,
   cmds,
   themeCmds,
+  hiddenCommandResponse,
 } from "../../commands";
 import NewLines from "../NewLines/NewLines";
 
@@ -193,7 +194,9 @@ function Terminal() {
         setLines([
           ...lines,
           commandLiner,
-          `<p className='color2'>Command not found: ${command}. For a list of commands, type <span class="command">'help'</span>.</p>`,
+          ...(hiddenCommandResponse(command) ?? [
+            `<p className='color2'>Command not found: ${command}. For a list of commands, type <span class="command">'help'</span>.</p>`,
+          ]),
         ]);
     }
     setTentativeCommand("");
@@ -209,8 +212,11 @@ function Terminal() {
       .trim()
       .toLowerCase();
     const isChoice = command === "y" || command === "n";
-    if (!isChoice && !cmds.includes(command) && !themeCmds.includes(command))
-      return;
+    const isKnown =
+      cmds.includes(command) ||
+      themeCmds.includes(command) ||
+      hiddenCommandResponse(command) !== null;
+    if (!isChoice && !isKnown) return;
 
     handleSubmit(command);
     inputRef.current.focus();

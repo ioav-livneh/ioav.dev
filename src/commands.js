@@ -4,7 +4,7 @@ var linkedin = "https://www.linkedin.com/in/ioav/";
 var email = "mailto:ioavlivneh@gmail.com";
 var game = "https://www.1010.ioav.dev";
 var syntopicon = "https://www.syntopicon.ioav.dev";
-var button = "https://www.button.ioav.dev";
+var livceramic = "https://www.livceramic.com";
 
 export const cmds = [
   "help",
@@ -25,6 +25,99 @@ export const themeCmds = [
   "theme beach",
   "theme space",
 ];
+
+// Hidden easter-egg commands, matched on the first word so arguments work (e.g. "cd projects").
+// Not listed in help or tab-completion on purpose.
+const escapeHtml = (text) =>
+  text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+const fileListing = `<p className='color2'>
+  <span className='command' data-command='about'>about.txt</span>   <span className='command' data-command='projects'>projects/</span>   <span className='command' data-command='skills'>skills.txt</span><br>
+  <span className='command' data-command='social'>social.txt</span>  <span className='command' data-command='timeline'>timeline.log</span>
+  </p>`;
+
+export function hiddenCommandResponse(command) {
+  const [name, ...rest] = command.trim().split(/\s+/);
+  const args = escapeHtml(rest.join(" "));
+  const reply = (text) => [`<p className='color2'>${text}</p>`];
+
+  switch (name) {
+    case "ls":
+      return [fileListing];
+    case "dir":
+      return [
+        `<p className='color2'>This isn't Windows, but I'll allow it.</p>`,
+        fileListing,
+      ];
+    case "cd":
+      if (!args || args === "~" || args === "/") {
+        return reply(
+          "You're already home. There's only one room in this house.",
+        );
+      }
+      if (args === "..") {
+        return reply("Nice try. There's nothing above home.");
+      }
+      return reply(
+        `cd: ${args}: Not a directory. Type <span className='command'>ls</span> to look around.`,
+      );
+    case "pwd":
+      return reply("/home/visitor");
+    case "whoami":
+      return reply("visitor. But I hope you'll become a friend.");
+    case "sudo":
+      return reply(
+        "visitor is not in the sudoers file. This incident will be reported. 🚨",
+      );
+    case "su":
+      return reply("su: Authentication failure. Good try, though.");
+    case "rm":
+      return reply(
+        "rm: Permission denied. This portfolio is not going anywhere.",
+      );
+    case "mkdir":
+    case "touch":
+    case "mv":
+    case "cp":
+      return reply(`${name}: Read-only file system. Look, don't touch. 👀`);
+    case "cat":
+      return reply(
+        "🐱 meow. Looking for a file? Type <span className='command'>ls</span>.",
+      );
+    case "echo":
+      return reply(args || "&nbsp;");
+    case "date":
+      return reply(new Date().toString());
+    case "uname":
+      return reply("ioavOS 1.0 (React) — built with ☕ and curiosity");
+    case "man":
+      return reply(
+        "No manual entry. Type <span className='command'>help</span> instead.",
+      );
+    case "vim":
+    case "vi":
+    case "nano":
+    case "emacs":
+      return reply(
+        `${name}: Opening... just kidding. No one has ever escaped ${name} anyway.`,
+      );
+    case "exit":
+    case "logout":
+      return reply(
+        "There is no escape. Try <span className='command'>clear</span> instead.",
+      );
+    case "ping":
+      return reply("pong 🏓");
+    case "hello":
+    case "hi":
+    case "hey":
+      return reply(
+        "Hey there! 👋 Type <span className='command'>about</span> to learn more about me.",
+      );
+    default:
+      return null;
+  }
+}
 
 export const help = [
   `<p className='color2'>
@@ -55,25 +148,25 @@ export const about = [
   Hi, I'm Ioav Livneh! 👋 <br><br>
   Creative coder. Pretentious bipedal ape.<br>
   I believe the internet should feel handmade, personal, and a little weird — <br>
-  not optimized, not templated, not AI-generated. <br><br>
+  not optimized, not templated, not soulless. <br><br>
   Based in Barcelona, Spain 📍
   </p>`,
 ];
 
 export const projects = [
   `<p className='color2' key={${crypto.randomUUID()}}> 
-  <a href=${syntopicon} target="_blank">1. Syntopicon </a><br>
-    A personal commonplace book where I keep the best quotes and takeaways from my favorite books.<br><br>
+  <a href=${livceramic} target="_blank">1. Liv Ceramic </a><br>
+    An e-commerce site for my family's ceramics business in Costa Rica. <br><br>
   <a href=${game} target="_blank">2. 1010! </a><br>
     A recreation of the Tetris-like mobile game, now available in web format. <br><br>
-  <a href=${button} target="_blank">3. Press the Button (Coming Soon) </a><br>
-    An infuriatingly entertaining game, inspired by the classic flash game 'Dont Press the Button'
+  <a href=${syntopicon} target="_blank">3. Syntopicon </a><br>
+    A personal commonplace book where I keep the best quotes and takeaways from my favorite books.
   </p>`,
 ];
 
 export const timeline1 = [
   `<p className='color2' key={${crypto.randomUUID()}}>
-  2026: Solution Architect at Elastic<br>
+  2026: Freelance Web Developer<br>
   2024: Solution Architect at MongoDB<br>
   2022: Software Engineer at Itlize <br>
   2021: Graduated from NYIT with a B.S. in Computer Science<br>
@@ -170,19 +263,6 @@ export const theme = [
   Apply any theme by using the syntax 'theme [theme-name]'<br>
   eg: theme forest
   </p>`,
-];
-
-export const banner2 = [
-  "                .----.     ",
-  "    .---------. | == |     ",
-  '    |.-"""""-.| |----|         _                        __         ',
-  "    ||       || | == |        (_)___  ____ __   __ ____/ /__ _   __",
-  "    ||       || |----|       / / __ \\/ __ `/ | / // __  / _ \\ | / /",
-  "    |'-.....-'| |::::|      / / /_/ / /_/ /| |/ // /_/ /  __/ |/ / ",
-  '    `"")---(""` |___.|     /_/\\____/\\__,_/ |___(_)__,_/\\___/|___/  ',
-  '   /:::::::::::\\" _  "                                     © 2026',
-  "  /:::=======:::\\ \\`\\   ",
-  '  `"""""""""""""`  "-"     ',
 ];
 
 export const banner = [
