@@ -40,6 +40,9 @@ p {
 .color2 {
   color: var(--color2-text);
 }
+.label {
+  color: var(--main-text);
+}
 .command {
   color: var(--command);
   text-shadow: 0 0 1px var(--command); 

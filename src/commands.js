@@ -1,9 +1,11 @@
+const currentYear = new Date().getFullYear();
+
 export const egg = "https://youtu.be/h6fcK_fRYaI";
 var github = "https://github.com/ioav-livneh";
 var linkedin = "https://www.linkedin.com/in/ioav/";
 var email = "mailto:ioavlivneh@gmail.com";
 var game = "https://www.1010.ioav.dev";
-var syntopicon = "https://www.syntopicon.ioav.dev";
+var syntopicon = "https://www.cards.ioav.dev";
 var livceramic = "https://www.livceramic.com";
 
 export const cmds = [
@@ -154,13 +156,22 @@ export const about = [
 ];
 
 export const projects = [
-  `<p className='color2' key={${crypto.randomUUID()}}> 
-  <a href=${livceramic} target="_blank">1. Liv Ceramic </a><br>
-    An e-commerce site for my family's ceramics business in Costa Rica. <br><br>
-  <a href=${game} target="_blank">2. 1010! </a><br>
-    A recreation of the Tetris-like mobile game, now available in web format. <br><br>
-  <a href=${syntopicon} target="_blank">3. Syntopicon </a><br>
-    A personal commonplace book where I keep the best quotes and takeaways from my favorite books.
+  `<p className='color2' key={${crypto.randomUUID()}}>
+  A few things I've built. Click a title to visit it.<br><br>
+
+  <a href=${livceramic} target="_blank">1. Liv Ceramic</a>  <span className='label'>2026</span><br>
+    An e-commerce site for my family's ceramics business in Costa Rica.<br>
+    <span className='label'>stack:</span>  Next.js · Supabase · Stripe · Resend<br><br>
+
+  <a href=${game} target="_blank">2. 1010!</a>  <span className='label'>2019 – present</span><br>
+    A recreation of the Tetris-like mobile game, now available in web format.<br>
+    <span className='label'>stack:</span>  JavaScript · HTML · CSS<br>
+    <span className='label'>code:</span>   <a href=${github}/1010-game target="_blank">github ↗</a><br><br>
+
+  <a href=${syntopicon} target="_blank">3. Syntopicon</a>  <span className='label'>2024 – 2025</span><br>
+    A personal commonplace book where I keep the best quotes and takeaways from my favorite books.<br>
+    <span className='label'>stack:</span>  JavaScript · CSS · MongoDB<br>
+    <span className='label'>code:</span>   <a href=${github}/ioav-cards target="_blank">github ↗</a>
   </p>`,
 ];
 
@@ -271,7 +282,7 @@ export const banner = [
   "         /**\\               / / __ \\/ __ `/ | / // __  / _ \\ | / /         ",
   "        /****\\   /\\        / / /_/ / /_/ /| |/ // /_/ /  __/ |/ /          ",
   "       /      \\ /**\\      /_/\\____/\\__,_/ |___(_)__,_/\\___/|___/           ",
-  "      /  /\\    /    \\                                      © 2026          ",
+  `      /  /\\    /    \\                                      © ${currentYear}          `,
   "     /  /  \\  /      \\      /\\    /\\  /\\      /\\            /\\/\\/\\  /\\     ",
   "    /  /    \\/ /\\     \\    /  \\/\\/  \\/  \\  /\\/  \\/\\  /\\  /\\/ / /  \\/  \\    ",
   "   /  /      \\/  \\/\\   \\  /    \\ \\  /    \\/ /   /  \\/  \\/  \\  /    \\   \\   ",
@@ -288,5 +299,5 @@ export const bannerMobile = [
   "   / __  / _ \\ | / /   ",
   " _/ /_/ /  __/ |/ /    ",
   "(_)__,_/\\___/|___/     ",
-  "   __________© 2026    ",
+  `   __________© ${currentYear}    `,
 ];
