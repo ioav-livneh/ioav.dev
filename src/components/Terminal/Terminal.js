@@ -21,6 +21,21 @@ import {
 } from "../../commands";
 import NewLines from "../NewLines/NewLines";
 
+const QUICK_COMMANDS = ["about", "projects", "timeline", "skills", "social", "theme", "help"];
+
+// Shell-style colored prompt. PROMPT_HTML is the same prompt for lines rendered from HTML strings.
+const PROMPT_HTML = `<span className='prompt-user'>visitor@ioav.dev</span>: <span className='prompt-path'>~</span> <span className='prompt-symbol'>$</span>`;
+
+function Prompt() {
+  return (
+    <>
+      <span className="prompt-user">visitor@ioav.dev</span>:{" "}
+      <span className="prompt-path">~</span>{" "}
+      <span className="prompt-symbol">$</span>{" "}
+    </>
+  );
+}
+
 function Terminal() {
   const [tentativeCommand, setTentativeCommand] = React.useState("");
   const [lines, setLines] = React.useState([]);
@@ -29,12 +44,30 @@ function Terminal() {
   const [hints, setHints] = React.useState([]);
   // How many characters the visible cursor sits to the left of the end of the command.
   const [caretOffset, setCaretOffset] = React.useState(0);
+  const [isFocused, setIsFocused] = React.useState(false);
 
   const inputRef = React.useRef();
   React.useEffect(() => {
     inputRef.current.focus();
   }, []);
+
+  // Follow new output and typing. Not on every render: a re-render from focus changes would jump
+  // the page mid-click, so the mouseup lands elsewhere and the clicked command never runs.
+  React.useEffect(() => {
+    window.scrollTo(0, document.body.offsetHeight);
+  }, [lines, tentativeCommand, hints]);
   const linerRef = React.useRef();
+  const contentRef = React.useRef();
+
+  // Clickable commands are plain spans from HTML strings, so make them keyboard-reachable here.
+  React.useEffect(() => {
+    contentRef.current
+      .querySelectorAll(".command:not(.heading), .choice")
+      .forEach((element) => {
+        element.tabIndex = 0;
+        element.setAttribute("role", "button");
+      });
+  });
 
   function handleSubmit(command = tentativeCommand) {
     setHints([]);
@@ -45,7 +78,7 @@ function Terminal() {
     }
 
     let lastCommand = commandHistory[commandHistory.length - 1];
-    let commandLiner = `<br><p>visitor@ioav.dev: ~ $ <span>${command}</span></p><br>`;
+    let commandLiner = `<br><p>${PROMPT_HTML} <span>${command}</span></p><br>`;
     let history = `<p className='color2'>
     ${commandHistory.map((commandHist) => {
       return commandHist;
@@ -78,6 +111,7 @@ function Terminal() {
         break;
       case "theme dark":
         setLines([...lines, commandLiner, "Dark theme applied"]);
+        r.style.setProperty("--scanline-opacity", "1");
         r.style.setProperty("--main-bg", "#0F111A"); //background
         r.style.setProperty("--main-bg-inverse", "#F0EEE550");
         r.style.setProperty("--secondary-bg-inverse", "#F0EEE515");
@@ -90,6 +124,7 @@ function Terminal() {
         break;
       case "theme light":
         setLines([...lines, commandLiner, "Light theme applied"]);
+        r.style.setProperty("--scanline-opacity", "0.5");
         r.style.setProperty("--main-bg", "#F4F4F4"); //background
         r.style.setProperty("--main-bg-inverse", "#0b0b0b50");
         r.style.setProperty("--secondary-bg-inverse", "#0b0b0b15");
@@ -102,6 +137,7 @@ function Terminal() {
         break;
       case "theme forest":
         setLines([...lines, commandLiner, "Forest theme applied"]);
+        r.style.setProperty("--scanline-opacity", "1");
         r.style.setProperty("--main-bg", "#002626"); //background
         r.style.setProperty("--main-bg-inverse", "#ffd9d950");
         r.style.setProperty("--secondary-bg-inverse", "#ffd9d915");
@@ -114,6 +150,7 @@ function Terminal() {
         break;
       case "theme beach":
         setLines([...lines, commandLiner, "Beach theme applied"]);
+        r.style.setProperty("--scanline-opacity", "0.5");
         r.style.setProperty("--main-bg", "#FFF8ED"); //background
         r.style.setProperty("--main-bg-inverse", "#00071250");
         r.style.setProperty("--secondary-bg-inverse", "#00071215");
@@ -126,6 +163,7 @@ function Terminal() {
         break;
       case "theme space":
         setLines([...lines, commandLiner, "Space theme applied"]);
+        r.style.setProperty("--scanline-opacity", "1");
         r.style.setProperty("--main-bg", "#1B2240"); //background
         r.style.setProperty("--main-bg-inverse", "#e4ddbf50");
         r.style.setProperty("--secondary-bg-inverse", "#e4ddbf15");
@@ -245,7 +283,8 @@ function Terminal() {
     if (keyCode === "ArrowRight" && caretOffset > 0) {
       setCaretOffset(caretOffset - 1);
     }
-    if (keyCode === "Tab") {
+    // Shift+Tab is left alone so keyboard users can move focus out of the input.
+    if (keyCode === "Tab" && !event.shiftKey) {
       event.preventDefault();
 
       let hintCmds = [];
@@ -283,7 +322,18 @@ function Terminal() {
     <div className="terminal-wrapper">
       {/* TODO: create separate component for tracking history */}
       <div className="screen-overlay"></div>
-      <div className="terminal-wrapper-content" onClick={runClickedCommand}>
+      <div
+        className="terminal-wrapper-content"
+        ref={contentRef}
+        onClick={runClickedCommand}
+        onKeyDown={(event) => {
+          const isClickable = event.target.matches(".command, .choice");
+          if (isClickable && (event.key === "Enter" || event.key === " ")) {
+            event.preventDefault();
+            runClickedCommand(event);
+          }
+        }}
+      >
         <div className="bannerWrapper">
           <NewLines lines={banner} type={"banner"} />
           <NewLines lines={bannerMobile} type={"mobile-banner"} />
@@ -292,9 +342,13 @@ function Terminal() {
         <br />
         <p className="color2">Welcome to my terminal portfolio!</p>
         <br />
-        <p className="color2">
-          For a list of available commands, type or click{" "}
-          <span className="command">'help'</span>.
+        <p className="color2">Type a command, or click one to get started:</p>
+        <p className="quick-menu">
+          {QUICK_COMMANDS.map((command) => (
+            <span className="command" key={command}>
+              {command}
+            </span>
+          ))}
         </p>
 
         <NewLines lines={lines} />
@@ -312,6 +366,8 @@ function Terminal() {
             id="command-field"
             value={tentativeCommand}
             autoComplete="off"
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
             onKeyDown={(event) => {
               moveCaret(event);
             }}
@@ -330,14 +386,15 @@ function Terminal() {
           ref={linerRef}
           id="command-line"
           onClick={() => {
-            onclick = inputRef.current.focus();
+            inputRef.current.focus();
           }}
         >
           <br />
           <p>
-            visitor@ioav.dev: ~ $ <span>{tentativeCommand}</span>
+            <Prompt />
+            <span>{tentativeCommand}</span>
             <b
-              className="cursor"
+              className={isFocused ? "cursor" : "cursor unfocused"}
               id="cursor"
               style={{ left: `${-caretOffset}ch` }}
             >
@@ -346,7 +403,7 @@ function Terminal() {
           </p>
           <p>
             {hints.map((hint) => (
-              <>{hint} &nbsp;&nbsp;</>
+              <React.Fragment key={hint}>{hint} &nbsp;&nbsp;</React.Fragment>
             ))}
           </p>
         </div>

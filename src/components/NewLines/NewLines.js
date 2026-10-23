@@ -3,27 +3,27 @@ import "./NewLines.css";
 import parse from "html-react-parser";
 
 function NewLines({ lines, type = "" }) {
-  React.useEffect(() => {
-    window.scrollTo(0, document.body.offsetHeight);
-  });
-
   return (
     <div className={"NewLines"}>
-      {lines.map((line) => {
+      {/* Lines are only ever appended (or all cleared), so index keys keep earlier lines
+          mounted and only new output plays the fade-in animation. */}
+      {lines.map((line, index) => {
         if (line.startsWith("<")) {
+          // Source indentation before </p> would otherwise become &nbsp; and render as an extra blank line.
+          const html = line.replace(/\s+<\/p>/g, "</p>");
           var t = "";
-          for (let i = 0; i < line.length; i++) {
-            if (line.charAt(i) === " " && line.charAt(i + 1) === " ") {
+          for (let i = 0; i < html.length; i++) {
+            if (html.charAt(i) === " " && html.charAt(i + 1) === " ") {
               t += "&nbsp;&nbsp;";
               i++;
             } else {
-              t += line.charAt(i);
+              t += html.charAt(i);
             }
           }
-          return parse(t); //add to the <p> key={`${line}-${crypto.randomUUID()}`}
+          return <React.Fragment key={index}>{parse(t)}</React.Fragment>;
         } else {
           return (
-            <p className={`${type} color2`} key={crypto.randomUUID()}>
+            <p className={`${type} color2`} key={index}>
               {line}
             </p>
           );

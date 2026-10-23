@@ -159,72 +159,73 @@ export const projects = [
   `<p className='color2' key={${crypto.randomUUID()}}>
   A few things I've built. Click a title to visit it.<br><br>
 
-  <a href=${livceramic} target="_blank">1. Liv Ceramic</a>  <span className='label'>2026</span><br>
-    An e-commerce site for my family's ceramics business in Costa Rica.<br>
-    <span className='label'>stack:</span>  Next.js · Supabase · Stripe · Resend<br><br>
+  <a href=${livceramic} target="_blank">1. Liv Ceramic</a>  <span className='label'>2026</span>
+<span className='indent'>An e-commerce site for my family's ceramics business in Costa Rica.<br>
+<span>stack:</span>  Next.js · Supabase · Stripe · Resend<br>
+<span>code:</span>   <a href=${github}/liv-ceramic target="_blank">github ↗</a></span><br>
 
-  <a href=${game} target="_blank">2. 1010!</a>  <span className='label'>2019 – present</span><br>
-    A recreation of the Tetris-like mobile game, now available in web format.<br>
-    <span className='label'>stack:</span>  JavaScript · HTML · CSS<br>
-    <span className='label'>code:</span>   <a href=${github}/1010-game target="_blank">github ↗</a><br><br>
+  <a href=${game} target="_blank">2. 1010!</a>  <span className='label'>2019 – present</span>
+<span className='indent'>A recreation of the Tetris-like mobile game, now available in web format.<br>
+<span>stack:</span>  JavaScript · HTML · CSS<br>
+<span>code:</span>   <a href=${github}/1010-game target="_blank">github ↗</a></span><br>
 
-  <a href=${syntopicon} target="_blank">3. Syntopicon</a>  <span className='label'>2024 – 2025</span><br>
-    A personal commonplace book where I keep the best quotes and takeaways from my favorite books.<br>
-    <span className='label'>stack:</span>  JavaScript · CSS · MongoDB<br>
-    <span className='label'>code:</span>   <a href=${github}/ioav-cards target="_blank">github ↗</a>
+  <a href=${syntopicon} target="_blank">3. Syntopicon</a>  <span className='label'>2024 – 2025</span>
+<span className='indent'>A personal commonplace book where I keep the best quotes and takeaways from my favorite books.<br>
+<span>stack:</span>  React · MongoDB · CSS · Framer Motion<br>
+<span>code:</span>   <a href=${github}/ioav-cards target="_blank">github ↗</a></span>
   </p>`,
 ];
 
 export const timeline1 = [
   `<p className='color2' key={${crypto.randomUUID()}}>
-  2026: Freelance Web Developer<br>
-  2024: Solution Architect at MongoDB<br>
-  2022: Software Engineer at Itlize <br>
-  2021: Graduated from NYIT with a B.S. in Computer Science<br>
-  2018: Academic Tutor at New York Institute of Technology<br><br>
+<span className='entry'>2026: Freelance Web Developer</span>
+<span className='entry'>2024: Solution Architect at MongoDB</span>
+<span className='entry'>2022: Software Engineer at Itlize </span>
+<span className='entry'>2021: Graduated from NYIT with a B.S. in Computer Science</span>
+<span className='entry'>2018: Academic Tutor at New York Institute of Technology</span><br>
   Do you want to continue? [<span className='choice'>Y</span>/<span className='choice'>n</span>]
   </p>`,
 ];
 
 export const timeline2 = [
   `<p className='color2' key={${crypto.randomUUID()}}>
-  2017: Graduated high school in Costa Rica<br>
-  2015: First steps in C++ <br>
-  2013: First steps in Java<br>
-  2003: Moved to Costa Rica<br>
-  1999: Born in Israel<br><br>
+<span className='entry'>2017: Graduated high school in Costa Rica</span>
+<span className='entry'>2015: First steps in C++ </span>
+<span className='entry'>2013: First steps in Java</span>
+<span className='entry'>2003: Moved to Costa Rica</span>
+<span className='entry'>1999: Born in Israel</span><br>
   Do you want to continue? [<span className='choice'>Y</span>/<span className='choice'>n</span>]
   </p>`,
 ];
 
 export const timeline3 = [
   `<p className='color2' key={${crypto.randomUUID()}}>
-  1995: Brendan Eich invents JavaScript<br>
-  1983: Internet is born<br>
-  1945: Von Neumann designs computer architecture<br>
-  1936: Alan Turing invents the turing machine<br>
-  1843: Ada Lovelace invents the first algorithm<br><br>
+<span className='entry'>1995: Brendan Eich invents JavaScript</span>
+<span className='entry'>1983: Internet is born</span>
+<span className='entry'>1945: Von Neumann designs computer architecture</span>
+<span className='entry'>1936: Alan Turing invents the turing machine</span>
+<span className='entry'>1843: Ada Lovelace invents the first algorithm</span><br>
   Do you want to continue? [<span className='choice'>Y</span>/<span className='choice'>n</span>]
   </p>`,
 ];
 
 export const timeline4 = [
   `<p className='color2' key={${crypto.randomUUID()}}>
-  1760 AD - 1840 AD:  Industrial Revolution<br>
-  1543 AD - 1687 AD:  Scientific Revolution<br>
-  2000 BC - 620 AD:   Major world religions founded<br>
-  12,000 years ago:   Agricultural Revolution <br>
-  70,000 years ago:   Cognitive Revolution <br><br>
+<span className='entry'>1760 AD - 1840 AD:  Industrial Revolution</span>
+<span className='entry'>1543 AD - 1687 AD:  Scientific Revolution</span>
+<span className='entry'>2000 BC - 620 AD:   Major world religions founded</span>
+<span className='entry'>12,000 years ago:   Agricultural Revolution </span>
+<span className='entry'>70,000 years ago:   Cognitive Revolution </span><br>
   Do you want to continue? [<span className='choice'>Y</span>/<span className='choice'>n</span>]
   </p>`,
 ];
 
 export const timeline5 = [
   `<p className='color2' key={${crypto.randomUUID()}}>
-  7 million years ago:    Humans diverged from chimps, our closest living biological ancestor<br>
-  85 million years ago:   Primates diverged from mammals<br>
-  325 million years ago:  Mammals diverged from reptiles<br>
-  1.5 billion years ago:  Animals diverged from plants and fungi<br>
+<span className='entry'>7 million years ago:    Humans diverged from chimps, our closest living biological ancestor</span>
+<span className='entry'>85 million years ago:   Primates diverged from mammals</span>
+<span className='entry'>325 million years ago:  Mammals diverged from reptiles</span>
+<span className='entry'>1.5 billion years ago:  Animals diverged from plants and fungi</span>
   3.9 billion years ago:  The first life. Everything alive today <br>
                         — every person, animal, and blade of grass — <br>
                         descends from a single common ancestor.<br><br>
@@ -269,7 +270,7 @@ export const social = [
 
 export const theme = [
   `<p className='color2'>
-  <span className='command' data-command='theme dark'>'dark'</span>   <span className='command' data-command='theme light'>'light'</span>   <span className='command' data-command='theme forest'>'forest'</span>   <span className='command' data-command='theme beach'>'beach'</span>   <span className='command' data-command='theme space'>'space'</span><br><br>
+  <span className='command' data-command='theme dark'><span className='swatch' style='background: #0F111A; border-color: #84FFFF'></span>'dark'</span>   <span className='command' data-command='theme light'><span className='swatch' style='background: #F4F4F4; border-color: #2979ff'></span>'light'</span>   <span className='command' data-command='theme forest'><span className='swatch' style='background: #002626; border-color: #FFCC80'></span>'forest'</span>   <span className='command' data-command='theme beach'><span className='swatch' style='background: #FFF8ED; border-color: #53c7f0'></span>'beach'</span>   <span className='command' data-command='theme space'><span className='swatch' style='background: #1B2240; border-color: #ad9bf6'></span>'space'</span><br><br>
 
   Apply any theme by using the syntax 'theme [theme-name]'<br>
   eg: theme forest

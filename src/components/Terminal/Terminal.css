@@ -17,7 +17,7 @@
 .terminal-wrapper-content {
     border: 1px solid var(--main-bg-inverse);
     border-radius: 0.6rem;
-    padding: 15px 20px;
+    padding: 20px clamp(20px, 4vw, 64px);
     min-height: calc(100vh - 68px);
     
     @media screen and (max-width: 830px) {
@@ -46,6 +46,7 @@
     min-height: 100%;
     width: 100%;
     animation: pan-overlay 0.3s infinite linear;
+    opacity: var(--scanline-opacity);
     position: absolute;
     z-index: -1;
     left: 0px;
@@ -80,6 +81,41 @@ form{
     }
   }
 
+/* Hollow, steady cursor while the input isn't focused, like a real terminal. */
+.cursor.unfocused {
+    background-color: transparent;
+    color: transparent;
+    box-shadow: inset 0 0 0 1px var(--main-text);
+    animation: none;
+    opacity: 0.6;
+}
+
+.quick-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3em 2.5ch;
+    margin-top: 0.6em;
+}
+
+/* New command output eases in. Banner lines live in .bannerWrapper, so they're not matched. */
+.terminal-wrapper-content > .NewLines > * {
+    animation: line-in 180ms ease-out both;
+}
+
+@keyframes line-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
+
+@media (prefers-reduced-motion: reduce) {
+    .terminal-wrapper-content > .NewLines > *,
+    .screen-overlay {
+        animation: none;
+    }
+}
+
 .hint{
     padding-right: 1rem;
 }
@@ -93,7 +129,7 @@ form{
     /* color: #519975; */
     background: var(--link-hover-bg);
     /* background: #211D1B; */
-    font-family: cursor, monospace;
+    font-family: var(--terminal-font);
     font-size: 20px;  
 }
 
