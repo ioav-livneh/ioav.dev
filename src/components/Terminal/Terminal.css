@@ -58,19 +58,17 @@ form{
 }
 
 .cursor{
-    font-size: 12px;
+    /* Sized in the command text's own font so 1ch = one character at every screen size. */
     color: var(--main-text) ;
     /* color: #73ABAD; */
     background-color: var(--main-text);
     /* background-color: #73ABAD; */
     position: relative;
     opacity: 0.4;
-    height: 1.5em;
-    width: 10px;
-    max-width: 10px;
-    transform: translateY(4px);
+    height: 1.3em;
+    width: 1ch;
+    vertical-align: bottom;
     overflow: hidden;
-    text-indent: -5px;
     display: inline-block;
     text-decoration: blink;
     animation: blinker 1s linear infinite;

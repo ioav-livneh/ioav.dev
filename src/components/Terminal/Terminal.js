@@ -26,20 +26,21 @@ function Terminal() {
   const [commandHistory, setCommandHistory] = React.useState([]);
   const [historyIndex, setHistoryIndex] = React.useState(0);
   const [hints, setHints] = React.useState([]);
+  // How many characters the visible cursor sits to the left of the end of the command.
+  const [caretOffset, setCaretOffset] = React.useState(0);
 
   const inputRef = React.useRef();
   React.useEffect(() => {
     inputRef.current.focus();
   }, []);
-  const cursorRef = React.useRef();
   const linerRef = React.useRef();
 
   function handleSubmit(command = tentativeCommand) {
     setHints([]);
-    if (tentativeCommand === "timeline") {
+    if (command === "timeline") {
       setCommandHistory([...commandHistory, "timeline1"]);
     } else {
-      setCommandHistory([...commandHistory, tentativeCommand]);
+      setCommandHistory([...commandHistory, command]);
     }
 
     let lastCommand = commandHistory[commandHistory.length - 1];
@@ -141,7 +142,7 @@ function Terminal() {
         setLines([...lines, commandLiner, ...timeline1]);
         break;
       case "n":
-        if (lastCommand.includes("timeline")) {
+        if (lastCommand?.includes("timeline")) {
           setCommandHistory([...commandHistory, "cancel"]);
           let response = `<p className='color2'>  You're no fun :( </p>`;
           setLines([...lines, commandLiner, response]);
@@ -196,7 +197,23 @@ function Terminal() {
         ]);
     }
     setTentativeCommand("");
-    cursorRef.current.style.left = "0px";
+    setCaretOffset(0);
+  }
+
+  function runClickedCommand(event) {
+    const commandSpan = event.target.closest(".command, .choice");
+    if (!commandSpan) return;
+
+    const command = (commandSpan.dataset.command ?? commandSpan.textContent)
+      .replace(/'/g, "")
+      .trim()
+      .toLowerCase();
+    const isChoice = command === "y" || command === "n";
+    if (!isChoice && !cmds.includes(command) && !themeCmds.includes(command))
+      return;
+
+    handleSubmit(command);
+    inputRef.current.focus();
   }
 
   function moveCaret(event) {
@@ -205,7 +222,7 @@ function Terminal() {
       const nextIndex = historyIndex + 1;
       setHistoryIndex(nextIndex);
       setTentativeCommand(commandHistory[commandHistory.length - nextIndex]);
-      cursorRef.current.style.left = "0px";
+      setCaretOffset(0);
     }
     if (keyCode === "ArrowDown" && historyIndex > 0) {
       const nextIndex = historyIndex - 1;
@@ -213,32 +230,14 @@ function Terminal() {
       setTentativeCommand(commandHistory[commandHistory.length - nextIndex]);
       if (nextIndex === 0) {
         setTentativeCommand("");
-        cursorRef.current.style.left = "0px";
+        setCaretOffset(0);
       }
     }
-    if (
-      keyCode === "ArrowLeft" &&
-      parseFloat(cursorRef.current.style.left) >=
-        0 - (tentativeCommand.length - 1) * 10.4
-    ) {
-      cursorRef.current.style.left =
-        parseFloat(cursorRef.current.style.left) - 10.4 + "px";
+    if (keyCode === "ArrowLeft" && caretOffset < tentativeCommand.length) {
+      setCaretOffset(caretOffset + 1);
     }
-    if (
-      keyCode === "ArrowRight" &&
-      parseFloat(cursorRef.current.style.left) + 10.4 <= 0
-    ) {
-      cursorRef.current.style.left =
-        parseFloat(cursorRef.current.style.left) + 10.4 + "px";
-    }
-    if (
-      keyCode === "<" ||
-      keyCode === "Meta" ||
-      keyCode === "Control" ||
-      keyCode === "Alt"
-    ) {
-      handleSubmit("Invalid key: '" + keyCode + "'");
-      setCommandHistory([...commandHistory, "invalid command"]);
+    if (keyCode === "ArrowRight" && caretOffset > 0) {
+      setCaretOffset(caretOffset - 1);
     }
     if (keyCode === "Tab") {
       event.preventDefault();
@@ -278,7 +277,7 @@ function Terminal() {
     <div className="terminal-wrapper">
       {/* TODO: create separate component for tracking history */}
       <div className="screen-overlay"></div>
-      <div className="terminal-wrapper-content">
+      <div className="terminal-wrapper-content" onClick={runClickedCommand}>
         <div className="bannerWrapper">
           <NewLines lines={banner} type={"banner"} />
           <NewLines lines={bannerMobile} type={"mobile-banner"} />
@@ -288,7 +287,7 @@ function Terminal() {
         <p className="color2">Welcome to my terminal portfolio!</p>
         <br />
         <p className="color2">
-          For a list of available commands, type{" "}
+          For a list of available commands, type or click{" "}
           <span className="command">'help'</span>.
         </p>
 
@@ -316,7 +315,7 @@ function Terminal() {
                 nextCommand = "";
               }
               setTentativeCommand(
-                nextCommand
+                nextCommand,
               ); /*TODO: Keep a separate component for this state or cache this data so that component doesnt rerender on every key stroke.*/
             }}
           />
@@ -334,8 +333,7 @@ function Terminal() {
             <b
               className="cursor"
               id="cursor"
-              ref={cursorRef}
-              style={{ left: "0px" }}
+              style={{ left: `${-caretOffset}ch` }}
             >
               █
             </b>

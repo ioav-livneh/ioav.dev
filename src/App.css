@@ -43,6 +43,22 @@ p {
 .command {
   color: var(--command);
   text-shadow: 0 0 1px var(--command); 
+  cursor: pointer;
+}
+.command.heading {
+  color: var(--link-text);
+  text-shadow: none;
+  cursor: auto;
+}
+.choice {
+  cursor: pointer;
+}
+.choice:hover {
+  text-decoration: underline;
+}
+.command:not(.heading):hover {
+  background: var(--link-hover-bg);
+  color: var(--link-hover-text);
 }
 
 .inherit,
@@ -62,3 +78,37 @@ a:hover {
 a:focus {
   outline: 0;
 } 
+
+/* Konami code easter egg: animated rainbow background, toggled from App.js */
+body.konami {
+  background: linear-gradient(
+    120deg,
+    #5a1a6e,
+    #1a3a8f,
+    #0e6b6b,
+    #2f7a1f,
+    #8a6a0e,
+    #8f2a1a,
+    #5a1a6e
+  );
+  background-size: 400% 400%;
+  animation: konami-rainbow 8s ease infinite;
+}
+
+@keyframes konami-rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.konami {
+    animation: none;
+  }
+}
