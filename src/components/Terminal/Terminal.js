@@ -21,6 +21,9 @@ import {
 } from "../../commands";
 import NewLines from "../NewLines/NewLines";
 
+// On touchscreens, focusing the input pops up the keyboard, so only focus it when the visitor taps the command line.
+const isTouchDevice = () => window.matchMedia("(pointer: coarse)").matches;
+
 const QUICK_COMMANDS = ["about", "projects", "timeline", "skills", "social", "theme", "help"];
 
 // Shell-style colored prompt. PROMPT_HTML is the same prompt for lines rendered from HTML strings.
@@ -48,7 +51,7 @@ function Terminal() {
 
   const inputRef = React.useRef();
   React.useEffect(() => {
-    inputRef.current.focus();
+    if (!isTouchDevice()) inputRef.current.focus();
   }, []);
 
   // Follow new output and typing. Not on every render: a re-render from focus changes would jump
@@ -257,7 +260,7 @@ function Terminal() {
     if (!isChoice && !isKnown) return;
 
     handleSubmit(command);
-    inputRef.current.focus();
+    if (!isTouchDevice()) inputRef.current.focus();
   }
 
   function moveCaret(event) {
