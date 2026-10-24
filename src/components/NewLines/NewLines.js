@@ -11,10 +11,16 @@ const SCRAMBLE_GLYPHS = "!#$%&*+-=?@^_~[]{}|/\\§±•x";
 const scramble = (text) =>
   text.replace(/\S/g, () => SCRAMBLE_GLYPHS[Math.floor(Math.random() * SCRAMBLE_GLYPHS.length)]);
 
-// Types out the given line elements in place, with a band of shuffling symbols running ahead of the
+// Types out the given elements in place, with a band of shuffling symbols running ahead of the
 // settled text. Text nodes are emptied and refilled in reading order; text-less elements (<br>, theme
-// swatches) appear when the band reaches them. Returns a function that finishes immediately.
-function typeOut(lineElements, onTypingChange) {
+// swatches) appear when the band reaches them. Text that isn't currently displayed (e.g. the phone
+// banner on desktop) is left alone. Returns finish(notify = true), which completes it immediately.
+// Pass `speed` (characters per ms) for a constant pace instead of fitting the output into maxDuration.
+export function typeOut(
+  lineElements,
+  onTypingChange,
+  { maxDuration = TYPING_MAX_DURATION, speed = null, followOutput = true } = {},
+) {
   const steps = [];
   let total = 0;
   for (const root of lineElements) {
@@ -25,7 +31,7 @@ function typeOut(lineElements, onTypingChange) {
     let node;
     while ((node = walker.nextNode())) {
       if (node.nodeType === Node.TEXT_NODE) {
-        if (node.data.length > 0) {
+        if (node.data.length > 0 && node.parentElement.getClientRects().length > 0) {
           steps.push({ node, text: node.data, start: total });
           total += node.data.length;
           node.data = "";
@@ -39,7 +45,8 @@ function typeOut(lineElements, onTypingChange) {
   }
 
   // The settled text has to travel the whole output plus the band before typing is done.
-  const charsPerMs = Math.max(TYPING_MIN_SPEED, (total + SCRAMBLE_AHEAD) / TYPING_MAX_DURATION);
+  const charsPerMs =
+    speed ?? Math.max(TYPING_MIN_SPEED, (total + SCRAMBLE_AHEAD) / maxDuration);
   let firstUnsettled = 0;
   let frame = null;
   let done = false;
@@ -62,7 +69,7 @@ function typeOut(lineElements, onTypingChange) {
     }
   };
 
-  const finish = () => {
+  const finish = (notify = true) => {
     if (done) return;
     done = true;
     cancelAnimationFrame(frame);
@@ -70,7 +77,7 @@ function typeOut(lineElements, onTypingChange) {
       if (step.text) step.node.data = step.text;
       else step.node.style.display = "";
     }
-    onTypingChange?.(false);
+    if (notify) onTypingChange?.(false);
   };
 
   const start = performance.now();
@@ -81,7 +88,7 @@ function typeOut(lineElements, onTypingChange) {
       return;
     }
     render(settled);
-    window.scrollTo(0, document.body.offsetHeight);
+    if (followOutput) window.scrollTo(0, document.body.offsetHeight);
     frame = requestAnimationFrame(tick);
   };
 

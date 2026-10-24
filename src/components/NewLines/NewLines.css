@@ -10,6 +10,11 @@
     }
 }
 
+/* The whoami summary is short enough to keep on one line on wide screens too. */
+.NewLines p.summary {
+    max-width: none;
+}
+
 /* Wrapper per output line, used only to find new lines to type out; it doesn't affect layout. */
 .NewLines .line {
     display: contents;

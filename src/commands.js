@@ -16,6 +16,7 @@ export const cmds = [
   "skills",
   "social",
   "theme",
+  "sound",
   "history",
   "clear",
 ];
@@ -37,6 +38,25 @@ const fileListing = `<p className='color2'>
   <span className='command' data-command='about'>about.txt</span>   <span className='command' data-command='projects'>projects/</span>   <span className='command' data-command='skills'>skills.txt</span><br>
   <span className='command' data-command='social'>social.txt</span>  <span className='command' data-command='timeline'>timeline.log</span>
   </p>`;
+
+// The one-line summary shown in the welcome screen's intro and by the whoami command.
+export const summary = {
+  name: "Ioav Livneh",
+  tagline: "web developer & former Solutions Architect at MongoDB.",
+  status: "Open to developer and bootcamp roles.",
+};
+
+export const whoami = [
+  `<p className='color2 summary'>
+  <span className='label'>${summary.name}</span>, ${summary.tagline.replace("&", "&amp;")}<br>
+  ${summary.status}
+  </p><br>`,
+];
+
+// The resume / contact links printed under the summary when the intro's whoami runs on load.
+export const introLinks = [
+  `<p>  <a href="mailto:ioavlivneh@gmail.com" className="terminal-button">[resume]</a>&nbsp;&nbsp;<a href="mailto:ioavlivneh@gmail.com" className="terminal-button">[contact]</a></p>`,
+];
 
 export function hiddenCommandResponse(command) {
   const [name, ...rest] = command.trim().split(/\s+/);
@@ -66,7 +86,7 @@ export function hiddenCommandResponse(command) {
     case "pwd":
       return reply("/home/visitor");
     case "whoami":
-      return reply("visitor. But I hope you'll become a friend.");
+      return reply("visitor, obviously. Who did you think you were?");
     case "sudo":
       return reply(
         "visitor is not in the sudoers file. This incident will be reported. 🚨",
@@ -129,6 +149,7 @@ export const help = [
   <span className='command'>skills</span>      <span className='desc'>  - technologies and frameworks </span><br>
   <span className='command'>social</span>      <span className='desc'>  - check out my github, linkedin, or email </span><br>
   <span className='command'>theme</span>       <span className='desc'>  - check available themes </span><br>
+  <span className='command'>sound</span>       <span className='desc'>  - turn sound effects on or off </span><br>
   <span className='command'>history</span>     <span className='desc'>  - view history of commands </span><br>
   <span className='command'>clear</span>       <span className='desc'>  - clear terminal </span>
 <span className='key-container color2'><br>

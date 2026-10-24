@@ -20,8 +20,11 @@ import {
   secretThemeCmd,
   konamiUnlocked,
   hiddenCommandResponse,
+  whoami,
+  introLinks,
 } from "../../commands";
-import NewLines from "../NewLines/NewLines";
+import NewLines, { typeOut } from "../NewLines/NewLines";
+import { isSoundEnabled, setSoundEnabled } from "../../sounds";
 
 // CSS variables for each theme. --command is the accent color, --link-hover-* the selection colors.
 const THEME_COLORS = {
@@ -112,6 +115,20 @@ const QUICK_COMMANDS = [
 // Shell-style colored prompt. PROMPT_HTML is the same prompt for lines rendered from HTML strings.
 const PROMPT_HTML = `<span className='prompt-user'>visitor@ioav.dev</span>: <span className='prompt-path'>~</span> <span className='prompt-symbol'>$</span>`;
 
+// The echoed "visitor@ioav.dev: ~ $ <command>" line above each command's output.
+const echoLine = (command) =>
+  `<br><p className='echo'>${PROMPT_HTML} <span>${command}</span></p><br>`;
+
+// The welcome screen ends with a "whoami" as if the visitor had just run it. It's part of the welcome
+// screen rather than `lines`, so the clear command never removes it.
+const INTRO_LINES = [echoLine("whoami"), ...whoami, ...introLinks];
+
+// On first load the whole welcome screen (banner, welcome text, menu and the whoami) decodes in as one
+// continuous pass at this constant speed, in characters per ms.
+const WELCOME_DECODE_SPEED = 0.6;
+const prefersReducedMotion = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 function Prompt() {
   return (
     <>
@@ -139,6 +156,28 @@ function Terminal() {
   const [caretOffset, setCaretOffset] = React.useState(0);
   const [isFocused, setIsFocused] = React.useState(false);
   const [isTypingOutput, setIsTypingOutput] = React.useState(false);
+  // Welcome screen decode on first load. Runs before paint so the text is never shown undecoded first.
+  const [welcomeDone, setWelcomeDone] = React.useState(prefersReducedMotion);
+  const welcomeRef = React.useRef();
+  const finishWelcomeRef = React.useRef(null);
+  React.useLayoutEffect(() => {
+    if (prefersReducedMotion()) return;
+    const finish = typeOut(
+      [welcomeRef.current],
+      (typing) => {
+        if (!typing) setWelcomeDone(true);
+      },
+      { speed: WELCOME_DECODE_SPEED, followOutput: false },
+    );
+    finishWelcomeRef.current = finish;
+    return () => finish(false);
+  }, []);
+
+  // The lines to build on. Running a command mid-decode finishes the welcome screen first.
+  function currentLines() {
+    finishWelcomeRef.current?.();
+    return lines;
+  }
 
   const inputRef = React.useRef();
   React.useEffect(() => {
@@ -167,6 +206,7 @@ function Terminal() {
   });
 
   function handleSubmit(command = tentativeCommand) {
+    const lines = currentLines();
     setHints([]);
     const isBlank = command.trim() === "";
     const answersTimeline =
@@ -181,7 +221,7 @@ function Terminal() {
     // Any other command closes the timeline's "continue?" prompt.
     if (!answersTimeline) setTimelineStep(command === "timeline" ? 1 : 0);
 
-    let commandLiner = `<br><p className='echo'>${PROMPT_HTML} <span>${command}</span></p><br>`;
+    let commandLiner = echoLine(command);
     let history = `<p className='color2'>
     ${updatedHistory.join(`<br>
     `)}</p>`;
@@ -237,6 +277,16 @@ function Terminal() {
       case "social":
         setLines([...lines, commandLiner, ...social]);
         break;
+      case "sound": {
+        const nowEnabled = !isSoundEnabled();
+        setSoundEnabled(nowEnabled);
+        setLines([
+          ...lines,
+          commandLiner,
+          `<p className='color2'>Sound effects ${nowEnabled ? "on 🔊" : "off 🔇"}. Type <span className='command'>sound</span> to turn them ${nowEnabled ? "off" : "back on"}.</p>`,
+        ]);
+        break;
+      }
       case "timeline":
         setLines([...lines, commandLiner, ...timeline1]);
         break;
@@ -307,6 +357,7 @@ function Terminal() {
 
   // App.js detects the Konami code (and fires the confetti); the terminal answers and unlocks the theme.
   function handleKonami() {
+    const lines = currentLines();
     setTentativeCommand(""); // the code's "b" was typed into the input
     setCaretOffset(0);
     setHistoryIndex(0);
@@ -316,7 +367,7 @@ function Terminal() {
     applyTheme("party");
     setLines([
       ...lines,
-      `<br><p className='echo'>${PROMPT_HTML} <span>↑ ↑ ↓ ↓ ← → ← → b a</span></p><br>`,
+      echoLine("↑ ↑ ↓ ↓ ← → ← → b a"),
       ...konamiUnlocked,
     ]);
   }
@@ -329,6 +380,7 @@ function Terminal() {
   }, []);
 
   function runClickedCommand(event) {
+    finishWelcomeRef.current?.(); // so a clicked command's text isn't still scrambled
     const commandSpan = event.target.closest(".command, .choice");
     if (!commandSpan) return;
 
@@ -421,24 +473,29 @@ function Terminal() {
           }
         }}
       >
-        <div className="bannerWrapper">
-          <NewLines lines={banner} type={"banner"} />
-          <NewLines lines={bannerMobile} type={"mobile-banner"} />
-        </div>
+        {/* Decoded in on first load (see the welcome decode effect). display: contents, so no layout change. */}
+        <div className="welcome" ref={welcomeRef}>
+          <div className="bannerWrapper">
+            <NewLines lines={banner} type={"banner"} />
+            <NewLines lines={bannerMobile} type={"mobile-banner"} />
+          </div>
 
-        <br />
-        <p className="color2">Welcome to my terminal portfolio!</p>
-        <br />
-        <p className="color2">
-          {`Type a command, or ${isTouchDevice() ? "tap" : "click"} one to get started:`}
-        </p>
-        <p className="quick-menu">
-          {QUICK_COMMANDS.map((command) => (
-            <span className="command" key={command}>
-              {command}
-            </span>
-          ))}
-        </p>
+          <br />
+          <p className="color2">Welcome to my terminal portfolio!</p>
+          <br />
+          <p className="color2">
+            {`Type a command, or ${isTouchDevice() ? "tap" : "click"} one to get started:`}
+          </p>
+          <p className="quick-menu">
+            {QUICK_COMMANDS.map((command) => (
+              <span className="command" key={command}>
+                {command}
+              </span>
+            ))}
+          </p>
+
+          <NewLines lines={INTRO_LINES} />
+        </div>
 
         <NewLines
           lines={lines}
@@ -478,7 +535,7 @@ function Terminal() {
         <div
           ref={linerRef}
           id="command-line"
-          className={isTypingOutput ? "typing" : ""}
+          className={isTypingOutput || !welcomeDone ? "typing" : ""}
           onClick={() => {
             inputRef.current.focus();
           }}

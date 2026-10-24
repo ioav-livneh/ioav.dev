@@ -2,6 +2,10 @@ import { useEffect, useRef } from "react";
 import confetti from "canvas-confetti";
 import "./App.css";
 import Terminal from "./components/Terminal/Terminal";
+import { unlockAudio, playHoverSound, playClickSound } from "./sounds";
+
+// Everything clickable: commands (not the skills headings), timeline Y/n choices, and links.
+const CLICKABLE = ".command:not(.heading), .choice, a";
 
 const KONAMI_CODE = [
   "ArrowUp",
@@ -60,6 +64,39 @@ function CursorGlow() {
 }
 
 function App() {
+  // Sound effects for hovering and clicking commands and links (see sounds.js).
+  useEffect(() => {
+    const hasHover = window.matchMedia("(hover: hover)").matches;
+
+    const handleMouseOver = (event) => {
+      const element = event.target.closest(CLICKABLE);
+      // Only when the pointer enters the element, not when it moves between its children.
+      if (element && !element.contains(event.relatedTarget)) playHoverSound();
+    };
+    const handleClick = (event) => {
+      if (event.target.closest(CLICKABLE)) playClickSound();
+    };
+    const handleKeyDown = (event) => {
+      if ((event.key === "Enter" || event.key === " ") && event.target.matches?.(CLICKABLE)) {
+        playClickSound();
+      }
+    };
+
+    // Audio can only start after an interaction, so the first one anywhere unlocks it.
+    window.addEventListener("pointerdown", unlockAudio);
+    window.addEventListener("keydown", unlockAudio);
+    if (hasHover) document.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("click", handleClick);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("pointerdown", unlockAudio);
+      window.removeEventListener("keydown", unlockAudio);
+      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("click", handleClick);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   useEffect(() => {
     let recentKeys = [];
 

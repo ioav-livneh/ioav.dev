@@ -187,3 +187,8 @@ form{
         display: none !important;
       }
 }
+
+/* Groups the banner and welcome text for the first-load decode; doesn't affect layout. */
+.welcome {
+    display: contents;
+}

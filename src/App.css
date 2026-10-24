@@ -107,10 +107,6 @@ p {
   .choice:hover {
     text-decoration: underline;
   }
-  .command:not(.heading):hover {
-    background: var(--link-hover-bg);
-    color: var(--link-hover-text);
-  }
 }
 
 .inherit,
@@ -124,10 +120,27 @@ a {
   width: min-content;
   white-space: nowrap;
 }
+/* Hover highlight on commands and links: a background strip that sweeps in from the left.
+   It's a background image sized from 0% to 100% width, so it doesn't affect layout. */
 @media (hover: hover) {
+  .command:not(.heading),
+  a {
+    background-image: linear-gradient(var(--link-hover-bg), var(--link-hover-bg));
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 0% 100%;
+    transition: background-size 0.25s ease, color 0.25s ease;
+  }
+  .command:not(.heading):hover,
   a:hover {
-    background: var(--link-hover-bg);
+    background-size: 100% 100%;
     color: var(--link-hover-text);
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: reduce) {
+  .command:not(.heading),
+  a {
+    transition: none;
   }
 }
 a:focus {
