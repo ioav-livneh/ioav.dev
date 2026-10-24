@@ -252,19 +252,19 @@ export const timeline5 = [
 
 export const skills = [
   `<p className='color2'>
-  <span className='command heading'>languages</span>
+  <span className='label'>languages</span>
 <span className='entry'>JavaScript, TypeScript, HTML, CSS, Python, C#, Java</span><br>
 
-  <span className='command heading'>frameworks</span>
+  <span className='label'>frameworks</span>
 <span className='entry'>React, Next.js, Node.js, Express, ASP.NET, Tailwind&nbsp;CSS, Framer&nbsp;Motion</span><br>
 
-  <span className='command heading'>data</span>
+  <span className='label'>data</span>
 <span className='entry'>MongoDB, PostgreSQL, Supabase, SQL&nbsp;Server, MySQL, Firebase</span><br>
 
-  <span className='command heading'>tools</span>
+  <span className='label'>tools</span>
 <span className='entry'>Git, Docker, Postman, Jira, Jenkins</span><br>
 
-  <span className='command heading'>ai</span>
+  <span className='label'>ai</span>
 <span className='entry'>Atlas&nbsp;Vector&nbsp;Search, LangChain, RAG&nbsp;pipelines</span>
   </p>`,
 ];
