@@ -136,6 +136,8 @@ export const help = [
   TAB            => autocompletes the command<br>
   ▲ / ▼          => navigate past commands<br>
   Konami Code    => ???
+</span><span className='touch-hint'><br>
+  TAP            => run any highlighted command
 </span></p>`,
 ];
 
@@ -144,7 +146,7 @@ export const about = [
   Hi, I'm Ioav Livneh! 👋 <br><br>
   Creative coder. Pretentious bipedal ape.<br>
   I believe the internet should feel handmade, personal, and a little weird — <br>
-  not optimized, not templated, not soulless. 💀<br><br>
+  not optimized, not templated, not soulless. 👻<br><br>
   Based in Barcelona, Spain 📍
   </p>`,
 ];
@@ -236,21 +238,21 @@ export const timeline5 = [
 
 export const skills = [
   `<p className='color2'>
-  <span className='command heading'>Programming languages</span><br>
-  Java | Kotlin | C, C#, C++ | Python | HTML5 <br>
-  CSS3 | SASS | PHP | JavaScript | TypeScript <br><br>
+  <span className='command heading'>Programming languages</span>
+<span className='entry'>Java&nbsp;| Kotlin&nbsp;| C,&nbsp;C#,&nbsp;C++&nbsp;| Python&nbsp;| HTML5</span>
+<span className='entry'>CSS3&nbsp;| SASS&nbsp;| PHP&nbsp;| JavaScript&nbsp;| TypeScript</span><br>
 
-  <span className='command heading'>Databases</span><br>
-  SQL Server | MySQL | NoSQL | PostgreSQL <br>
-  Firebase | AWS | MongoDB | PhpMyAdmin <br><br>
+  <span className='command heading'>Databases</span>
+<span className='entry'>SQL&nbsp;Server&nbsp;| MySQL&nbsp;| NoSQL&nbsp;| PostgreSQL</span>
+<span className='entry'>Firebase&nbsp;| AWS&nbsp;| MongoDB&nbsp;| PhpMyAdmin</span><br>
 
-  <span className='command heading'>Tools</span><br>
-  Visual Studio | Android Studio | SSMS <br>
-  Github | JIRA | Postman | GCP | Jenkins <br><br>
+  <span className='command heading'>Tools</span>
+<span className='entry'>Visual&nbsp;Studio&nbsp;| Android&nbsp;Studio&nbsp;| SSMS</span>
+<span className='entry'>Github&nbsp;| JIRA&nbsp;| Postman&nbsp;| GCP&nbsp;| Jenkins</span><br>
 
-  <span className='command heading'>Frameworks</span><br>
-  React | Angular | Express | Node | Jupyter <br>
-  Spark | ASP.NET | Bootstrap | jQuery
+  <span className='command heading'>Frameworks</span>
+<span className='entry'>React&nbsp;| Angular&nbsp;| Express&nbsp;| Node&nbsp;| Jupyter</span>
+<span className='entry'>Spark&nbsp;| ASP.NET&nbsp;| Bootstrap&nbsp;| jQuery</span>
   </p>`,
 ];
 

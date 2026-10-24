@@ -102,12 +102,15 @@ p {
 .choice {
   cursor: var(--cursor-hand);
 }
-.choice:hover {
-  text-decoration: underline;
-}
-.command:not(.heading):hover {
-  background: var(--link-hover-bg);
-  color: var(--link-hover-text);
+/* Hover styles only where there's a real mouse; touchscreens would otherwise leave them stuck on after a tap. */
+@media (hover: hover) {
+  .choice:hover {
+    text-decoration: underline;
+  }
+  .command:not(.heading):hover {
+    background: var(--link-hover-bg);
+    color: var(--link-hover-text);
+  }
 }
 
 .inherit,
@@ -121,9 +124,11 @@ a {
   width: min-content;
   white-space: nowrap;
 }
-a:hover {
-  background: var(--link-hover-bg);
-  color: var(--link-hover-text);
+@media (hover: hover) {
+  a:hover {
+    background: var(--link-hover-bg);
+    color: var(--link-hover-text);
+  }
 }
 a:focus {
   outline: 0;
@@ -209,5 +214,26 @@ body.konami {
 @media (prefers-reduced-motion: reduce) {
   .cursor-glow::before {
     animation: none;
+  }
+}
+
+/* Touchscreens: invisible padding grows each tap area toward ~40px without moving any text
+   (vertical padding on inline elements doesn't change line height; the negative margins cancel it). */
+@media (pointer: coarse) {
+  .command:not(.heading),
+  .choice,
+  .NewLines a {
+    padding: 8px 4px;
+    margin: -8px -4px;
+  }
+}
+
+/* Phone-only "TAP" line in the help output (the keyboard shortcuts above it are hidden on phones). */
+.touch-hint {
+  display: none;
+}
+@media (max-width: 640px) and (pointer: coarse) {
+  .touch-hint {
+    display: inline;
   }
 }

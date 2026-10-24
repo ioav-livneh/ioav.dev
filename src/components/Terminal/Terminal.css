@@ -23,6 +23,16 @@
     padding: 20px clamp(20px, 4vw, 64px);
   }
 
+/* Phones: slimmer frame spacing so more of the narrow screen goes to text. */
+@media screen and (max-width: 640px) {
+    .terminal-wrapper {
+        padding: 6px;
+    }
+    .terminal-wrapper-content {
+        padding: 14px 12px;
+    }
+}
+
   @keyframes pan-overlay {
     from {
       background-position: 0 0;
@@ -145,6 +155,9 @@ form{
     display: inline;
     @media screen and (max-width: 640px) {
         display: block;
+        /* Wrapped lines indent under the description instead of returning to the left edge. */
+        padding-left: 4ch;
+        text-indent: -4ch;
       }
 }
 

@@ -429,7 +429,9 @@ function Terminal() {
         <br />
         <p className="color2">Welcome to my terminal portfolio!</p>
         <br />
-        <p className="color2">Type a command, or click one to get started:</p>
+        <p className="color2">
+          {`Type a command, or ${isTouchDevice() ? "tap" : "click"} one to get started:`}
+        </p>
         <p className="quick-menu">
           {QUICK_COMMANDS.map((command) => (
             <span className="command" key={command}>
