@@ -162,3 +162,52 @@ body.konami {
     animation: none;
   }
 }
+
+/* Mouse-following glow (see CursorGlow in App.js). Sits behind the text and ignores clicks. */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 360px;
+  height: 360px;
+  margin: -180px 0 0 -180px;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: transform 0.12s ease-out, opacity 0.3s ease;
+}
+
+/* The gradient lives on a pseudo-element so its pulsing scale doesn't fight the tracking transform. */
+.cursor-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--command) 14%, transparent) 0%,
+    transparent 70%
+  );
+  animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(0.6);
+  }
+}
+
+@media (pointer: coarse) {
+  .cursor-glow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-glow::before {
+    animation: none;
+  }
+}

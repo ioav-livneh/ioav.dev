@@ -139,18 +139,12 @@ export const help = [
 </span></p>`,
 ];
 
-// Konami Code    => ???
-// Redirects them to ioav.dev/ShhYouFoundTheSecretDontTellAnyone
-// make background lines wavy
-// play Welcome to Vulf records, add confetti and lots of personality
-// Or give a simple alert "Konami code entered. Secret theme unlocked! `theme microdose` " and apply the theme to make everything wavy/trippy and colorful
-
 export const about = [
   `<p className='color2' key={${crypto.randomUUID()}}>
   Hi, I'm Ioav Livneh! 👋 <br><br>
   Creative coder. Pretentious bipedal ape.<br>
   I believe the internet should feel handmade, personal, and a little weird — <br>
-  not optimized, not templated, not soulless. <br><br>
+  not optimized, not templated, not soulless. 💀<br><br>
   Based in Barcelona, Spain 📍
   </p>`,
 ];
@@ -268,12 +262,25 @@ export const social = [
   <a href=${email} target="_blank">3. Email</a>        <span className='desc'>  - ioavlivneh@gmail.com</span> </p>`,
 ];
 
-export const theme = [
+// The secret theme, unlocked with the Konami code (see App.js and Terminal.js).
+export const secretThemeCmd = "theme party";
+
+const secretThemeEntry = `   <span className='command' data-command='${secretThemeCmd}'><span className='swatch' style='background: linear-gradient(120deg, #5a1a6e, #1a3a8f, #0e6b6b, #2f7a1f, #8a6a0e, #8f2a1a); border-color: #84FFFF'></span>'party' ★</span>`;
+
+export const theme = (secretUnlocked) => [
   `<p className='color2'>
-  <span className='command' data-command='theme dark'><span className='swatch' style='background: #0F111A; border-color: #84FFFF'></span>'dark'</span>   <span className='command' data-command='theme light'><span className='swatch' style='background: #F4F4F4; border-color: #2979ff'></span>'light'</span>   <span className='command' data-command='theme forest'><span className='swatch' style='background: #002626; border-color: #FFCC80'></span>'forest'</span>   <span className='command' data-command='theme beach'><span className='swatch' style='background: #FFF8ED; border-color: #53c7f0'></span>'beach'</span>   <span className='command' data-command='theme space'><span className='swatch' style='background: #1B2240; border-color: #ad9bf6'></span>'space'</span><br><br>
+  <span className='command' data-command='theme dark'><span className='swatch' style='background: #0F111A; border-color: #84FFFF'></span>'dark'</span>   <span className='command' data-command='theme light'><span className='swatch' style='background: #F4F4F4; border-color: #2979ff'></span>'light'</span>   <span className='command' data-command='theme forest'><span className='swatch' style='background: #002626; border-color: #FFCC80'></span>'forest'</span>   <span className='command' data-command='theme beach'><span className='swatch' style='background: #FFF8ED; border-color: #53c7f0'></span>'beach'</span>   <span className='command' data-command='theme space'><span className='swatch' style='background: #1B2240; border-color: #ad9bf6'></span>'space'</span>${secretUnlocked ? secretThemeEntry : ""}<br><br>
 
   Apply any theme by using the syntax 'theme [theme-name]'<br>
   eg: theme forest
+  </p>`,
+];
+
+export const konamiUnlocked = [
+  `<p className='color2'>
+  cheat code accepted. ✨<br>
+  secret theme unlocked: <span className='command' data-command='${secretThemeCmd}'>theme party</span><br>
+  switch back anytime with <span className='command' data-command='theme dark'>theme dark</span>
   </p>`,
 ];
 

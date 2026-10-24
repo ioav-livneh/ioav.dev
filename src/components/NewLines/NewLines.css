@@ -9,3 +9,8 @@
         max-width: 100vw;
     }
 }
+
+/* Wrapper per output line, used only to find new lines to type out; it doesn't affect layout. */
+.NewLines .line {
+    display: contents;
+}

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import confetti from "canvas-confetti";
 import "./App.css";
 import Terminal from "./components/Terminal/Terminal";
@@ -28,6 +28,37 @@ const launchConfetti = () => {
   confetti({ ...shared, angle: 120, origin: { x: 1, y: 1 } });
 };
 
+// A faint accent-colored glow that trails the mouse. Hidden by CSS on touchscreens.
+function CursorGlow() {
+  const glowRef = useRef();
+
+  useEffect(() => {
+    const glow = glowRef.current;
+    let frame = null;
+
+    const handleMouseMove = (event) => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        glow.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+        glow.style.opacity = 1;
+      });
+    };
+    const handleMouseLeave = () => {
+      glow.style.opacity = 0;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    document.documentElement.addEventListener("mouseleave", handleMouseLeave);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  return <div className="cursor-glow" ref={glowRef} aria-hidden="true" />;
+}
+
 function App() {
   useEffect(() => {
     let recentKeys = [];
@@ -37,10 +68,10 @@ function App() {
       recentKeys = [...recentKeys, key].slice(-KONAMI_CODE.length);
       if (recentKeys.join() === KONAMI_CODE.join()) {
         recentKeys = [];
-        const activated = document.body.classList.toggle("konami");
-        if (activated) {
-          launchConfetti();
-        }
+        event.preventDefault(); // keep the final "a" out of the command input
+        launchConfetti();
+        // Terminal.js listens for this to print the unlock message and apply the secret theme.
+        window.dispatchEvent(new Event("konami"));
       }
     };
 
@@ -50,6 +81,7 @@ function App() {
 
   return (
     <div className="App">
+      <CursorGlow />
       <Terminal />
       {/* Bottom right corner of screen, hide a link that pops up on hover that takes you to my old website with matrix
       to show off ability to do mouse tracking and css animation to slide things in off the screen. */}

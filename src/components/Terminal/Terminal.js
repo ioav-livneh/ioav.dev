@@ -17,14 +17,97 @@ import {
   theme,
   cmds,
   themeCmds,
+  secretThemeCmd,
+  konamiUnlocked,
   hiddenCommandResponse,
 } from "../../commands";
 import NewLines from "../NewLines/NewLines";
 
+// CSS variables for each theme. --command is the accent color, --link-hover-* the selection colors.
+const THEME_COLORS = {
+  dark: {
+    "--main-bg": "#0F111A",
+    "--main-bg-inverse": "#F0EEE550",
+    "--secondary-bg-inverse": "#F0EEE515",
+    "--link-hover-bg": "#717CB480",
+    "--link-hover-text": "#FFFFFF",
+    "--command": "#84FFFF",
+    "--main-text": "#EEFFFF",
+    "--link-text": "#82AAFF",
+    "--color2-text": "#C3E88D",
+    "--scanline-opacity": "1",
+  },
+  light: {
+    "--main-bg": "#F4F4F4",
+    "--main-bg-inverse": "#0b0b0b50",
+    "--secondary-bg-inverse": "#0b0b0b15",
+    "--link-hover-bg": "#FFFFFF",
+    "--link-hover-text": "#232324",
+    "--command": "#2979ff",
+    "--main-text": "#986801",
+    "--link-text": "#4078F2",
+    "--color2-text": "#50A14E",
+    "--scanline-opacity": "0.5",
+  },
+  forest: {
+    "--main-bg": "#002626",
+    "--main-bg-inverse": "#ffd9d950",
+    "--secondary-bg-inverse": "#ffd9d915",
+    "--link-hover-bg": "#1E611E",
+    "--link-hover-text": "#FFFFFF",
+    "--command": "#FFCC80",
+    "--main-text": "#eeffff",
+    "--link-text": "#82aaff",
+    "--color2-text": "#c3e88d",
+    "--scanline-opacity": "1",
+  },
+  beach: {
+    "--main-bg": "#FFF8ED",
+    "--main-bg-inverse": "#00071250",
+    "--secondary-bg-inverse": "#00071215",
+    "--link-hover-bg": "#e7c496",
+    "--link-hover-text": "#FFFFFF",
+    "--command": "#53c7f0",
+    "--main-text": "#272727",
+    "--link-text": "#7C4DFF",
+    "--color2-text": "#91B859",
+    "--scanline-opacity": "0.5",
+  },
+  space: {
+    "--main-bg": "#1B2240",
+    "--main-bg-inverse": "#e4ddbf50",
+    "--secondary-bg-inverse": "#e4ddbf15",
+    "--link-hover-bg": "#383f56",
+    "--link-hover-text": "#FFFFFF",
+    "--command": "#ad9bf6",
+    "--main-text": "#eeffff",
+    "--link-text": "#82aaff",
+    "--color2-text": "#c3e88d",
+    "--scanline-opacity": "1",
+  },
+};
+
+// "party" is the secret Konami theme: dark theme's colors over the animated rainbow background.
+function applyTheme(name) {
+  const colors = THEME_COLORS[name === "party" ? "dark" : name];
+  Object.entries(colors).forEach(([variable, value]) =>
+    document.documentElement.style.setProperty(variable, value),
+  );
+  document.body.classList.toggle("konami", name === "party");
+}
+
 // On touchscreens, focusing the input pops up the keyboard, so only focus it when the visitor taps the command line.
 const isTouchDevice = () => window.matchMedia("(pointer: coarse)").matches;
 
-const QUICK_COMMANDS = ["about", "projects", "timeline", "skills", "social", "theme", "help"];
+const QUICK_COMMANDS = [
+  "about",
+  "projects",
+  "timeline",
+  "skills",
+  "social",
+  "theme",
+  "help",
+];
 
 // Shell-style colored prompt. PROMPT_HTML is the same prompt for lines rendered from HTML strings.
 const PROMPT_HTML = `<span className='prompt-user'>visitor@ioav.dev</span>: <span className='prompt-path'>~</span> <span className='prompt-symbol'>$</span>`;
@@ -44,10 +127,18 @@ function Terminal() {
   const [lines, setLines] = React.useState([]);
   const [commandHistory, setCommandHistory] = React.useState([]);
   const [historyIndex, setHistoryIndex] = React.useState(0);
+  // Which timeline section was shown last (1-5) while its "continue? [Y/n]" prompt is open; 0 otherwise.
+  const [timelineStep, setTimelineStep] = React.useState(0);
+  // The secret party theme stays locked on every visit until the Konami code is entered.
+  const [secretUnlocked, setSecretUnlocked] = React.useState(false);
+  const availableThemeCmds = secretUnlocked
+    ? [...themeCmds, secretThemeCmd]
+    : themeCmds;
   const [hints, setHints] = React.useState([]);
   // How many characters the visible cursor sits to the left of the end of the command.
   const [caretOffset, setCaretOffset] = React.useState(0);
   const [isFocused, setIsFocused] = React.useState(false);
+  const [isTypingOutput, setIsTypingOutput] = React.useState(false);
 
   const inputRef = React.useRef();
   React.useEffect(() => {
@@ -56,7 +147,10 @@ function Terminal() {
 
   // Follow new output and typing. Not on every render: a re-render from focus changes would jump
   // the page mid-click, so the mouseup lands elsewhere and the clicked command never runs.
+  // Nothing to follow on first load, so short screens open at the top of the banner.
   React.useEffect(() => {
+    if (lines.length === 0 && tentativeCommand === "" && hints.length === 0)
+      return;
     window.scrollTo(0, document.body.offsetHeight);
   }, [lines, tentativeCommand, hints]);
   const linerRef = React.useRef();
@@ -74,21 +168,23 @@ function Terminal() {
 
   function handleSubmit(command = tentativeCommand) {
     setHints([]);
-    if (command === "timeline") {
-      setCommandHistory([...commandHistory, "timeline1"]);
-    } else {
-      setCommandHistory([...commandHistory, command]);
-    }
+    const isBlank = command.trim() === "";
+    const answersTimeline =
+      timelineStep > 0 && (command === "y" || command === "n");
 
-    let lastCommand = commandHistory[commandHistory.length - 1];
-    let commandLiner = `<br><p>${PROMPT_HTML} <span>${command}</span></p><br>`;
+    // History is what the visitor typed: no blank entries and no y/n answers to the timeline prompt.
+    const updatedHistory =
+      isBlank || answersTimeline
+        ? commandHistory
+        : [...commandHistory, command];
+    setCommandHistory(updatedHistory);
+    // Any other command closes the timeline's "continue?" prompt.
+    if (!answersTimeline) setTimelineStep(command === "timeline" ? 1 : 0);
+
+    let commandLiner = `<br><p className='echo'>${PROMPT_HTML} <span>${command}</span></p><br>`;
     let history = `<p className='color2'>
-    ${commandHistory.map((commandHist) => {
-      return commandHist;
-    }).join(`<br>
+    ${updatedHistory.join(`<br>
     `)}</p>`;
-
-    var r = document.querySelector(":root");
 
     switch (command) {
       case "help":
@@ -110,72 +206,33 @@ function Terminal() {
         setLines([...lines, commandLiner, ...skills]);
         break;
       case "theme":
-        setLines([...lines, commandLiner, ...theme]);
+        setLines([...lines, commandLiner, ...theme(secretUnlocked)]);
         break;
       case "theme dark":
-        setLines([...lines, commandLiner, "Dark theme applied"]);
-        r.style.setProperty("--scanline-opacity", "1");
-        r.style.setProperty("--main-bg", "#0F111A"); //background
-        r.style.setProperty("--main-bg-inverse", "#F0EEE550");
-        r.style.setProperty("--secondary-bg-inverse", "#F0EEE515");
-        r.style.setProperty("--link-hover-bg", "#717CB480"); //selection background
-        r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
-        r.style.setProperty("--command", "#84FFFF"); //accent color
-        r.style.setProperty("--main-text", "#EEFFFF"); //variables color
-        r.style.setProperty("--link-text", "#82AAFF"); //functions color
-        r.style.setProperty("--color2-text", "#C3E88D"); //strings color
-        break;
       case "theme light":
-        setLines([...lines, commandLiner, "Light theme applied"]);
-        r.style.setProperty("--scanline-opacity", "0.5");
-        r.style.setProperty("--main-bg", "#F4F4F4"); //background
-        r.style.setProperty("--main-bg-inverse", "#0b0b0b50");
-        r.style.setProperty("--secondary-bg-inverse", "#0b0b0b15");
-        r.style.setProperty("--link-hover-bg", "#FFFFFF"); //selection background
-        r.style.setProperty("--link-hover-text", "#232324"); //selection foreground
-        r.style.setProperty("--command", "#2979ff"); //accent color
-        r.style.setProperty("--main-text", "#986801"); //variables color
-        r.style.setProperty("--link-text", "#4078F2"); //functions color
-        r.style.setProperty("--color2-text", "#50A14E"); //strings color
-        break;
       case "theme forest":
-        setLines([...lines, commandLiner, "Forest theme applied"]);
-        r.style.setProperty("--scanline-opacity", "1");
-        r.style.setProperty("--main-bg", "#002626"); //background
-        r.style.setProperty("--main-bg-inverse", "#ffd9d950");
-        r.style.setProperty("--secondary-bg-inverse", "#ffd9d915");
-        r.style.setProperty("--link-hover-bg", "#1E611E"); //selection background
-        r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
-        r.style.setProperty("--command", "#FFCC80"); //accent color
-        r.style.setProperty("--main-text", "#eeffff"); //variables color
-        r.style.setProperty("--link-text", "#82aaff"); //functions color
-        r.style.setProperty("--color2-text", "#c3e88d"); //strings color
-        break;
       case "theme beach":
-        setLines([...lines, commandLiner, "Beach theme applied"]);
-        r.style.setProperty("--scanline-opacity", "0.5");
-        r.style.setProperty("--main-bg", "#FFF8ED"); //background
-        r.style.setProperty("--main-bg-inverse", "#00071250");
-        r.style.setProperty("--secondary-bg-inverse", "#00071215");
-        r.style.setProperty("--link-hover-bg", "#e7c496"); //selection background
-        r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
-        r.style.setProperty("--command", "#53c7f0"); //accent color
-        r.style.setProperty("--main-text", "#272727"); //variables color
-        r.style.setProperty("--link-text", "#7C4DFF"); //functions color
-        r.style.setProperty("--color2-text", "#91B859"); //strings color
+      case "theme space": {
+        const name = command.slice("theme ".length);
+        setLines([
+          ...lines,
+          commandLiner,
+          `${name[0].toUpperCase()}${name.slice(1)} theme applied`,
+        ]);
+        applyTheme(name);
         break;
-      case "theme space":
-        setLines([...lines, commandLiner, "Space theme applied"]);
-        r.style.setProperty("--scanline-opacity", "1");
-        r.style.setProperty("--main-bg", "#1B2240"); //background
-        r.style.setProperty("--main-bg-inverse", "#e4ddbf50");
-        r.style.setProperty("--secondary-bg-inverse", "#e4ddbf15");
-        r.style.setProperty("--link-hover-bg", "#383f56"); //selection background
-        r.style.setProperty("--link-hover-text", "#FFFFFF"); //selection foreground
-        r.style.setProperty("--command", "#ad9bf6"); //accent color
-        r.style.setProperty("--main-text", "#eeffff"); //variables color
-        r.style.setProperty("--link-text", "#82aaff"); //functions color
-        r.style.setProperty("--color2-text", "#c3e88d"); //strings color
+      }
+      case secretThemeCmd:
+        if (!secretUnlocked) {
+          setLines([
+            ...lines,
+            commandLiner,
+            `<p className='color2'>Command not found: ${command}. For a list of commands, type <span class="command">'help'</span>.</p>`,
+          ]);
+          break;
+        }
+        setLines([...lines, commandLiner, "Party theme applied ✨"]);
+        applyTheme("party");
         break;
       case "social":
         setLines([...lines, commandLiner, ...social]);
@@ -184,8 +241,8 @@ function Terminal() {
         setLines([...lines, commandLiner, ...timeline1]);
         break;
       case "n":
-        if (lastCommand?.includes("timeline")) {
-          setCommandHistory([...commandHistory, "cancel"]);
+        if (answersTimeline) {
+          setTimelineStep(0);
           let response = `<p className='color2'>  You're no fun :( </p>`;
           setLines([...lines, commandLiner, response]);
         } else {
@@ -197,27 +254,27 @@ function Terminal() {
         }
         break;
       case "y":
-        switch (lastCommand) {
-          case "timeline1":
+        switch (answersTimeline ? timelineStep : 0) {
+          case 1:
             setLines([...lines, commandLiner, ...timeline2]);
-            setCommandHistory([...commandHistory, "timeline2"]);
+            setTimelineStep(2);
             break;
-          case "timeline2":
+          case 2:
             setLines([...lines, commandLiner, ...timeline3]);
-            setCommandHistory([...commandHistory, "timeline3"]);
+            setTimelineStep(3);
             break;
-          case "timeline3":
+          case 3:
             setLines([...lines, commandLiner, ...timeline4]);
-            setCommandHistory([...commandHistory, "timeline4"]);
+            setTimelineStep(4);
             break;
-          case "timeline4":
+          case 4:
             setLines([...lines, commandLiner, ...timeline5]);
-            setCommandHistory([...commandHistory, "timeline5"]);
+            setTimelineStep(5);
             break;
-          case "timeline5":
+          case 5:
             let response = `<a href='${egg}'>  There was an egg...</a>`;
             setLines([...lines, commandLiner, response]);
-            setCommandHistory([...commandHistory, "the egg"]);
+            setTimelineStep(0);
             setTimeout(function () {
               window.open(egg, "_blank");
             }, 1000);
@@ -232,6 +289,10 @@ function Terminal() {
         }
         break;
       default:
+        if (isBlank) {
+          setLines([...lines, commandLiner]); // like a real shell: just a fresh prompt
+          break;
+        }
         setLines([
           ...lines,
           commandLiner,
@@ -244,6 +305,29 @@ function Terminal() {
     setCaretOffset(0);
   }
 
+  // App.js detects the Konami code (and fires the confetti); the terminal answers and unlocks the theme.
+  function handleKonami() {
+    setTentativeCommand(""); // the code's "b" was typed into the input
+    setCaretOffset(0);
+    setHistoryIndex(0);
+    setHints([]);
+    setTimelineStep(0);
+    setSecretUnlocked(true);
+    applyTheme("party");
+    setLines([
+      ...lines,
+      `<br><p className='echo'>${PROMPT_HTML} <span>↑ ↑ ↓ ↓ ← → ← → b a</span></p><br>`,
+      ...konamiUnlocked,
+    ]);
+  }
+  const handleKonamiRef = React.useRef(handleKonami);
+  handleKonamiRef.current = handleKonami;
+  React.useEffect(() => {
+    const onKonami = () => handleKonamiRef.current();
+    window.addEventListener("konami", onKonami);
+    return () => window.removeEventListener("konami", onKonami);
+  }, []);
+
   function runClickedCommand(event) {
     const commandSpan = event.target.closest(".command, .choice");
     if (!commandSpan) return;
@@ -255,7 +339,7 @@ function Terminal() {
     const isChoice = command === "y" || command === "n";
     const isKnown =
       cmds.includes(command) ||
-      themeCmds.includes(command) ||
+      availableThemeCmds.includes(command) ||
       hiddenCommandResponse(command) !== null;
     if (!isChoice && !isKnown) return;
 
@@ -299,7 +383,7 @@ function Terminal() {
       });
 
       if (tentativeCommand.startsWith("theme")) {
-        themeCmds.forEach(function (cmds) {
+        availableThemeCmds.forEach(function (cmds) {
           if (cmds.startsWith(tentativeCommand)) {
             hintCmds = [...hintCmds, cmds];
           }
@@ -354,7 +438,11 @@ function Terminal() {
           ))}
         </p>
 
-        <NewLines lines={lines} />
+        <NewLines
+          lines={lines}
+          typeOutNewLines
+          onTypingChange={setIsTypingOutput}
+        />
 
         {/* TODO:  create separate component just for command line*/}
 
@@ -388,6 +476,7 @@ function Terminal() {
         <div
           ref={linerRef}
           id="command-line"
+          className={isTypingOutput ? "typing" : ""}
           onClick={() => {
             inputRef.current.focus();
           }}
