@@ -157,7 +157,7 @@ export const projects = [
 
   <a href=${livceramic} target="_blank">1. Liv Ceramic</a>  <span className='label'>2026</span>
 <span className='indent'>An e-commerce site for my family's ceramics business in Costa Rica.<br>
-<span>stack:</span>  Next.js · Supabase · Stripe · Resend<br>
+<span>stack:</span>  Next.js · Supabase · Tailwind · Resend<br>
 <span>code:</span>   <a href=${github}/liv-ceramic target="_blank">github ↗</a></span><br>
 
   <a href=${game} target="_blank">2. 1010!</a>  <span className='label'>2019 – present</span>
