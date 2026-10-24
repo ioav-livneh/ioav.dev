@@ -250,26 +250,16 @@ export const timeline5 = [
   </p>`,
 ];
 
-// Technical Skills
-// Languages: Java | Kotlin | C/C++ | C# | Python | JavaScript | TypeScript | PHP | HTML5 | CSS3 | SASS
-// Frameworks & Libraries: React | Angular | Node.js | Express | ASP.NET | jQuery | Bootstrap | Jupyter | Spark
-// Databases: SQL Server | MySQL | PostgreSQL | MongoDB | Firebase | NoSQL | PhpMyAdmin
-// Cloud & DevOps: AWS | GCP | Azure | MongoDB Atlas | Jenkins | Firebase | GitHub | Postman
-// Tools & Platforms: Android Studio | Visual Studio | SSMS | JIRA
-
 export const skills = [
   `<p className='color2'>
   <span className='command heading'>languages</span>
 <span className='entry'>JavaScript, TypeScript, HTML, CSS, Python, C#, Java</span><br>
 
   <span className='command heading'>frameworks</span>
-<span className='entry'>React, Next.js, Node.js, Express, Tailwind&nbsp;CSS, Framer&nbsp;Motion, ASP.NET</span><br>
+<span className='entry'>React, Next.js, Node.js, Express, ASP.NET, Tailwind&nbsp;CSS, Framer&nbsp;Motion</span><br>
 
   <span className='command heading'>data</span>
 <span className='entry'>MongoDB, PostgreSQL, Supabase, SQL&nbsp;Server, MySQL, Firebase</span><br>
-
-  <span className='command heading'>apis &amp; services</span>
-<span className='entry'>Stripe, Resend, OpenAI&nbsp;API, Vercel</span><br>
 
   <span className='command heading'>tools</span>
 <span className='entry'>Git, Docker, Postman, Jira, Jenkins</span><br>
