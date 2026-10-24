@@ -55,7 +55,7 @@ export const whoami = [
 
 // The resume / contact links printed under the summary when the intro's whoami runs on load.
 export const introLinks = [
-  `<p>  <a href="mailto:ioavlivneh@gmail.com" className="terminal-button">[resume]</a>&nbsp;&nbsp;<a href="mailto:ioavlivneh@gmail.com" className="terminal-button">[contact]</a></p>`,
+  `<p>  <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="terminal-button">[resume]</a>&nbsp;&nbsp;<a href="mailto:ioavlivneh@gmail.com" className="terminal-button">[contact]</a></p>`,
 ];
 
 export function hiddenCommandResponse(command) {
@@ -149,7 +149,7 @@ export const help = [
   <span className='command'>skills</span>      <span className='desc'>  - technologies and frameworks </span><br>
   <span className='command'>social</span>      <span className='desc'>  - check out my github, linkedin, or email </span><br>
   <span className='command'>theme</span>       <span className='desc'>  - check available themes </span><br>
-  <span className='command'>sound</span>       <span className='desc'>  - turn sound effects on or off </span><br>
+<span className='not-mobile'>  <span className='command'>sound</span>       <span className='desc'>  - turn sound effects on or off </span><br></span>
   <span className='command'>history</span>     <span className='desc'>  - view history of commands </span><br>
   <span className='command'>clear</span>       <span className='desc'>  - clear terminal </span>
 <span className='key-container color2'><br>

@@ -25,6 +25,10 @@
 
 /* Phones: slimmer frame spacing so more of the narrow screen goes to text. */
 @media screen and (max-width: 640px) {
+    /* Hidden on phones, e.g. the sound command in help. */
+    .not-mobile {
+        display: none;
+    }
     .terminal-wrapper {
         padding: 6px;
     }
