@@ -238,21 +238,23 @@ export const timeline5 = [
 
 export const skills = [
   `<p className='color2'>
-  <span className='command heading'>Programming languages</span>
-<span className='entry'>Java&nbsp;| Kotlin&nbsp;| C,&nbsp;C#,&nbsp;C++&nbsp;| Python&nbsp;| HTML5</span>
-<span className='entry'>CSS3&nbsp;| SASS&nbsp;| PHP&nbsp;| JavaScript&nbsp;| TypeScript</span><br>
+  <span className='command heading'>languages</span>
+<span className='entry'>JavaScript, TypeScript, HTML, CSS, Python, C#, Java</span><br>
 
-  <span className='command heading'>Databases</span>
-<span className='entry'>SQL&nbsp;Server&nbsp;| MySQL&nbsp;| NoSQL&nbsp;| PostgreSQL</span>
-<span className='entry'>Firebase&nbsp;| AWS&nbsp;| MongoDB&nbsp;| PhpMyAdmin</span><br>
+  <span className='command heading'>frameworks</span>
+<span className='entry'>React, Next.js, Node.js, Express, Tailwind&nbsp;CSS, Framer&nbsp;Motion, ASP.NET</span><br>
 
-  <span className='command heading'>Tools</span>
-<span className='entry'>Visual&nbsp;Studio&nbsp;| Android&nbsp;Studio&nbsp;| SSMS</span>
-<span className='entry'>Github&nbsp;| JIRA&nbsp;| Postman&nbsp;| GCP&nbsp;| Jenkins</span><br>
+  <span className='command heading'>data</span>
+<span className='entry'>MongoDB, PostgreSQL, Supabase, SQL&nbsp;Server, MySQL, Firebase</span><br>
 
-  <span className='command heading'>Frameworks</span>
-<span className='entry'>React&nbsp;| Angular&nbsp;| Express&nbsp;| Node&nbsp;| Jupyter</span>
-<span className='entry'>Spark&nbsp;| ASP.NET&nbsp;| Bootstrap&nbsp;| jQuery</span>
+  <span className='command heading'>apis &amp; services</span>
+<span className='entry'>Stripe, Resend, OpenAI&nbsp;API, Vercel</span><br>
+
+  <span className='command heading'>tools</span>
+<span className='entry'>Git, Docker, Postman, Jira, Jenkins</span><br>
+
+  <span className='command heading'>ai</span>
+<span className='entry'>Atlas&nbsp;Vector&nbsp;Search, LangChain, RAG&nbsp;pipelines</span>
   </p>`,
 ];
 
