@@ -44,12 +44,14 @@ export const summary = {
   name: "Ioav Livneh",
   tagline: "web developer & former Solutions Architect at MongoDB.",
   status: "Open to developer and bootcamp roles.",
+  location: "Based in Barcelona, Spain 📍",
 };
 
 export const whoami = [
   `<p className='color2 summary'>
   <span className='label'>${summary.name}</span>, ${summary.tagline.replace("&", "&amp;")}<br>
-  ${summary.status}
+  ${summary.status}<br>
+  ${summary.location}
   </p><br>`,
 ];
 
@@ -165,10 +167,12 @@ export const help = [
 export const about = [
   `<p className='color2' key={${crypto.randomUUID()}}>
   Hi, I'm Ioav Livneh! 👋 <br><br>
-  Creative coder. Pretentious bipedal ape.<br>
-  I believe the internet should feel handmade, personal, and a little weird — <br>
-  not optimized, not templated, not soulless. 👻<br><br>
-  Based in Barcelona, Spain 📍
+  I am interested in how technology changes the way we think, <br>
+  our attention, and our sense of being human, especially now <br>
+  that the internet is no longer only made by humans. <br><br>
+  I also love quirky websites, digital gardens, now pages, and <br>
+  anything that makes the web feel more handmade and a little weird. <br><br>
+  This site is my attempt at making a digital home for myself.
   </p>`,
 ];
 

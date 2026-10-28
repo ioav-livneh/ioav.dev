@@ -43,7 +43,11 @@ function blip({ frequency, endFrequency, duration, volume }) {
   const gain = context.createGain();
   oscillator.type = "square";
   oscillator.frequency.setValueAtTime(frequency, now);
-  if (endFrequency) oscillator.frequency.exponentialRampToValueAtTime(endFrequency, now + duration);
+  if (endFrequency)
+    oscillator.frequency.exponentialRampToValueAtTime(
+      endFrequency,
+      now + duration,
+    );
   gain.gain.setValueAtTime(volume, now);
   gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
   oscillator.connect(gain).connect(context.destination);
@@ -51,6 +55,7 @@ function blip({ frequency, endFrequency, duration, volume }) {
   oscillator.stop(now + duration);
 }
 
-export const playHoverSound = () => blip({ frequency: 1800, duration: 0.03, volume: 0.015 });
+export const playHoverSound = () =>
+  blip({ frequency: 1800, duration: 0.03, volume: 0.015 });
 export const playClickSound = () =>
   blip({ frequency: 900, endFrequency: 450, duration: 0.08, volume: 0.04 });
